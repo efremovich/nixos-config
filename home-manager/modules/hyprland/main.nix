@@ -13,7 +13,7 @@
         "XDG_SCREENSHOTS_DIR,$HOME/screens"
       ];
 
-      monitor = ",1920x1080@60,auto,1";
+      monitor = ",3840x2160@120,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
       "$fileManager" = "$terminal -e sh -c 'ranger'";
@@ -60,7 +60,7 @@
       };
 
       input = {
-        kb_layout = "us,ru,il";
+        kb_layout = "us,ru";
         kb_options = "grp:caps_toggle";
       };
 
