@@ -5,20 +5,18 @@
     # Packages in each category are sorted alphabetically
 
     # Desktop apps
-    anki
-    code-cursor
     imv
+    kicad
     mpv
     obs-studio
     obsidian
     pavucontrol
-    teams-for-linux
     telegram-desktop
-    vesktop
+    dbeaver
+    libreoffice
 
     # CLI utils
     bc
-    bottom
     brightnessctl
     cliphist
     ffmpeg
