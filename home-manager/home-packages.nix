@@ -5,20 +5,17 @@
     # Packages in each category are sorted alphabetically
 
     # Desktop apps
-    anki
-    code-cursor
+    dbeaver-bin
     imv
+    kicad
+    libreoffice
     mpv
-    obs-studio
     obsidian
     pavucontrol
-    teams-for-linux
     telegram-desktop
-    vesktop
 
     # CLI utils
     bc
-    bottom
     brightnessctl
     cliphist
     ffmpeg
@@ -28,9 +25,9 @@
     grimblast
     htop
     hyprpicker
-    ntfs3g
     mediainfo
     microfetch
+    ntfs3g
     playerctl
     ripgrep
     showmethekey
@@ -49,6 +46,7 @@
     openjdk23
     nodejs
     python311
+    go
 
     # WM stuff
     libsForQt5.xwaylandvideobridge
