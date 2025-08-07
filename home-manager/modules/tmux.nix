@@ -42,7 +42,7 @@
       bind -n M-c kill-pane
       bind -n M-q kill-window
       bind -n M-Q kill-session
-   
+
       bind-key "T" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 80%,70% \
           --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
@@ -57,20 +57,25 @@
           --preview-window 'right:55%' \
           --preview 'sesh preview {}'
       )\""
+      bind-key "K" display-popup -E -w 40% "sesh connect \"$(
+        sesh list -i | gum filter --limit 1 --no-sort --fuzzy --placeholder 'Pick a sesh' --height 50 --prompt='⚡'
+      )\""
+
     '';
-    plugins = with pkgs; [
-      tmuxPlugins.catppuccin
-      # {
-      #   plugin = tmuxPlugins.resurrect;
-      #   extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-      # }
-      # {
-      #   plugin = tmuxPlugins.continuum;
-      #   extraConfig = ''
-      # set -g @continuum-restore 'on'
-      # set -g @continuum-save-interval '60' # minutes
-      #   '';
-      # }
-    ];
+    plugins = with pkgs;
+      [
+        tmuxPlugins.catppuccin
+        # {
+        #   plugin = tmuxPlugins.resurrect;
+        #   extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+        # }
+        # {
+        #   plugin = tmuxPlugins.continuum;
+        #   extraConfig = ''
+        # set -g @continuum-restore 'on'
+        # set -g @continuum-save-interval '60' # minutes
+        #   '';
+        # }
+      ];
   };
 }

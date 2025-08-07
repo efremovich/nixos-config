@@ -62,6 +62,7 @@
       input = {
         kb_layout = "us,ru";
         kb_options = "grp:caps_toggle";
+        kb_numlock = "enabled"
       };
 
       gestures = {
