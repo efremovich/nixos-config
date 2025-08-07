@@ -6,7 +6,6 @@
       python311Packages.python-lsp-server
       nixd
       vimPlugins.nvim-treesitter-parsers.hyprlang
-      vimplugin-LazyVim
     ];
   };
 }
