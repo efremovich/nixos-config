@@ -5,15 +5,14 @@
     # Packages in each category are sorted alphabetically
 
     # Desktop apps
+    dbeaver-bin
     imv
     kicad
+    libreoffice
     mpv
-    obs-studio
     obsidian
     pavucontrol
     telegram-desktop
-    dbeaver
-    libreoffice
 
     # CLI utils
     bc
@@ -26,9 +25,9 @@
     grimblast
     htop
     hyprpicker
-    ntfs3g
     mediainfo
     microfetch
+    ntfs3g
     playerctl
     ripgrep
     showmethekey
@@ -47,6 +46,7 @@
     openjdk23
     nodejs
     python311
+    go
 
     # WM stuff
     libsForQt5.xwaylandvideobridge
