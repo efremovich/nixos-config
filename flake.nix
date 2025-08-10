@@ -28,6 +28,7 @@
     user = "efremov";
     hosts = [
       { hostname = "chicago"; stateVersion = "25.05"; }
+      { hostname = "lenovo"; stateVersion = "25.05"; }
     ];
 
     makeSystem = { hostname, stateVersion }: nixpkgs.lib.nixosSystem {

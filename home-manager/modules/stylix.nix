@@ -11,7 +11,8 @@
     font-awesome
     powerline-fonts
     powerline-symbols
-  ];
+    nerd-fonts.symbols-only
+];
 
   stylix = {
     enable = true;
