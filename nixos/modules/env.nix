@@ -6,5 +6,7 @@
     PATH = [
       "${XDG_BIN_HOME}"
     ];
+    XDG_CURRENT_DESKTOP = "sway"; 
   };
 }
+

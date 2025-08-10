@@ -82,6 +82,8 @@ in {
       # Scratchpad
       "$mainMod,       S, togglespecialworkspace,  magic"
       "$mainMod SHIFT, S, movetoworkspace, special:magic"
+
+      # Navigate
     ];
 
     # Move/resize windows with mainMod + LMB/RMB and dragging

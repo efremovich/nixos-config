@@ -36,15 +36,30 @@
       bind -n M-v split-window -h
 
       bind -n M-o new-window -c ~/para "nvim -c 'Telescope find_files' '0 Inbox/todolist.md'"
-      bind -n M-f new-window -c ~/flake "nvim -c 'Telescope find_files' flake.nix"
+      bind -n M-f new-window -c ~/.nix "nvim -c 'Telescope find_files' flake.nix"
       bind -n M-n new-window -c ~/.config/nvim "nvim -c 'Telescope find_files' init.lua"
       bind -n M-Enter new-window
       bind -n M-c kill-pane
       bind -n M-q kill-window
       bind -n M-Q kill-session
+   
+      bind-key "T" run-shell "sesh connect \"$(
+        sesh list --icons | fzf-tmux -p 80%,70% \
+          --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+          --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+          --bind 'tab:down,btab:up' \
+          --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+          --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
+          --bind 'ctrl-g:change-prompt(⚙️  )+reload(sesh list -c --icons)' \
+          --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
+          --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+          --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+          --preview-window 'right:55%' \
+          --preview 'sesh preview {}'
+      )\""
     '';
     plugins = with pkgs; [
-      tmuxPlugins.gruvbox
+      tmuxPlugins.catppuccin
       # {
       #   plugin = tmuxPlugins.resurrect;
       #   extraConfig = "set -g @resurrect-strategy-nvim 'session'";

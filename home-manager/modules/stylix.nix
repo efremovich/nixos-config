@@ -3,7 +3,7 @@
 
   home.packages = with pkgs; [
     dejavu_fonts
-    jetbrains-mono
+    nerd-fonts.jetbrains-mono
     noto-fonts
     noto-fonts-lgc-plus
     texlivePackages.hebrew-fonts

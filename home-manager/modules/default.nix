@@ -3,6 +3,7 @@
     ./alacritty.nix
     ./bat.nix
     ./chromium.nix
+    ./firefox.nix
     ./eza.nix
     ./git.nix
     ./hyprland
@@ -17,6 +18,7 @@
     ./waybar
     ./wofi
     ./zathura.nix
+    ./zoxide.nix
     ./zsh.nix
   ];
 }
