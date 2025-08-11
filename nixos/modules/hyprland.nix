@@ -2,8 +2,10 @@
   programs.hyprland = {
     enable = true;
     withUWSM = true;
-    # xwayland.enable = false;
+    xwayland.enable = false;
   };
 
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = {
+
+  };
 }
