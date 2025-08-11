@@ -38,12 +38,13 @@
           format-en = "🇺🇸";
           format-ru = "🇷🇺";
           min-length = 5;
+          interval = 100;
           tooltip = false;
         };
 
         "custom/weather" = {
           format = " {} ";
-          exec = "curl -s 'wttr.in/Tashkent?format=%c%t'";
+          exec = "curl -s 'wttr.in/Krasnodar?format=%c%t'";
           interval = 300;
           class = "weather";
         };

@@ -13,7 +13,7 @@
         "XDG_SCREENSHOTS_DIR,$HOME/screens"
       ];
 
-      monitor = ",3840x2160@120,auto,1";
+      monitor = ",preferred,auto,1";
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
       "$fileManager" = "$terminal -e sh -c 'ranger'";
@@ -26,10 +26,10 @@
       ];
 
       general = {
-        gaps_in = 0;
-        gaps_out = 0;
+        gaps_in = 2;
+        gaps_out = 2;
 
-        border_size = 5;
+        border_size = 3;
 
         "col.active_border" = "rgba(d65d0eff) rgba(98971aff) 45deg";
         "col.inactive_border" = "rgba(3c3836ff)";
@@ -62,7 +62,7 @@
       input = {
         kb_layout = "us,ru";
         kb_options = "grp:caps_toggle";
-        kb_numlock = "enabled"
+        # kb_numlock = "enabled";
       };
 
       gestures = {
