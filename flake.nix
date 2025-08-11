@@ -16,10 +16,10 @@
     };
 
     # add LazyVim-module
-    LazyVim = {
-      url = "github:matadaniel/LazyVim-module";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # LazyVim = {
+    #   url = "github:matadaniel/LazyVim-module";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # COMING SOON...
     #nixvim = {
     #  url = "github:nix-community/nixvim";

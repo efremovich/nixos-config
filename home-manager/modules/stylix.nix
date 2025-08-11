@@ -12,7 +12,7 @@
     powerline-fonts
     powerline-symbols
     nerd-fonts.symbols-only
-];
+  ];
 
   stylix = {
     enable = true;
@@ -21,11 +21,11 @@
 
     targets = {
       firefox.profileNames = [ "default" ];
-      waybar.enable = true;
-      wofi.enable = true;
+      waybar.enable = false;
+      wofi.enable = false;
       hyprland.enable = false;
       hyprlock.enable = false;
-      
+
     };
 
     cursor = {
