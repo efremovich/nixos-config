@@ -2,12 +2,13 @@
   imports = [
     ./alacritty.nix
     ./bat.nix
-    ./chromium.nix
-    ./firefox.nix
+    # ./chromium.nix
     ./eza.nix
+    ./firefox.nix
     ./git.nix
     ./hyprland
     ./lazygit.nix
+    # ./lazyvim.nix
     ./neovim.nix
     ./obsidian.nix
     ./ranger.nix
