@@ -19,6 +19,6 @@
     ./wofi
     ./zathura.nix
     ./zoxide.nix
-    ./zsh.nix
+    # ./zsh.nix
   ];
 }
