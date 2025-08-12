@@ -15,6 +15,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # add LazyVim-module
+    LazyVim = {
+      url = "github:pfassina/lazyvim-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # COMING SOON...
     #nixvim = {
     #  url = "github:nix-community/nixvim";

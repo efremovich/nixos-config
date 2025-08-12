@@ -12,19 +12,20 @@
     powerline-fonts
     powerline-symbols
     nerd-fonts.symbols-only
-];
+  ];
 
   stylix = {
     enable = true;
-    polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+    polarity = "light";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
 
     targets = {
-      neovim.enable = false;
+      firefox.profileNames = [ "default" ];
       waybar.enable = false;
       wofi.enable = false;
       hyprland.enable = false;
       hyprlock.enable = false;
+
     };
 
     cursor = {
@@ -65,8 +66,8 @@
     };
 
     image = pkgs.fetchurl {
-      url = "https://codeberg.org/lunik1/nixos-logo-gruvbox-wallpaper/raw/branch/master/png/gruvbox-dark-rainbow.png";
-      sha256 = "036gqhbf6s5ddgvfbgn6iqbzgizssyf7820m5815b2gd748jw8zc";
+      url = "https://w.wallhaven.cc/full/7j/wallhaven-7j3lve.png";
+      sha256 = "kko5Uiq7H0DqiT2aDYbaQCNRzs+5AleaATzsXi3xgQA=";
     };
   };
 }

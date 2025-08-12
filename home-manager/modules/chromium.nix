@@ -3,10 +3,14 @@
     enable = true;
     extensions = [
       # Dark Reader
-      { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; }
+      {
+        id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";
+      }
 
       # Unhook - Remove YouTube Recommended & Shorts
-      { id = "khncfooichmfjbepaaaebmommgaepoid"; }
+      {
+        id = "khncfooichmfjbepaaaebmommgaepoid";
+      }
 
       # FireShot
       { id = "mcbpblocgmgfnpjjppndjkmgjaogfceg"; }

@@ -29,7 +29,7 @@
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";
 
-    initExtra = ''
+    initContent = ''
       # Start Tmux automatically if not already running. No Tmux in TTY
       if [ -z "$TMUX" ] && [ -n "$DISPLAY" ]; then
         tmux attach-session -t default || tmux new-session -s default

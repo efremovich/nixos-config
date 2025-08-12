@@ -6,6 +6,7 @@
     ./hardware-configuration.nix
     ./local-packages.nix
     ../../nixos/modules
+    ../../nixos/boot/systemd-boot.nix
   ];
 
   environment.systemPackages = [ pkgs.home-manager ];

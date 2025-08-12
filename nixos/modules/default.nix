@@ -2,7 +2,7 @@
   imports = [
     ./audio.nix
     ./bluetooth.nix
-    ./boot
+    # ./boot
     ./env.nix
     ./home-manager.nix
     ./hyprland.nix
