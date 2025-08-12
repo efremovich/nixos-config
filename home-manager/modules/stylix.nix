@@ -4,7 +4,8 @@
   home.packages = with pkgs; [
     dejavu_fonts
     nerd-fonts.jetbrains-mono
-    noto-fonts
+    nerd-fonts.cascadia-mono
+    nerd-fonts.noto
     noto-fonts-lgc-plus
     texlivePackages.hebrew-fonts
     noto-fonts-emoji
@@ -45,11 +46,11 @@
       };
       sansSerif = {
         name = "Noto Sans";
-        package = pkgs.noto-fonts;
+        package = pkgs.nerd-fonts.noto;
       };
       serif = {
         name = "Noto Serif";
-        package = pkgs.noto-fonts;
+        package = pkgs.nerd-fonts.noto;
       };
 
       sizes = {
