@@ -4,6 +4,8 @@
     baseIndex = 1;
     mouse = true;
     escapeTime = 0;
+    statusInterval = 3;
+    setClipboard = true;
     keyMode = "vi";
     terminal = "screen-256color";
     extraConfig = ''
@@ -18,8 +20,6 @@
       bind-key -n Home send Escape "OH"
       bind-key -n End send Escape "OF"
 
-      set -g status-position top       # macOS / darwin style
-      set -g status-left-length 100    # increase length (from 10)
 
       bind-key "T" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 80%,70% \
@@ -46,6 +46,8 @@
       plugin = tmuxPlugins.catppuccin;
       extraConfig = ''
         set -g status-left "#{E:@catppuccin_status_session}"
+        set -g status-position top       # macOS / darwin style
+        set -g status-left-length 100    # increase length (from 10)
         set -g @catppuccin_flavor "latte"
         set -g @catppuccin_window_status_style "basic"
       '';

@@ -3,8 +3,6 @@
     enable = true;
     userName = "Efremovich";
     userEmail = "sasha.fima@gmail.com";
-    extraConfig= {
-      pull.rebase = false;
-    };
-	};
+    extraConfig = { pull.rebase = true; };
+  };
 }
