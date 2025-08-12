@@ -1,7 +1,11 @@
 {
   imports = [
+    #./boot
+    #./xdg.nix
+    #./zerotierone.nix
     ./audio.nix
     ./bluetooth.nix
+    ./docker.nix
     ./env.nix
     ./home-manager.nix
     ./locale.nix

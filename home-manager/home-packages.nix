@@ -44,13 +44,15 @@
     wl-clipboard
     wtype
     yt-dlp
+    rar
     zip
+    freerdp
 
     # Coding stuff
-    openjdk23
-    nodejs
-    python311
     go
+    nodejs
+    openjdk23
+    python311
 
     # WM stuff
     libsForQt5.xwaylandvideobridge

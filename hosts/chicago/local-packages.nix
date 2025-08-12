@@ -1,8 +1,15 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    gcc
-    rustc
+    autoconf
+    automake
     cargo
+    gcc
+    gnumake
+    libiconv
+    libtool
+    makeWrapper
+    pkg-config
+    rustc
   ];
 
 }
