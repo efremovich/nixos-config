@@ -3,6 +3,7 @@
 
   home.packages = with pkgs; [
     dejavu_fonts
+    nerd-fonts.jetbrains-mono
     noto-fonts
     noto-fonts-lgc-plus
     texlivePackages.hebrew-fonts
@@ -10,7 +11,7 @@
     font-awesome
     powerline-fonts
     powerline-symbols
-    nerd-fonts
+    nerd-fonts.symbols-only
   ];
 
   stylix = {
