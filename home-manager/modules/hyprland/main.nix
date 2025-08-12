@@ -23,6 +23,7 @@
         "waybar"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "hypridle"
       ];
 
       general = {
@@ -46,29 +47,23 @@
         active_opacity = 1.0;
         inactive_opacity = 1.0;
 
-        shadow = {
-          enabled = false;
-        };
+        shadow = { enabled = false; };
 
-        blur = {
-          enabled = false;
-        };
+        blur = { enabled = false; };
       };
 
-      animations = {
-        enabled = false;
-      };
+      animations = { enabled = false; };
 
       input = {
         kb_layout = "us,ru";
         kb_options = "grp:caps_toggle";
-        # kb_numlock = "enabled";
+        numlock_by_default = true;
       };
 
       gestures = {
         workspace_swipe = true;
         workspace_swipe_invert = false;
-        workspace_swipe_forever	= true;
+        workspace_swipe_forever = true;
       };
 
       dwindle = {
@@ -112,10 +107,7 @@
         "nofocus, class:^(xwaylandvideobridge)$"
       ];
 
-      workspace = [
-        "w[tv1], gapsout:0, gapsin:0"
-        "f[1], gapsout:0, gapsin:0"
-      ];
+      workspace = [ "w[tv1], gapsout:0, gapsin:0" "f[1], gapsout:0, gapsin:0" ];
     };
   };
 }
