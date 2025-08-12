@@ -12,6 +12,12 @@
         padding.x = 15;
         padding.y = 15;
       };
+      cursor = {
+          style ={
+    shape =  "Block"; # или Beam (для Insert)
+    blinking=  "On";
+    };
+        };
     };
   };
 }
