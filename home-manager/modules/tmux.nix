@@ -4,10 +4,16 @@
     baseIndex = 1;
     mouse = true;
     escapeTime = 0;
+    statusInterval = 3;
     keyMode = "vi";
     terminal = "screen-256color";
     extraConfig = ''
       set -as terminal-features ",alacritty*:RGB"
+      set -g set-clipboard on      # use system clipboard
+      set -g allow-passthrough on
+      set -g detach-on-destroy off # don't exit from tmux when closing a session
+      set -g allow-passthrough on
+
       bind -n M-r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 
       bind '%' split-window -c '#{pane_current_path}' -h
@@ -18,8 +24,6 @@
       bind-key -n Home send Escape "OH"
       bind-key -n End send Escape "OF"
 
-      set -g status-position top       # macOS / darwin style
-      set -g status-left-length 100    # increase length (from 10)
 
       bind-key "T" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 80%,70% \
@@ -46,6 +50,8 @@
       plugin = tmuxPlugins.catppuccin;
       extraConfig = ''
         set -g status-left "#{E:@catppuccin_status_session}"
+        set -g status-position top       # macOS / darwin style
+        set -g status-left-length 100    # increase length (from 10)
         set -g @catppuccin_flavor "latte"
         set -g @catppuccin_window_status_style "basic"
       '';

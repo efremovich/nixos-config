@@ -8,7 +8,7 @@
       rust-analyzer
       gopls
       nil
-      nixfmt
+      nixpkgs-fmt
       nodePackages.typescript-language-server
     ];
 
