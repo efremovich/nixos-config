@@ -9,9 +9,9 @@
         normal = { style = lib.mkForce "Bold"; };
       };
       padding = {
-       x = 15;
-       y = 15;
-      }
+        x = 15;
+        y = 15;
+      };
     };
   };
 }
