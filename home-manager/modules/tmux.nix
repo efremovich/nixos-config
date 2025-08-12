@@ -5,11 +5,15 @@
     mouse = true;
     escapeTime = 0;
     statusInterval = 3;
-    setClipboard = true;
     keyMode = "vi";
     terminal = "screen-256color";
     extraConfig = ''
       set -as terminal-features ",alacritty*:RGB"
+      set -g set-clipboard on      # use system clipboard
+      set -g allow-passthrough on
+      set -g detach-on-destroy off # don't exit from tmux when closing a session
+      set -g allow-passthrough on
+
       bind -n M-r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 
       bind '%' split-window -c '#{pane_current_path}' -h
