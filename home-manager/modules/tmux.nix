@@ -4,7 +4,6 @@
     baseIndex = 1;
     mouse = true;
     escapeTime = 0;
-    statusInterval = 3;
     keyMode = "vi";
     terminal = "screen-256color";
     extraConfig = ''
