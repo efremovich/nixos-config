@@ -41,7 +41,7 @@
       };
       monospace = {
         name = "JetBrains Mono";
-        package = pkgs.jetbrains-mono;
+        package = pkgs.nerd-fonts.jetbrains-mono;
       };
       sansSerif = {
         name = "Noto Sans";

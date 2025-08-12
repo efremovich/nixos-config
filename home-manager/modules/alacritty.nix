@@ -8,9 +8,9 @@
         builtin_box_drawing = true;
         normal = { style = lib.mkForce "Bold"; };
       };
-      padding = {
-        x = 15;
-        y = 15;
+      window = {
+        padding.x = 15;
+        padding.y = 15;
       };
     };
   };
