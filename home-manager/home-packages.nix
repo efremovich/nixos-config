@@ -13,6 +13,7 @@
     obsidian
     pavucontrol
     telegram-desktop
+
     # CLI utils
     bc
     brightnessctl
@@ -21,18 +22,20 @@
     ffmpegthumbnailer
     fzf
     git-graph
-    gum
     grimblast
+    gum
     htop
     hyprpicker
     mediainfo
     microfetch
+    nixpkgs-fmt
     ntfs3g
     playerctl
+    rar
     ripgrep
+    sesh
     showmethekey
     silicon
-    sesh
     udisks
     ueberzugpp
     unzip

@@ -14,9 +14,9 @@
       };
       cursor = {
           style ={
-    shape =  "Block"; # или Beam (для Insert)
+     shape =  "Block"; # или Beam (для Insert)
     blinking=  "On";
-    };
+            };
         };
     };
   };

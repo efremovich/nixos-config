@@ -2,9 +2,9 @@
   imports = [
     ./audio.nix
     ./bluetooth.nix
-    # ./boot
     ./env.nix
     ./home-manager.nix
+    ./locale.nix
     ./hyprland.nix
     ./kernel.nix
     ./mime.nix
@@ -16,7 +16,6 @@
     ./timezone.nix
     ./user.nix
     ./zapret.nix
-    # ./xdg.nix
     #./zerotierone.nix
     ./zram.nix
   ];
