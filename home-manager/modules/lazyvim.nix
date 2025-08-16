@@ -8,13 +8,14 @@
       rust-analyzer
       gopls
       nil
-      nixpkgs-fmt
+      nixfmt
       nodePackages.typescript-language-server
     ];
 
     # Add treesitter parsers
     treesitterParsers = with pkgs.tree-sitter-grammars; [
       tree-sitter-rust
+      tree-sitter-nix
       tree-sitter-go
       tree-sitter-typescript
       tree-sitter-tsx
