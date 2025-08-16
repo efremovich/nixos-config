@@ -43,7 +43,7 @@
           format-en = "🇺🇸";
           format-ru = "🇷🇺";
           min-length = 5;
-          interval = 100;
+          interval = 1;
           tooltip = false;
         };
 

@@ -1,24 +1,266 @@
-{ inputs, pkgs, ... }: {
+# Full-featured LazyVim configuration example
+# This demonstrates all available options and common use cases
+{ pkgs, inputs, ... }: {
+  # Import the LazyVim module
   imports = [ inputs.LazyVim.homeManagerModules.default ];
 
   programs.lazyvim = {
     enable = true;
-    # Add LSP servers and tools
+
+    # LSP servers, formatters, linters, and tools
     extraPackages = with pkgs; [
-      rust-analyzer
-      gopls
+      # LSP servers
+      lua-language-server
       nil
-      nixfmt
-      nodePackages.typescript-language-server
+      nixd
+      pyright
+      ruff
+      clang
+      yaml-language-server
+      
+      gopls
+      golangci-lint
+      delve
+
+      # Formatters
+      alejandra
+      stylua
+      ruff
+
+      # Tools
+      ripgrep
+      fd
+      git
+      lua5_1
+      luarocks
+
+      # Image preview tools
+      viu
+      chafa
+
+      # SQLite for Snacks.picker frecency/history
+      sqlite
+      lua51Packages.luasql-sqlite3
+
+      # Tools for Snacks.image rendering
+      ghostscript # for PDF rendering
+      tectonic # for LaTeX math expressions
+      mermaid-cli # for Mermaid diagrams
     ];
 
-    # Add treesitter parsers
+    # Treesitter parsers for syntax highlighting
     treesitterParsers = with pkgs.tree-sitter-grammars; [
-      tree-sitter-rust
+      tree-sitter-bash
+      tree-sitter-css
+      tree-sitter-html
+      tree-sitter-javascript
+      tree-sitter-json
+      tree-sitter-latex
+      tree-sitter-lua
+      tree-sitter-markdown
       tree-sitter-nix
-      tree-sitter-go
-      tree-sitter-typescript
+      tree-sitter-nu
+      tree-sitter-python
+      tree-sitter-regex
+      tree-sitter-scss
+      tree-sitter-toml
       tree-sitter-tsx
+      tree-sitter-typescript
+      tree-sitter-yaml
+      tree-sitter-go
     ];
+
+    # LazyVim configuration structure
+    config = {
+      options = ''
+        vim.opt.relativenumber = true
+        vim.opt.tabstop = 2
+        vim.opt.shiftwidth = 2
+        vim.opt.expandtab = true
+        vim.opt.wrap = false
+        vim.opt.cursorline = true
+        vim.opt.signcolumn = "yes"
+        vim.opt.scrolloff = 8
+        vim.opt.sidescrolloff = 8
+      '';
+
+      keymaps = "";
+
+      autocmds = "";
+    };
+
+    # Plugin configurations
+    plugins = {
+
+      # Better escape
+      better-escape = ''
+        return {
+          "max397574/better-escape.nvim",
+          event = "InsertEnter",
+          opts = {
+            mapping = {"jk", "jj"},
+            timeout = 200,
+          },
+        }
+      '';
+
+      # Zen mode for distraction-free writing
+      zen-mode = ''
+        return {
+          "folke/zen-mode.nvim",
+          cmd = "ZenMode",
+          opts = {
+            window = {
+              width = 120,
+              options = {
+                number = false,
+                relativenumber = false,
+              },
+            },
+          },
+        }
+      '';
+
+      # Markdown preview
+      markdown-preview = ''
+        return {
+          "iamcco/markdown-preview.nvim",
+          ft = "markdown",
+          build = "cd app && npm install",
+          config = function()
+            vim.g.mkdp_auto_start = 0
+            vim.g.mkdp_auto_close = 1
+          end,
+        }
+      '';
+
+      # Language-specific configurations
+      languages = ''
+          return {
+           {
+              "neovim/nvim-lspconfig",
+              opts = {
+                servers = {
+                  gopls = {
+                    gofumpt = false,
+                    settings = {
+                      gopls = {
+                        gofumpt = false,
+                        codelenses = {
+                          gc_details = false,
+                          generate = true,
+                          regenerate_cgo = true,
+                          run_govulncheck = true,
+                          test = true,
+                          tidy = true,
+                          upgrade_dependency = true,
+                          vendor = true,
+                        },
+                        hints = {
+                          assignVariableTypes = false,
+                          compositeLiteralFields = false,
+                          compositeLiteralTypes = false,
+                          constantValues = true,
+                          functionTypeParameters = true,
+                          parameterNames = false,
+                          rangeVariableTypes = false,
+                        },
+                        analyses = {
+                          nilness = true,
+                          unusedparams = true,
+                          unusedwrite = true,
+                          useany = true,
+                        },
+                        usePlaceholders = false,
+                        completeUnimported = true,
+                        staticcheck = true,
+                        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                        semanticTokens = true,
+                      },
+                    },
+                  },
+                },
+                setup = {
+                  gopls = function(_, opts)
+                    -- workaround for gopls not supporting semanticTokensProvider
+                    -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
+                    LazyVim.lsp.on_attach(function(client, _)
+                      if not client.server_capabilities.semanticTokensProvider then
+                        local semantic = client.config.capabilities.textDocument.semanticTokens
+                        client.server_capabilities.semanticTokensProvider = {
+                          full = true,
+                          legend = {
+                            tokenTypes = semantic.tokenTypes,
+                            tokenModifiers = semantic.tokenModifiers,
+                          },
+                          range = true,
+                        }
+                      end
+                    end, "gopls")
+                    -- end workaround
+                  end,
+                },
+              },
+            },
+
+            -- Ensure Go tools are installed
+            {
+              "mason-org/mason.nvim",
+              opts = { ensure_installed = { "goimports" } },
+            },
+            {
+              "nvimtools/none-ls.nvim",
+              optional = true,
+              dependencies = {
+                {
+                  "mason-org/mason.nvim",
+                  opts = { ensure_installed = { "gomodifytags", "impl" } },
+                },
+              },
+              opts = function(_, opts)
+                local nls = require("null-ls")
+                opts.sources = vim.list_extend(opts.sources or {}, {
+                  nls.builtins.code_actions.gomodifytags,
+                  nls.builtins.code_actions.impl,
+                  nls.builtins.formatting.goimports,
+                  nls.builtins.formatting.gofmt,
+                })
+              end,
+            },
+            {
+              "stevearc/conform.nvim",
+              optional = true,
+              opts = {
+                formatters_by_ft = {
+                  go = { "goimports" },
+                },
+              },
+            },
+            {
+              "nvim-neotest/neotest",
+              optional = true,
+              dependencies = {
+                "fredrikaverpil/neotest-golang",
+              },
+              opts = {
+                adapters = {
+                  ["neotest-golang"] = {
+                    -- Here we can set options for neotest-golang, e.g.
+                    -- go_test_args = { "-v", "-race", "-count=1", "-timeout=60s" },
+                    dap_go_enabled = true, -- requires leoluz/nvim-dap-go
+                    runners = {
+                      go = {
+                        pre_run = function()
+                          vim.env.GOLANG_PROTOBUF_REGISTRATION_CONFLICT = "warn"
+                        end,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          }
+      '';
+    };
   };
 }

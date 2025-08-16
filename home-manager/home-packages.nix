@@ -13,7 +13,6 @@
     obsidian
     pavucontrol
     telegram-desktop
-    nm-connection-editor
 
     # CLI utils
     bc
