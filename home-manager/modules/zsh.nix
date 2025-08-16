@@ -5,7 +5,7 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = let flakeDir = "~/flake";
+    shellAliases = let flakeDir = "~/.nix";
     in {
       sw = "nh os switch";
       upd = "nh os switch --update";
@@ -22,6 +22,9 @@
       ga = "git add";
       gc = "git commit";
       gp = "git push";
+
+      upnix = "sudo nixos-rebuild switch -- flake ~/.nix";
+      uphome = "home-manager switch --flake ~/.nix";
 
       ".." = "cd ..";
     };
