@@ -17,15 +17,23 @@
       ruff
       clang
       yaml-language-server
-      
-      gopls
-      golangci-lint
+
+      # go
       delve
+      gofumpt
+      golangci-lint
+      gomodifytags
+      gopls
+      gotests
+      gotools
+      iferr
+      impl
 
       # Formatters
       alejandra
       stylua
       ruff
+      nixfmt
 
       # Tools
       ripgrep
@@ -91,175 +99,127 @@
 
     # Plugin configurations
     plugins = {
-
-      # Better escape
-      better-escape = ''
-        return {
-          "max397574/better-escape.nvim",
-          event = "InsertEnter",
-          opts = {
-            mapping = {"jk", "jj"},
-            timeout = 200,
-          },
-        }
-      '';
-
-      # Zen mode for distraction-free writing
-      zen-mode = ''
-        return {
-          "folke/zen-mode.nvim",
-          cmd = "ZenMode",
-          opts = {
-            window = {
-              width = 120,
-              options = {
-                number = false,
-                relativenumber = false,
-              },
-            },
-          },
-        }
-      '';
-
-      # Markdown preview
-      markdown-preview = ''
-        return {
-          "iamcco/markdown-preview.nvim",
-          ft = "markdown",
-          build = "cd app && npm install",
-          config = function()
-            vim.g.mkdp_auto_start = 0
-            vim.g.mkdp_auto_close = 1
-          end,
-        }
-      '';
-
       # Language-specific configurations
       languages = ''
-          return {
-           {
-              "neovim/nvim-lspconfig",
-              opts = {
-                servers = {
-                  gopls = {
-                    gofumpt = false,
-                    settings = {
-                      gopls = {
-                        gofumpt = false,
-                        codelenses = {
-                          gc_details = false,
-                          generate = true,
-                          regenerate_cgo = true,
-                          run_govulncheck = true,
-                          test = true,
-                          tidy = true,
-                          upgrade_dependency = true,
-                          vendor = true,
-                        },
-                        hints = {
-                          assignVariableTypes = false,
-                          compositeLiteralFields = false,
-                          compositeLiteralTypes = false,
-                          constantValues = true,
-                          functionTypeParameters = true,
-                          parameterNames = false,
-                          rangeVariableTypes = false,
-                        },
-                        analyses = {
-                          nilness = true,
-                          unusedparams = true,
-                          unusedwrite = true,
-                          useany = true,
-                        },
-                        usePlaceholders = false,
-                        completeUnimported = true,
-                        staticcheck = true,
-                        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-                        semanticTokens = true,
+        return {
+          {
+            "neovim/nvim-lspconfig",
+            opts = {
+              servers = {
+                gopls = {
+                  gofumpt = false,
+                  settings = {
+                    gopls = {
+                      gofumpt = false,
+                      codelenses = {
+                        gc_details = false,
+                        generate = true,
+                        regenerate_cgo = true,
+                        run_govulncheck = true,
+                        test = true,
+                        tidy = true,
+                        upgrade_dependency = true,
+                        vendor = true,
                       },
+                      hints = {
+                        assignVariableTypes = false,
+                        compositeLiteralFields = false,
+                        compositeLiteralTypes = false,
+                        constantValues = true,
+                        functionTypeParameters = true,
+                        parameterNames = false,
+                        rangeVariableTypes = false,
+                      },
+                      analyses = {
+                        nilness = true,
+                        unusedparams = true,
+                        unusedwrite = true,
+                        useany = true,
+                      },
+                      usePlaceholders = false,
+                      completeUnimported = true,
+                      staticcheck = true,
+                      directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                      semanticTokens = true,
                     },
                   },
                 },
-                setup = {
-                  gopls = function(_, opts)
-                    -- workaround for gopls not supporting semanticTokensProvider
-                    -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-                    LazyVim.lsp.on_attach(function(client, _)
-                      if not client.server_capabilities.semanticTokensProvider then
-                        local semantic = client.config.capabilities.textDocument.semanticTokens
-                        client.server_capabilities.semanticTokensProvider = {
-                          full = true,
-                          legend = {
-                            tokenTypes = semantic.tokenTypes,
-                            tokenModifiers = semantic.tokenModifiers,
-                          },
-                          range = true,
-                        }
-                      end
-                    end, "gopls")
-                    -- end workaround
-                  end,
-                },
+              },
+              setup = {
+                gopls = function(_, opts)
+                  -- workaround for gopls not supporting semanticTokensProvider
+                  -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
+                  LazyVim.lsp.on_attach(function(client, _)
+                    if not client.server_capabilities.semanticTokensProvider then
+                      local semantic = client.config.capabilities.textDocument.semanticTokens
+                      client.server_capabilities.semanticTokensProvider = {
+                        full = true,
+                        legend = {
+                          tokenTypes = semantic.tokenTypes,
+                          tokenModifiers = semantic.tokenModifiers,
+                        },
+                        range = true,
+                      }
+                    end
+                  end, "gopls")
+                  -- end workaround
+                end,
               },
             },
+          },
 
-            -- Ensure Go tools are installed
-            {
-              "mason-org/mason.nvim",
-              opts = { ensure_installed = { "goimports" } },
-            },
-            {
-              "nvimtools/none-ls.nvim",
-              optional = true,
-              dependencies = {
-                {
-                  "mason-org/mason.nvim",
-                  opts = { ensure_installed = { "gomodifytags", "impl" } },
-                },
-              },
-              opts = function(_, opts)
-                local nls = require("null-ls")
-                opts.sources = vim.list_extend(opts.sources or {}, {
-                  nls.builtins.code_actions.gomodifytags,
-                  nls.builtins.code_actions.impl,
-                  nls.builtins.formatting.goimports,
-                  nls.builtins.formatting.gofmt,
-                })
-              end,
-            },
-            {
-              "stevearc/conform.nvim",
-              optional = true,
-              opts = {
-                formatters_by_ft = {
-                  go = { "goimports" },
-                },
+          {
+            "nvimtools/none-ls.nvim",
+            optional = true,
+            dependencies = {
+              {
+                "mason-org/mason.nvim",
+                opts = { ensure_installed = { "gomodifytags", "impl" } },
               },
             },
-            {
-              "nvim-neotest/neotest",
-              optional = true,
-              dependencies = {
-                "fredrikaverpil/neotest-golang",
+            opts = function(_, opts)
+              local nls = require("null-ls")
+              opts.sources = vim.list_extend(opts.sources or {}, {
+                nls.builtins.code_actions.gomodifytags,
+                nls.builtins.code_actions.impl,
+                nls.builtins.formatting.goimports,
+                nls.builtins.formatting.gofmt,
+              })
+            end,
+          },
+          {
+            "stevearc/conform.nvim",
+            optional = true,
+            opts = {
+              formatters_by_ft = {
+                go = { "goimports" },
               },
-              opts = {
-                adapters = {
-                  ["neotest-golang"] = {
-                    -- Here we can set options for neotest-golang, e.g.
-                    -- go_test_args = { "-v", "-race", "-count=1", "-timeout=60s" },
-                    dap_go_enabled = true, -- requires leoluz/nvim-dap-go
-                    runners = {
-                      go = {
-                        pre_run = function()
-                          vim.env.GOLANG_PROTOBUF_REGISTRATION_CONFLICT = "warn"
-                        end,
-                      },
+            },
+          },
+          {
+            "nvim-neotest/neotest",
+            optional = true,
+            dependencies = {
+              "fredrikaverpil/neotest-golang",
+            },
+            opts = {
+              adapters = {
+                ["neotest-golang"] = {
+                  -- Here we can set options for neotest-golang, e.g.
+                  -- go_test_args = { "-v", "-race", "-count=1", "-timeout=60s" },
+                  dap_go_enabled = true, -- requires leoluz/nvim-dap-go
+                  runners = {
+                    go = {
+                      pre_run = function()
+                        vim.env.GOLANG_PROTOBUF_REGISTRATION_CONFLICT = "warn"
+                      end,
                     },
                   },
                 },
               },
             },
-          }
+          },
+        }
       '';
     };
   };

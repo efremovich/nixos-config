@@ -26,11 +26,13 @@
       ];
 
       general = {
-        gaps_in = 2;
-        gaps_out = 2;
+        gaps_in = 4;
+        gaps_out = 8;
 
-        border_size = 3;
+        border_size = 2;
 
+        "col.active_border" = "rgba(7BA3F7EE) rgba(F7768EEE) 50deg";
+        "col.inactive_border" = "rgba(1A1B27EE)";
         # "col.active_border" = "rgba(d65d0eff) rgba(98971aff) 45deg";
         # "col.inactive_border" = "rgba(3c3836ff)";
 
@@ -41,14 +43,23 @@
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 10;
 
         active_opacity = 1.0;
         inactive_opacity = 1.0;
 
-        shadow = { enabled = false; };
+        shadow = {
+          enabled = true;
+        };
 
-        blur = { enabled = false; };
+        blur = {
+          enabled = false; 
+          size = 3;
+          passes = 3;
+          vibrancy = 0.1696;
+          ignore_opacity = false;
+          popups = false;
+        };
       };
 
       animations = { enabled = false; };

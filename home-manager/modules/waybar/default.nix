@@ -14,6 +14,9 @@
           "custom/weather"
           "pulseaudio"
           "battery"
+          "cpu"
+          "memory"
+          "network"
           "clock"
           "tray"
         ];
@@ -89,6 +92,33 @@
         "tray" = {
           icon-size = 14;
           spacing = 1;
+        };
+
+        "network"= {
+          "format-wifi"= "{icon} {essid} ⇣{bandwidthDownBytes:>} ";
+          "format-icons"= [
+            "󰤯"
+            "󰤟"
+            "󰤢"
+            "󰤥"
+            "󰤨"
+          ];
+          "format-ethernet"= "󰀂 ⇣{bandwidthDownBytes:>}" ;
+          "format-alt"= "󱛇";
+          "format-disconnected"= "󰖪";
+          "tooltip-format-wifi"= "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}";
+          "tooltip-format-ethernet"= "󰀂  {ifname}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}";
+          "tooltip-format-disconnected"= "Disconnected";
+          "on-click"= "alacritty -T waybar_nmtui -e nmtui";
+          "interval"= 2;
+        };
+        "cpu"= {
+          format = " {usage: >3}%";
+          "on-click"= "alacritty -T waybar_btop -e btop";
+        };
+        "memory"= {
+          "format"= " {: >3}%";
+          "on-click"= "alacritty -T waybar_btop -e btop";
         };
       };
     };

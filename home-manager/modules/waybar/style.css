@@ -51,49 +51,68 @@ window#waybar {
   background: @mauve;
 }
 
-#clock, #battery, #pulseaudio, #tray, #language, #weather {
+#clock, #battery, #pulseaudio, #tray, #language, #weather, #cpu, #memory, #network {
   padding: 0 10px;
   margin: 0 10px;
 }
 
 #language {
   margin: 0;
-  color: #d79921;
-  border-bottom: 5px solid #d79921;
+  color: @rosewater;
+  border-bottom: 5px solid @rosewater;
 }
 
 #custom-weather {
   margin: 0;
-  color: #98971a;
-  border-bottom: 5px solid #98971a
+  color: @flamingo;
+  border-bottom: 5px solid @flamingo
 }
 
 #pulseaudio {
   margin: 0;
-  color: #689d6a;
-  border-bottom: 5px solid #689d6a;
+  color: @peach;
+  border-bottom: 5px solid @peach;
 }
 
 #pulseaudio.muted {
   padding: 0 20px;
-  color: #cc241d;
-  border-bottom: 5px solid #cc241d;
+  color: @red;
+  border-bottom: 5px solid @red;
+}
+
+#cpu {
+  margin: 0;
+  color: @mauve;
+  border-bottom: 5px solid @mauve;
+}
+
+#memory {
+  margin: 0;
+  color: @maroon;
+  border-bottom: 5px solid @maroon;
+}
+
+#network {
+  margin: 0;
+  color: @green;
+  border-bottom: 5px solid @green;
 }
 
 #battery {
   margin: 0;
-  color: #458588;
-  border-bottom: 5px solid #458588;
+  color: @teal;
+  border-bottom: 5px solid @teal;
 }
 
 #clock {
   margin: 0;
-  color: #b16286;
-  border-bottom: 5px solid #b16286;
+  color: @sky;
+  border-bottom: 5px solid @sky;
 }
+
 
 #tray {
   margin: 0;
-  color: #d65d0e;
-  border-bottom: 5px solid #d65d0e;
+  color: @lavender;
+  border-bottom: 5px solid @lavender;
 }

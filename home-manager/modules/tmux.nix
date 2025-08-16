@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -44,28 +45,17 @@
       )\""
 
     '';
-    plugins = with pkgs; [{
-
-      plugin = tmuxPlugins.catppuccin;
-      extraConfig = ''
-        set -g status-left "#{E:@catppuccin_status_session}"
-        set -g status-position top       # macOS / darwin style
-        set -g status-left-length 100    # increase length (from 10)
-        set -g @catppuccin_flavor "latte"
-        set -g @catppuccin_window_status_style "basic"
-      '';
-    }
-    # {
-    #   plugin = tmuxPlugins.resurrect;
-    #   extraConfig = "set -g @resurrect-strategy-nvim 'session'";
-    # }
-    # {
-    #   plugin = tmuxPlugins.continuum;
-    #   extraConfig = ''
-    # set -g @continuum-restore 'on'
-    # set -g @continuum-save-interval '60' # minutes
-    #   '';
-    # }
-      ];
+    plugins = with pkgs; [
+      {
+        plugin = tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g status-left "#{E:@catppuccin_status_session}"
+          set -g status-position top       # macOS / darwin style
+          set -g status-left-length 100    # increase length (from 10)
+          set -g @catppuccin_flavor "latte"
+          set -g @catppuccin_window_status_style "basic"
+        '';
+      }
+    ];
   };
 }
