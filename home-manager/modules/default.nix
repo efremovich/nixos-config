@@ -7,8 +7,9 @@
     ./firefox.nix
     ./git.nix
     ./hyprland
+    # ./niri
     ./lazygit.nix
-       # ./lazyvim.nix
+    # ./lazyvim.nix
     ./neovim.nix
     ./obsidian.nix
     ./ranger.nix

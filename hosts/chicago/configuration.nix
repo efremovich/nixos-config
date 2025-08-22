@@ -6,6 +6,7 @@
     ./local-packages.nix
     ../../nixos/modules
     ../../nixos/boot/grub.nix
+    # ../../nixos/desktop
     ../../nixos/graphics/amd.nix
   ];
 

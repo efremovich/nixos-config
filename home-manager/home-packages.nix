@@ -2,7 +2,12 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    # Packages in each category are sorted alphabetically
+    #niri
+    niri
+    swaylock
+    swayidle
+    swaybg
+    fuzzel
 
     # Desktop apps
     dbeaver-bin
@@ -57,7 +62,6 @@
     # WM stuff
     libsForQt5.xwaylandvideobridge
     libnotify
-    xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
 
     # Other
