@@ -15,16 +15,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # add LazyVim-module
-    LazyVim = {
-      url = "github:pfassina/lazyvim-nix";
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.niri-stable.follows = "niri-stable";
     };
-    # COMING SOON...
-    #nixvim = {
-    #  url = "github:nix-community/nixvim";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    niri-stable.url = "github:YaLTeR/niri/v25.05.1";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

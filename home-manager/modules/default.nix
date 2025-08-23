@@ -8,9 +8,9 @@
     ./git.nix
     ./hyprland
     ./lazygit.nix
-       # ./lazyvim.nix
     ./neovim.nix
     ./obsidian.nix
+    ./niri
     ./ranger.nix
     ./starship.nix
     ./stylix.nix

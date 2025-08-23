@@ -58,10 +58,15 @@
     libsForQt5.xwaylandvideobridge
     libnotify
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
+    xdg-desktop-portal-wlr
+    xdg-desktop-portal-gnome
 
     # Other
     bemoji
     nix-prefetch-scripts
+
+    swaylock
+    swayidle
+    niri
   ];
 }
