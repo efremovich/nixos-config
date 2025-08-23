@@ -1,20 +1,27 @@
 { pkgs, config, ... }: {
-  # Включение драйверов Intel
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    extraPackages = with pkgs; [ intel-media-driver libva-utils ];
+
+    extraPackages = with pkgs; [
+      cudaPackages.cudatoolkit
+      egl-wayland
+      nvidia-vaapi-driver
+    ];
   };
 
-  # Vulkan
-  hardware.vulkan.enable = true;
-  hardware.vulkan.extraPackages = with pkgs; [ vulkan-tools ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
-  # Для Wayland и niri
-  services.xserver.enable = false;
+  hardware.nvidia = {
+    modesetting.enable = true;
 
-  # Если используется Wayland (например, Sway или GNOME на Wayland)
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1"; # Фикс для курсора в Wayland
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+
+    open = true;
+    nvidiaSettings = true;
+
+    # package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_340xx;
+    # package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 }

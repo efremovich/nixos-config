@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
     ./local-packages.nix
     ../../nixos/modules
-    ../../nixos/graphics/intel.nix
+    # ../../nixos/graphics/intel.nix
     ../../nixos/boot/systemd-boot.nix
   ];
 

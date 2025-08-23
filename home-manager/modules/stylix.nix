@@ -2,17 +2,23 @@
   imports = [ inputs.stylix.homeModules.stylix ];
 
   home.packages = with pkgs; [
-    dejavu_fonts
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.noto
-    noto-fonts-lgc-plus
-    texlivePackages.hebrew-fonts
-    noto-fonts-emoji
-    font-awesome
-    powerline-fonts
-    powerline-symbols
     nerd-fonts.symbols-only
+    nerd-fonts.fira-code
+    nerd-fonts.victor-mono
+    nerd-fonts.fantasque-sans-mono
     nerd-fonts.caskaydia-cove
+    lilex
+    font-awesome
+    noto-fonts
+    noto-fonts-emoji
+    recursive
+    sn-pro
+    ia-writer-quattro
+    ia-writer-duospace
+    libre-baskerville
+    monaspace
+    maple-mono.NF
+    maple-mono.variable
   ];
 
   stylix = {

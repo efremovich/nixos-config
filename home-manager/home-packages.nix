@@ -68,5 +68,7 @@
     swaylock
     swayidle
     niri
+
+    pciutils
   ];
 }
