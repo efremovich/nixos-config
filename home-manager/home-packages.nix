@@ -57,9 +57,9 @@
     # WM stuff
     libsForQt5.xwaylandvideobridge
     libnotify
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-wlr
-    xdg-desktop-portal-gnome
+    # xdg-desktop-portal-gtk
+    # xdg-desktop-portal-wlr
+    # xdg-desktop-portal-gnome
 
     # Other
     bemoji

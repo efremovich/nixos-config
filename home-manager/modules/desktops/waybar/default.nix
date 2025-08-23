@@ -1,5 +1,5 @@
 # https://github.com/Alexays/Waybar
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.file.".config/waybar/toggl_status.py".source = ./toggl_status.py;
   home.file.".config/waybar/vpn_status.py".source = ./vpn_status.py;
   home.file.".config/waybar/vpn_toggle.py".source = ./vpn_toggle.py;
@@ -27,9 +27,7 @@
           "mpris"
           "custom/mpris-icon"
         ];
-        modules-center = [
-          "niri/workspaces"
-        ];
+        modules-center = [ "niri/workspaces" ];
         modules-right = [
           # "custom/toggl-icon"
           # "custom/toggl"
@@ -54,7 +52,8 @@
           on-click = "niri msg action toggle-overview";
         };
         "image" = {
-          path = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
+          path =
+            "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake-white.svg";
           on-click = "niri msg action toggle-overview";
           size = 22;
           tooltip = false;
@@ -124,8 +123,10 @@
             "" = "<span foreground='#89b4fa'> Niri</span>";
             " " = "<span foreground='#89b4fa'> Niri</span>";
             # terminals
-            "com.mitchellh.ghostty" = "<span foreground='#89b4fa'>󰊠 Ghostty</span>";
-            "org.wezfurlong.wezterm" = "<span foreground='#89b4fa'> Wezterm</span>";
+            "com.mitchellh.ghostty" =
+              "<span foreground='#89b4fa'>󰊠 Ghostty</span>";
+            "org.wezfurlong.wezterm" =
+              "<span foreground='#89b4fa'> Wezterm</span>";
             "kitty" = "<span foreground='#89b4fa'>󰄛 Kitty</span>";
             # code
             "code" = "<span foreground='#89b4fa'>󰨞 Code</span>";
@@ -147,7 +148,8 @@
             "tana" = "<span foreground='#89b4fa'>󰠮 Tana</span>";
             "obsidian" = "<span foreground='#89b4fa'>󰠮 Obsdian</span>";
             "Zotero" = "<span foreground='#89b4fa'>󰬡 Zotero</span>";
-            "org.pulseaudio.pavucontrol" = "<span foreground='#89b4fa'> Pavucontrol</span>";
+            "org.pulseaudio.pavucontrol" =
+              "<span foreground='#89b4fa'> Pavucontrol</span>";
             # Everything else
             "(.*)" = "<span foreground='#89b4fa'>$1</span>";
           };
@@ -155,9 +157,11 @@
 
         # Module configuration: Center
         clock = {
-          format = "<b>{:%a %b[%m] %d ▒ %I:%M %p}</b>";
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-          format-alt = "{:%H:%M %Y-%m-%d}";
+          format = "<b>{:%a %b[%m] %d ▒ %H:%M}</b>";
+          tooltip-format = ''
+            <big>{:%Y %B}</big>
+            <tt><small>{calendar}</small></tt>'';
+          format-alt = "{:%H:%M %d.%m.%Y}";
         };
 
         # Module configuration: Right
@@ -176,7 +180,7 @@
             phone-muted = "";
             portable = "";
             car = "";
-            default = ["" ""];
+            default = [ "" "" ];
           };
           scroll-step = 1;
           on-click = "pavucontrol";
@@ -224,7 +228,7 @@
         };
         backlight = {
           format = "{icon}";
-          format-icons = ["" "" "" "" "" "" "" "" ""];
+          format-icons = [ "" "" "" "" "" "" "" "" "" ];
         };
         battery = {
           states = {
@@ -237,11 +241,11 @@
           format-plugged = "";
           format-alt = "{capacity}% {icon}";
           # format-icons = ["" "" "" "" "" "" "" ""];
-          format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+          format-icons = [ "󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
           tooltip-format = "{capacity}% {time}";
           tooltip = true;
         };
-        "battery#bat2" = {bat = "BAT2";};
+        "battery#bat2" = { bat = "BAT2"; };
         tray = {
           icon-size = 18;
           spacing = 10;
@@ -298,15 +302,15 @@
           };
         };
         # Custom icons
-        "custom/toggl-icon" = {format = "󱎫";};
-        "custom/audio-icon" = {format = "";};
-        "custom/network-icon" = {format = "󰖩";};
-        "custom/backlight-icon" = {format = "󰌵";};
-        "custom/battery-icon" = {format = "󰁹";};
-        "custom/clock-icon" = {format = "";};
-        "custom/mpris-icon" = {format = " ";};
-        "custom/idle-icon" = {format = " ";};
-        "custom/vpn-icon" = {format = " ";};
+        "custom/toggl-icon" = { format = "󱎫"; };
+        "custom/audio-icon" = { format = ""; };
+        "custom/network-icon" = { format = "󰖩"; };
+        "custom/backlight-icon" = { format = "󰌵"; };
+        "custom/battery-icon" = { format = "󰁹"; };
+        "custom/clock-icon" = { format = ""; };
+        "custom/mpris-icon" = { format = " "; };
+        "custom/idle-icon" = { format = " "; };
+        "custom/vpn-icon" = { format = " "; };
         "custom/tray-icon" = {
           format = "󱊖";
           on-click = "swaync-client -t";

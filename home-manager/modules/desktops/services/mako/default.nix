@@ -3,7 +3,7 @@
   services.mako = {
     enable = false;
     settings = {
-      anchor = "top-right";
+      anchor = "bottom-right";
       borderRadius = "2";
       borderSize = "2";
       font = "Maple Mono";
@@ -12,11 +12,7 @@
       textColor = "#cdd6f4";
       borderColor = "#cba6f7";
       progressColor = "#313244";
-      criteria = {
-        "urgency=high" = {
-          borderColor = "#fab387";
-        };
-      };
+      criteria = { "urgency=high" = { borderColor = "#fab387"; }; };
     };
   };
 }

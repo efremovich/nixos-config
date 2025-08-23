@@ -11,14 +11,20 @@
     ./neovim.nix
     ./obsidian.nix
     # ./niri
+    ./fonts.nix
     ./desktops/niri
+    ./desktops/services/mako
+    ./desktops/waybar
+    # ./desktops/gtk.nix
+    ./desktops/qt5.nix
+    ./desktops/xdg.nix
     # ./desktops/niri/swayidle-nosleep.nix
     ./ranger.nix
     ./starship.nix
     ./stylix.nix
     ./swaync
     ./tmux.nix
-    ./waybar
+    # ./waybar
     ./wofi
     ./zathura.nix
     ./zoxide.nix

@@ -1,9 +1,5 @@
-{pkgs, ...}: {
-  imports = [
-    ./services.nix
-    ./swaylock.nix
-    ./xwayland-satellite.nix
-  ];
+{ pkgs, ... }: {
+  imports = [ ./services.nix ./swaylock.nix ./xwayland-satellite.nix ];
 
   home.packages = with pkgs; [
     swww
@@ -21,7 +17,10 @@
     pipewire
     hyprpicker
     python312Packages.toggl-cli
+    fuzzel
   ];
+
+  services.hyprpaper = { enable = true; };
 
   home.file.".config/niri" = {
     recursive = true;
