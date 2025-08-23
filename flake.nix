@@ -25,6 +25,7 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
+      inherit (self) outputs;
       system = "x86_64-linux";
       homeStateVersion = "25.05";
       user = "efremov";
@@ -48,6 +49,8 @@
         };
 
     in {
+      overlays = import ./overlays { inherit inputs outputs; };
+
       nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
         configs // {
           "${host.hostname}" =

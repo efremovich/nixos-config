@@ -6,11 +6,13 @@
     ./eza.nix
     ./firefox.nix
     ./git.nix
-    ./hyprland
+    # ./hyprland
     ./lazygit.nix
     ./neovim.nix
     ./obsidian.nix
-    ./niri
+    # ./niri
+    ./desktops/niri
+    # ./desktops/niri/swayidle-nosleep.nix
     ./ranger.nix
     ./starship.nix
     ./stylix.nix
