@@ -1,24 +1,12 @@
 { pkgs, config, ... }: {
   hardware.graphics = {
     enable = true;
-
-    extraPackages = with pkgs; [
-      egl-wayland
-      nvidia-vaapi-driver
-    ];
+    enable32Bit = true;
+    extraPackages = with pkgs; [ egl-wayland nvidia-vaapi-driver amdvlk ];
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true; # Для 32-битных приложений (например, Wine)
-    extraPackages = with pkgs; [
-      amdvlk # Vulkan-драйвер от AMD
-    ];
-  };
 
   # Если используется Wayland (например, Sway или GNOME на Wayland)
   environment.sessionVariables = {
