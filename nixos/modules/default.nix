@@ -9,7 +9,7 @@
     ./env.nix
     ./home-manager.nix
     ./locale.nix
-    ./hyprland.nix
+    # ./hyprland.nix
     ./niri.nix
     ./kernel.nix
     ./mime.nix
