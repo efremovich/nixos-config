@@ -33,12 +33,13 @@
       hyprland.enable = false;
       hyprlock.enable = false;
       neovim.enable = false;
+      gtk.enable = true;
     };
 
     cursor = {
-      name = "DMZ-Black";
+      name = "Bibata-Original-Ice";
       size = 24;
-      package = pkgs.vanilla-dmz;
+      package = pkgs.bibata-cursors;
     };
 
     fonts = {
@@ -47,8 +48,8 @@
         package = pkgs.noto-fonts-color-emoji;
       };
       monospace = {
-        name = "JetBrains Mono";
-        package = pkgs.jetbrains-mono;
+        name = "CaskaydiaCove Mono Nerd Font";
+        package = pkgs.nerd-fonts.caskaydia-cove;
       };
       sansSerif = {
         name = "Noto Sans";
@@ -73,8 +74,8 @@
     };
 
     image = pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/7j/wallhaven-7j3lve.png";
-      sha256 = "kko5Uiq7H0DqiT2aDYbaQCNRzs+5AleaATzsXi3xgQA=";
+      url = "https://w.wallhaven.cc/full/o5/wallhaven-o5jv65.jpg";
+      sha256 = "";
     };
   };
 }
