@@ -1,5 +1,5 @@
 {
-  i18n.defaultLocale = "ru_RU.UTF-8";
+  # i18n.defaultLocale = "ru_RU.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ru_RU.UTF-8";

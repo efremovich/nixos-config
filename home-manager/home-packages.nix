@@ -47,6 +47,7 @@
     rar
     zip
     freerdp
+    k9s
 
     # Coding stuff
     go
@@ -60,7 +61,7 @@
     # xdg-desktop-portal-gtk
     # xdg-desktop-portal-wlr
     # xdg-desktop-portal-gnome
-
+    nekoray
     # Other
     bemoji
     nix-prefetch-scripts

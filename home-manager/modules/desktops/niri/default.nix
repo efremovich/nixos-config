@@ -17,7 +17,9 @@
     pipewire
     hyprpicker
     python312Packages.toggl-cli
-    fuzzel
+    grim
+    slurp
+    swappy
   ];
 
   services.hyprpaper = { enable = true; };

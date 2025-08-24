@@ -33,11 +33,6 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
 
     initContent = ''
-      # Start UWSM
-      if uwsm check may-start > /dev/null && uwsm select; then
-        exec systemd-cat -t uwsm_start uwsm start default
-      fi
-
       function sesh-sessions() {
         {
           exec </dev/tty

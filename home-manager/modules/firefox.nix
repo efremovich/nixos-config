@@ -1,10 +1,15 @@
-{
+{ config, pkgs, ... }: {
   programs.firefox = {
     enable = true;
     profiles.default = {
       settings = {
-        "browser.toolbars.visible" = false; # Hides the entire toolbar
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
+      userContent = ''
+        #TabsToolbar {
+            visibility: collapse !important;
+        }
+      '';
     };
   };
   xdg.mimeApps.defaultApplications = {

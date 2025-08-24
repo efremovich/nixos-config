@@ -81,7 +81,7 @@
           on-click = "activate";
           current-only = false;
           disable-scroll = false;
-          icon-theme = "Papirus-Dark";
+          icon-theme = "Papirus-Light";
           format = "<span><b>{icon}</b></span>";
           format-icons = {
             "1" = "1";
@@ -98,7 +98,7 @@
         "wlr/taskbar" = {
           all-outputs = false;
           format = "{icon}";
-          icon-theme = "Papirus-Dark";
+          icon-theme = "Papirus-Light";
           icon-size = 16;
           tooltip = true;
           tooltip-format = "{title}";
@@ -198,15 +198,15 @@
           rotate = 270;
           format = "{icon}";
           format-icons = [
-            "<span color='#b4befe'>󰝦</span>"
-            "<span color='#b4befe'>󰪞</span>"
-            "<span color='#a6e3a1'>󰪟</span>"
-            "<span color='#a6e3a1'>󰪠</span>"
-            "<span color='#f9e2af'>󰪡</span>"
-            "<span color='#fab387'>󰪢</span>"
-            "<span color='#eba0ac'>󰪣</span>"
-            "<span color='#f38ba8'>󰪤</span>"
-            "<span color='#f38ba8'>󰪥</span>"
+            "<span color='#7287fd'>󰝦</span>"
+            "<span color='#7287fd'>󰪞</span>"
+            "<span color='#40a02b'>󰪟</span>"
+            "<span color='#40a02b'>󰪠</span>"
+            "<span color='#df8e1d'>󰪡</span>"
+            "<span color='#fe640b'>󰪢</span>"
+            "<span color='#e64553'>󰪣</span>"
+            "<span color='#d20f39'>󰪤</span>"
+            "<span color='#d20f39'>󰪥</span>"
           ];
           max-length = 10;
         };
@@ -215,15 +215,15 @@
           format = "{icon}";
           rotate = 270;
           format-icons = [
-            "<span color='#b4befe'>󰝦</span>"
-            "<span color='#b4befe'>󰪞</span>"
-            "<span color='#a6e3a1'>󰪟</span>"
-            "<span color='#a6e3a1'>󰪠</span>"
-            "<span color='#f9e2af'>󰪡</span>"
-            "<span color='#fab387'>󰪢</span>"
-            "<span color='#eba0ac'>󰪣</span>"
-            "<span color='#f38ba8'>󰪤</span>"
-            "<span color='#f38ba8'>󰪥</span>"
+            "<span color='#7287fd'>󰝦</span>"
+            "<span color='#7287fd'>󰪞</span>"
+            "<span color='#40a02b'>󰪟</span>"
+            "<span color='#40a02b'>󰪠</span>"
+            "<span color='#df8e1d'>󰪡</span>"
+            "<span color='#fe640b'>󰪢</span>"
+            "<span color='#e64553'>󰪣</span>"
+            "<span color='#d20f39'>󰪤</span>"
+            "<span color='#d20f39'>󰪥</span>"
           ];
         };
         backlight = {

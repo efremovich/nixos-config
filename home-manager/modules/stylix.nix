@@ -7,6 +7,7 @@
     nerd-fonts.victor-mono
     nerd-fonts.fantasque-sans-mono
     nerd-fonts.caskaydia-cove
+    nerd-fonts.jetbrains-mono
     lilex
     font-awesome
     noto-fonts
@@ -34,6 +35,7 @@
       hyprlock.enable = false;
       neovim.enable = false;
       gtk.enable = true;
+      fuzzel.enable = true;
     };
 
     cursor = {
@@ -48,9 +50,13 @@
         package = pkgs.noto-fonts-color-emoji;
       };
       monospace = {
-        name = "CaskaydiaCove Mono Nerd Font";
-        package = pkgs.nerd-fonts.caskaydia-cove;
+        name = "CaskaydiaCoveNerdFontMono";
+        package = pkgs.cascadia-code;
       };
+      # monospace = {
+      #   name = "JetBrains Mono";
+      #   package = pkgs.jetbrains-mono;
+      # };
       sansSerif = {
         name = "Noto Sans";
         package = pkgs.nerd-fonts.noto;
@@ -62,7 +68,7 @@
 
       sizes = {
         terminal = 13;
-        applications = 11;
+        applications = 12;
       };
     };
 

@@ -11,10 +11,13 @@
     ./neovim.nix
     ./obsidian.nix
     # ./niri
-    ./fonts.nix
+    # для niri
     ./desktops/niri
+    ./desktops/niri/swaync
     ./desktops/services/mako
     ./desktops/waybar
+    ./desktops/fuzzel.nix
+    ./apps/walker
     # ./desktops/gtk.nix
     ./desktops/qt5.nix
     ./desktops/xdg.nix
@@ -22,10 +25,8 @@
     ./ranger.nix
     ./starship.nix
     ./stylix.nix
-    ./swaync
+    # ./nekoray.nix
     ./tmux.nix
-    # ./waybar
-    ./wofi
     ./zathura.nix
     ./zoxide.nix
     ./zsh.nix
