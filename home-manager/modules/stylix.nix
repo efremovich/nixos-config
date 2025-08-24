@@ -75,7 +75,7 @@
 
     image = pkgs.fetchurl {
       url = "https://w.wallhaven.cc/full/o5/wallhaven-o5jv65.jpg";
-      sha256 = "";
+      sha256 = "sha256-bMYij70tl4RmzGLnsmcjg6wtBDVnL71gO9ox6g2MUcs=";
     };
   };
 }
