@@ -36,4 +36,6 @@
     # attempts when resuming from sleep
     Unit.StartLimitIntervalSec = lib.mkForce 1;
   };
+
+  services.hyprpaper = { enable = true; };
 }

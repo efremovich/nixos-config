@@ -13,6 +13,7 @@
     obsidian
     pavucontrol
     telegram-desktop
+    yandex-music
 
     # CLI utils
     bc
@@ -47,6 +48,7 @@
     rar
     zip
     freerdp
+    k9s
 
     # Coding stuff
     go
@@ -57,9 +59,7 @@
     # WM stuff
     libsForQt5.xwaylandvideobridge
     libnotify
-    # xdg-desktop-portal-gtk
-    # xdg-desktop-portal-wlr
-    # xdg-desktop-portal-gnome
+
     nekoray
     # Other
     bemoji
@@ -70,5 +70,6 @@
     niri
 
     pciutils
+    remmina
   ];
 }

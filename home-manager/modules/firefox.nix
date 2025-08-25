@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{
   programs.firefox = {
     enable = true;
     profiles.default = {
@@ -6,7 +6,7 @@
         "browser.toolbars.visible" = false; # Hides the entire toolbar
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
-      userContent = ''
+      userChrome = ''
         #TabsToolbar {
             visibility: collapse !important;
         }

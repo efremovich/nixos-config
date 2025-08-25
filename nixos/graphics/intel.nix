@@ -21,7 +21,7 @@
     nvidiaSettings = true;
 
     # package = config.boot.kernelPackages.nvidiaPackages.beta;
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_340xx;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
     # package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 }

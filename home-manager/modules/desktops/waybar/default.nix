@@ -20,19 +20,20 @@
         spacing = 0;
         modules-left = [
           # "custom/spacer"
-          "image"
+          # "image"
+          "niri/workspaces"
           "wlr/taskbar"
           "niri/window"
           "custom/window-icon"
-          "mpris"
-          "custom/mpris-icon"
         ];
-        modules-center = [ "niri/workspaces" ];
+        modules-center = [ "custom/clock-icon" "clock" ];
         modules-right = [
           # "custom/toggl-icon"
           # "custom/toggl"
-          "custom/clock-icon"
-          "clock"
+          "custom/mpris-icon"
+          "mpris"
+          "custom/language-icon"
+          "niri/language"
           "custom/tray-icon"
           "memory"
           "cpu"
@@ -154,6 +155,8 @@
             "(.*)" = "<span foreground='#89b4fa'>$1</span>";
           };
         };
+
+        "niri/language" = { format = "{short}"; };
 
         # Module configuration: Center
         clock = {
@@ -311,6 +314,7 @@
         "custom/mpris-icon" = { format = " "; };
         "custom/idle-icon" = { format = " "; };
         "custom/vpn-icon" = { format = " "; };
+        "custom/language-icon" = { format = "󰌍 "; };
         "custom/tray-icon" = {
           format = "󱊖";
           on-click = "swaync-client -t";

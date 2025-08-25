@@ -12,19 +12,22 @@
     ./obsidian.nix
     # ./niri
     # для niri
+    ./apps/walker
+    ./desktops/fuzzel.nix
     ./desktops/niri
+    ./desktops/niri/swayidle.nix
+    ./desktops/niri/swaylock.nix
+    ./desktops/niri/swaync
+    ./desktops/niri/xwayland-satellite.nix
+    ./desktops/qt5.nix
     ./desktops/services/mako
     ./desktops/waybar
-    ./desktops/fuzzel.nix
-    ./apps/walker
-    # ./desktops/gtk.nix
-    ./desktops/qt5.nix
     ./desktops/xdg.nix
-    # ./desktops/niri/swayidle-nosleep.nix
+
+    ./k9s.nix
     ./ranger.nix
     ./starship.nix
     ./stylix.nix
-    # ./nekoray.nix
     ./tmux.nix
     ./zathura.nix
     ./zoxide.nix

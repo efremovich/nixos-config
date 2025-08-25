@@ -36,6 +36,7 @@
       neovim.enable = false;
       gtk.enable = true;
       fuzzel.enable = true;
+      k9s.enable = true;
     };
 
     cursor = {
@@ -50,7 +51,8 @@
         package = pkgs.noto-fonts-color-emoji;
       };
       monospace = {
-        name = "CaskaydiaCoveNerdFontMono";
+        name = "CaskaydiaCoveNerdFont";
+        # name = "CaskaydiaCoveNerdFontMono";
         package = pkgs.cascadia-code;
       };
       # monospace = {
@@ -80,8 +82,8 @@
     };
 
     image = pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/o5/wallhaven-o5jv65.jpg";
-      sha256 = "sha256-bMYij70tl4RmzGLnsmcjg6wtBDVnL71gO9ox6g2MUcs=";
+      url = "https://w.wallhaven.cc/full/vp/wallhaven-vp92q5.jpg";
+      sha256 = "sha256-d8J7pDYFs8ZvEq6AbViFDofFXAicFHdPUPLdnVBnz1s=";
     };
   };
 }

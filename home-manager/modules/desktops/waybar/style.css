@@ -27,7 +27,7 @@
 @define-color crust #dce0e8;
 
 * {
-  font-family: "Monaspace Neon Frozen", "CaskaydiaCove Nerd Font";
+  font-family: "CaskaydiaCove Nerd Font";
   font-size: 15px;
   min-height: 0;
   border: none;
@@ -162,7 +162,7 @@ window.eDP-1 * {
 
 #window {
   background: @crust;
-  font-family: "Monaspace Radon Frozen", "CaskaydiaCove Nerd Font";
+  font-family:  "CaskaydiaCove Nerd Font";
   border-radius: 0;
   padding: 0rem 0.7rem;
   border: 2px solid @blue;
@@ -211,9 +211,17 @@ window#waybar.swallowing {
 
 #clock {
   background: @crust;
-  color: @pink;
+  color: @subtext0;
   border-radius: 0 5px 5px 0;
   border: 2px solid @pink;
+  padding: 0rem 0.7rem;
+}
+
+#language {
+  background: @crust;
+  color: @mauve;
+  border-radius: 0 5px 5px 0;
+  border: 2px solid @mauve;
   padding: 0rem 0.7rem;
 }
 
@@ -239,7 +247,7 @@ window#waybar.swallowing {
 
 #custom-toggl {
   background: @crust;
-  font-family: "Monaspace Radon Frozen", "CaskaydiaCove Nerd Font";
+  font-family: "CaskaydiaCove Nerd Font";
   color: @red;
   border-radius: 0 5px 5px 0;
   border: 2px solid @red;
@@ -265,6 +273,8 @@ window#waybar.swallowing {
 #custom-backlight-icon,
 #custom-battery-icon,
 #custom-clock-icon,
+#custom-language-icon,
+#custom-mpris-icon,
 #custom-tray-icon {
   background: @crust;
   color: @crust;
@@ -289,6 +299,10 @@ window#waybar.swallowing {
   background: @pink;
 }
 
+#custom-language-icon {
+  background: @mauve;
+}
+
 #custom-tray-icon {
   margin-left: 5px;
   background: @text;
@@ -310,16 +324,15 @@ window#waybar.swallowing {
 }
 #mpris {
   background: @crust;
-  font-family: "Monaspace Radon Frozen", "CaskaydiaCove Nerd Font";
+  font-family: "CaskaydiaCove Nerd Font";
   color: @green;
   padding: 0rem 0.7rem;
-  border-radius: 5px 0 0 5px;
+  border-radius: 0 5px 5px 0;
   border: 2px solid @green;
 }
 
 #custom-vpn-icon,
 #custom-idle-icon,
-#custom-mpris-icon,
 #custom-window-icon {
   color: @crust;
   padding: 0px 10px;
@@ -339,3 +352,4 @@ window#waybar.swallowing {
 #custom-window-icon {
   background: @blue;
 }
+

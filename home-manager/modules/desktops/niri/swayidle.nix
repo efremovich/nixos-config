@@ -1,20 +1,14 @@
 # Ref: https://github.com/hallettj/home.nix/blob/main/home-manager/features/niri/swayidle.nix
-{
-  pkgs,
-  lib,
-  ...
-}: let
-  niri-bin = "${pkgs.niri-unstable}/bin/niri";
+{ pkgs, lib, ... }:
+let niri-bin = "${pkgs.niri}/bin/niri";
 in {
-  home.packages = with pkgs; [
-    swaylock
-  ];
+  home.packages = with pkgs; [ swaylock ];
   services.swayidle = let
     seconds = 1;
     minutes = 60 * seconds;
-    screen-blank-timeout = 15 * minutes;
+    screen-blank-timeout = 10 * minutes;
     lock-after-blank-timeout = 15 * minutes;
-    sleep-timeout = 60 * minutes;
+    sleep-timeout = 25 * minutes;
 
     loginctl = "${pkgs.systemd}/bin/loginctl";
     systemctl = "${pkgs.systemd}/bin/systemctl";
