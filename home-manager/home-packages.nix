@@ -49,12 +49,14 @@
     zip
     freerdp
     k9s
+    kubectl
 
     # Coding stuff
     go
     nodejs
     openjdk23
     python311
+    postgresql
 
     # WM stuff
     libsForQt5.xwaylandvideobridge
