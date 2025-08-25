@@ -14,6 +14,7 @@
     pavucontrol
     telegram-desktop
     yandex-music
+    anydesk
 
     # CLI utils
     bc
@@ -49,12 +50,15 @@
     zip
     freerdp
     k9s
+    kubectl
 
     # Coding stuff
     go
     nodejs
     openjdk23
     python311
+    postgresql
+    lazydocker
 
     # WM stuff
     libsForQt5.xwaylandvideobridge
@@ -71,5 +75,7 @@
 
     pciutils
     remmina
+
+    nix-search-cli
   ];
 }

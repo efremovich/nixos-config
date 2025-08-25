@@ -1,13 +1,10 @@
 { pkgs, ... }: {
   services.zapret = {
-    enable = false;
+    enable = true;
     package = pkgs.zapret;
 
     udpSupport = true;
-    udpPorts = [
-      "443"
-      "50000:65535"
-    ];
+    udpPorts = [ "443" "50000:65535" ];
 
     params = [
       "--dpi-desync=fake,split2"
