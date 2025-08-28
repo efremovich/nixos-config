@@ -36,6 +36,10 @@
           hostname = "lenovo";
           stateVersion = "25.05";
         }
+        {
+          hostname = "pazajik";
+          stateVersion = "25.05";
+        }
       ];
       makeSystem = { hostname, stateVersion }:
         nixpkgs.lib.nixosSystem {
@@ -58,9 +62,9 @@
         modules = [ ./home-manager/home.nix ];
       };
 
-      # Экспортим niri для использования в модулях
-      overlays.default = final: prev: {
-        inherit (niri.packages.${system}) niri niri-stable niri-unstable;
-      };
+      # # Экспортим niri для использования в модулях
+      # overlays.default = final: prev: {
+      #   inherit (niri.packages.${system}) niri niri-stable niri-unstable;
+      # };
     };
 }
