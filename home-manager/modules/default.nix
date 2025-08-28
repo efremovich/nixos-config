@@ -6,19 +6,29 @@
     ./eza.nix
     ./firefox.nix
     ./git.nix
-    ./hyprland
-    # ./niri
+    # ./hyprland
     ./lazygit.nix
-    # ./lazyvim.nix
     ./neovim.nix
     ./obsidian.nix
+    # ./niri
+    # для niri
+    ./apps/walker
+    ./desktops/fuzzel.nix
+    ./desktops/niri
+    ./desktops/niri/swayidle.nix
+    ./desktops/niri/swaylock.nix
+    ./desktops/niri/swaync
+    ./desktops/niri/xwayland-satellite.nix
+    ./desktops/qt5.nix
+    ./desktops/services/mako
+    ./desktops/waybar
+    ./desktops/xdg.nix
+
+    ./k9s.nix
     ./ranger.nix
     ./starship.nix
     ./stylix.nix
-    ./swaync
     ./tmux.nix
-    ./waybar
-    ./wofi
     ./zathura.nix
     ./zoxide.nix
     ./zsh.nix

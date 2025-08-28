@@ -2,16 +2,24 @@
   imports = [ inputs.stylix.homeModules.stylix ];
 
   home.packages = with pkgs; [
-    dejavu_fonts
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.noto
-    noto-fonts-lgc-plus
-    texlivePackages.hebrew-fonts
-    noto-fonts-emoji
-    font-awesome
-    powerline-fonts
-    powerline-symbols
     nerd-fonts.symbols-only
+    nerd-fonts.fira-code
+    nerd-fonts.victor-mono
+    nerd-fonts.fantasque-sans-mono
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.jetbrains-mono
+    lilex
+    font-awesome
+    noto-fonts
+    noto-fonts-emoji
+    recursive
+    sn-pro
+    ia-writer-quattro
+    ia-writer-duospace
+    libre-baskerville
+    monaspace
+    maple-mono.NF
+    maple-mono.variable
   ];
 
   stylix = {
@@ -26,12 +34,16 @@
       hyprland.enable = false;
       hyprlock.enable = false;
       neovim.enable = false;
+      gtk.enable = true;
+      fuzzel.enable = true;
+      k9s.enable = true;
+      swaync.enable = false;
     };
 
     cursor = {
-      name = "DMZ-Black";
+      name = "Bibata-Original-Ice";
       size = 24;
-      package = pkgs.vanilla-dmz;
+      package = pkgs.bibata-cursors;
     };
 
     fonts = {
@@ -40,9 +52,14 @@
         package = pkgs.noto-fonts-color-emoji;
       };
       monospace = {
-        name = "JetBrains Mono";
-        package = pkgs.jetbrains-mono;
+        name = "CaskaydiaCoveNerdFont";
+        # name = "CaskaydiaCoveNerdFontMono";
+        package = pkgs.cascadia-code;
       };
+      # monospace = {
+      #   name = "JetBrains Mono";
+      #   package = pkgs.jetbrains-mono;
+      # };
       sansSerif = {
         name = "Noto Sans";
         package = pkgs.nerd-fonts.noto;
@@ -54,7 +71,7 @@
 
       sizes = {
         terminal = 13;
-        applications = 11;
+        applications = 12;
       };
     };
 
@@ -66,8 +83,8 @@
     };
 
     image = pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/7j/wallhaven-7j3lve.png";
-      sha256 = "kko5Uiq7H0DqiT2aDYbaQCNRzs+5AleaATzsXi3xgQA=";
+      url = "https://w.wallhaven.cc/full/vp/wallhaven-vp92q5.jpg";
+      sha256 = "sha256-d8J7pDYFs8ZvEq6AbViFDofFXAicFHdPUPLdnVBnz1s=";
     };
   };
 }

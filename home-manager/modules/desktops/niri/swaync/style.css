@@ -1,0 +1,499 @@
+/* Цветовая палитра Catppuccin Latte */
+:root {
+  /* Основные цвета */
+  --rosewater: #dc8a78;
+  --flamingo: #dd7878;
+  --pink: #ea76cb;
+  --mauve: #8839ef;
+  --red: #d20f39;
+  --maroon: #e64553;
+  --peach: #fe640b;
+  --yellow: #df8e1d;
+  --green: #40a02b;
+  --teal: #179299;
+  --sky: #04a5e5;
+  --sapphire: #209fb5;
+  --blue: #1e66f5;
+  --lavender: #7287fd;
+  
+  /* Текст */
+  --text: #4c4f69;
+  --subtext1: #5c5f77;
+  --subtext0: #6c6f85;
+  
+  /* Оверлеи */
+  --overlay2: #7c7f93;
+  --overlay1: #8c8fa1;
+  --overlay0: #9ca0b0;
+  
+  /* Поверхности */
+  --surface2: #acb0be;
+  --surface1: #bcc0cc;
+  --surface0: #ccd0da;
+  
+  /* Базовые цвета */
+  --base: #eff1f5;
+  --mantle: #e6e9ef;
+  --crust: #dce0e8;
+  
+  /* Дополнительные переменные для удобства */
+  --bg-color: var(--base);
+  --text-color: var(--text);
+  --surface-color: var(--surface0);
+  --border-color: var(--surface2);
+  --accent-color: var(--blue);
+  --critical-color: var(--red);
+  --close-button-color: var(--maroon);
+}
+
+* {
+  all: unset;
+  font-size: 16px;
+  font-family: "CaskaydiaCove Nerd Font";
+  transition: 200ms;
+}
+
+trough highlight {
+  background: var(--text-color);
+}
+
+scale trough {
+  margin: 0rem 1rem;
+  background-color: var(--surface0);
+  min-height: 8px;
+  min-width: 70px;
+}
+
+slider {
+  background-color: var(--blue);
+}
+
+.floating-notifications.background .notification-row .notification-background {
+  box-shadow:
+    0 0 8px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px var(--surface0);
+  border-radius: 12.6px;
+  margin: 18px;
+  background-color: var(--base);
+  color: var(--text-color);
+  padding: 0;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification {
+  padding: 7px;
+  border-radius: 12.6px;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification.critical {
+  box-shadow: inset 0 0 7px 0 var(--critical-color);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content {
+  margin: 7px;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .summary {
+  color: var(--text-color);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .time {
+  color: var(--subtext0);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .body {
+  color: var(--text-color);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > * {
+  min-height: 3.4em;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action {
+  border-radius: 7px;
+  color: var(--text-color);
+  background-color: var(--surface0);
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  margin: 7px;
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--surface1);
+  color: var(--text-color);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:active {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--sapphire);
+  color: var(--text-color);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button {
+  margin: 7px;
+  padding: 2px;
+  border-radius: 6.3px;
+  color: var(--base);
+  background-color: var(--close-button-color);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:hover {
+  background-color: var(--red);
+  color: var(--base);
+}
+
+.floating-notifications.background
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background-color: var(--close-button-color);
+  color: var(--base);
+}
+
+.control-center {
+  box-shadow:
+    0 0 8px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px var(--surface0);
+  border-radius: 12.6px;
+  margin: 18px;
+  background-color: var(--base);
+  color: var(--text-color);
+  padding: 14px;
+}
+
+.control-center .widget-title > label {
+  color: var(--text-color);
+  font-size: 1.3em;
+}
+
+.control-center .widget-title button {
+  border-radius: 7px;
+  color: var(--text-color);
+  background-color: var(--surface0);
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  padding: 8px;
+}
+
+.control-center .widget-title button:hover {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--surface1);
+  color: var(--text-color);
+}
+
+.control-center .widget-title button:active {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--sapphire);
+  color: var(--text-color);
+}
+
+.control-center .notification-row .notification-background {
+  border-radius: 7px;
+  color: var(--text-color);
+  background-color: var(--surface0);
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  margin-top: 14px;
+}
+
+.control-center .notification-row .notification-background .notification {
+  padding: 7px;
+  border-radius: 7px;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification.critical {
+  box-shadow: inset 0 0 7px 0 var(--critical-color);
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content {
+  margin: 7px;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .summary {
+  color: var(--text-color);
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .time {
+  color: var(--subtext0);
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  .notification-content
+  .body {
+  color: var(--text-color);
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > * {
+  min-height: 3.4em;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action {
+  border-radius: 7px;
+  color: var(--text-color);
+  background-color: var(--mantle);
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  margin: 7px;
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:hover {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--surface0);
+  color: var(--text-color);
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .notification
+  > *:last-child
+  > *
+  .notification-action:active {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--sapphire);
+  color: var(--text-color);
+}
+
+.control-center .notification-row .notification-background .close-button {
+  margin: 7px;
+  padding: 2px;
+  border-radius: 6.3px;
+  color: var(--base);
+  background-color: var(--maroon);
+}
+
+.close-button {
+  border-radius: 6.3px;
+}
+
+.control-center .notification-row .notification-background .close-button:hover {
+  background-color: var(--red);
+  color: var(--base);
+}
+
+.control-center
+  .notification-row
+  .notification-background
+  .close-button:active {
+  background-color: var(--close-button-color);
+  color: var(--base);
+}
+
+.control-center .notification-row .notification-background:hover {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--overlay1);
+  color: var(--text-color);
+}
+
+.control-center .notification-row .notification-background:active {
+  box-shadow: inset 0 0 0 1px var(--surface2);
+  background-color: var(--sapphire);
+  color: var(--text-color);
+}
+
+.notification.critical progress {
+  background-color: var(--critical-color);
+}
+
+.notification.low progress,
+.notification.normal progress {
+  background-color: var(--blue);
+}
+
+.control-center-dnd {
+  margin-top: 5px;
+  border-radius: 8px;
+  background: var(--surface0);
+  border: 1px solid var(--surface2);
+  box-shadow: none;
+}
+
+.control-center-dnd:checked {
+  background: var(--surface0);
+}
+
+.control-center-dnd slider {
+  background: var(--surface2);
+  border-radius: 8px;
+}
+
+.widget-dnd {
+  margin: 0px;
+  font-size: 1.1rem;
+}
+
+.widget-dnd > switch {
+  font-size: initial;
+  border-radius: 8px;
+  background: var(--surface0);
+  border: 1px solid var(--surface2);
+  box-shadow: none;
+}
+
+.widget-dnd > switch:checked {
+  background: var(--surface0);
+}
+
+.widget-dnd > switch slider {
+  background: var(--surface2);
+  border-radius: 8px;
+  border: 1px solid var(--overlay0);
+}
+
+.widget-mpris .widget-mpris-player {
+  background: var(--surface0);
+  padding: 7px;
+}
+
+.widget-mpris .widget-mpris-title {
+  font-size: 1.2rem;
+}
+
+.widget-mpris .widget-mpris-subtitle {
+  font-size: 0.8rem;
+}
+
+.widget-menubar > box > .menu-button-bar > button > label {
+  font-size: 3rem;
+  padding: 0.5rem 2rem;
+}
+
+.widget-menubar > box > .menu-button-bar > :last-child {
+  color: var(--critical-color);
+}
+
+.power-buttons button:hover,
+.powermode-buttons button:hover,
+.screenshot-buttons button:hover {
+  background: var(--surface0);
+}
+
+.control-center .widget-label > label {
+  color: var(--text-color);
+  font-size: 2rem;
+}
+
+.widget-buttons-grid {
+  padding-top: 1rem;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button label {
+  font-size: 2.5rem;
+}
+
+.widget-volume {
+  padding-top: 1rem;
+}
+
+.widget-volume label {
+  font-size: 1.5rem;
+  color: var(--sapphire);
+}
+
+.widget-volume trough highlight {
+  background: var(--sapphire);
+}
+
+.widget-backlight trough highlight {
+  background: var(--yellow);
+}
+
+.widget-backlight label {
+  font-size: 1.5rem;
+  color: var(--yellow);
+}
+
+.widget-backlight .KB {
+  padding-bottom: 1rem;
+}
+
+.image {
+  padding-right: 0.5rem;
+}

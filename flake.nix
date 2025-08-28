@@ -13,7 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # 🔥 Добавляем niri-flake
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,6 +23,7 @@
 
   outputs = { self, nixpkgs, home-manager, niri, ... }@inputs:
     let
+      inherit (self) outputs;
       system = "x86_64-linux";
       homeStateVersion = "25.05";
       user = "efremov";
@@ -44,9 +44,13 @@
           modules = [ ./hosts/${hostname}/configuration.nix ];
         };
     in {
-      nixosConfigurations = nixpkgs.lib.foldl'
-        (configs: host: configs // { "${host.hostname}" = makeSystem host; })
-        { } hosts;
+      overlays = import ./overlays { inherit inputs outputs; };
+
+      nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
+        configs // {
+          "${host.hostname}" =
+            makeSystem { inherit (host) hostname stateVersion; };
+        }) { } hosts;
 
       homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};

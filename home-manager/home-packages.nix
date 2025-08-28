@@ -18,6 +18,8 @@
     obsidian
     pavucontrol
     telegram-desktop
+    yandex-music
+    anydesk
 
     # CLI utils
     bc
@@ -52,20 +54,33 @@
     rar
     zip
     freerdp
+    k9s
+    kubectl
 
     # Coding stuff
     go
     nodejs
     openjdk23
     python311
+    postgresql
+    lazydocker
 
     # WM stuff
     libsForQt5.xwaylandvideobridge
     libnotify
-    xdg-desktop-portal-hyprland
 
+    nekoray
     # Other
     bemoji
     nix-prefetch-scripts
+
+    swaylock
+    swayidle
+    niri
+
+    pciutils
+    remmina
+
+    nix-search-cli
   ];
 }

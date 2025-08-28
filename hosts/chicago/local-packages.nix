@@ -9,7 +9,9 @@
     libtool
     makeWrapper
     pkg-config
+    sqlite
     rustc
+    insomnia
   ];
 
 }

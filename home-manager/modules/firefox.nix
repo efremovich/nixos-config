@@ -4,7 +4,13 @@
     profiles.default = {
       settings = {
         "browser.toolbars.visible" = false; # Hides the entire toolbar
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
+      userChrome = ''
+        #TabsToolbar {
+            visibility: collapse !important;
+        }
+      '';
     };
   };
   xdg.mimeApps.defaultApplications = {

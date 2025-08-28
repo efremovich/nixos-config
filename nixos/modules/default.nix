@@ -8,10 +8,13 @@
     ./docker.nix
     ./env.nix
     ./home-manager.nix
-    ./hyprland.nix
+    ./locale.nix
+    # ./hyprland.nix
+    ./niri.nix
     ./kernel.nix
     ./locale.nix
     ./mime.nix
+    ./nekoray.nix
     ./net.nix
     ./nh.nix
     # ./niri.nix

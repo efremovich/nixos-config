@@ -33,22 +33,12 @@
     history.path = "${config.xdg.dataHome}/zsh/history";
 
     initContent = ''
-      # Start Tmux automatically if not already running. No Tmux in TTY
-      if [ -z "$TMUX" ] && [ -n "$DISPLAY" ]; then
-        tmux attach-session -t default || tmux new-session -s default
-      fi
-
-      # Start UWSM
-      if uwsm check may-start > /dev/null && uwsm select; then
-        exec systemd-cat -t uwsm_start uwsm start default
-      fi
-
       function sesh-sessions() {
         {
           exec </dev/tty
           exec <&1
           local session
-          session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+          session=$(sesh list | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
           zle reset-prompt > /dev/null 2>&1 || true
           [[ -z "$session" ]] && return
           sesh connect $session
@@ -56,9 +46,9 @@
       }
 
       zle     -N             sesh-sessions
-      bindkey -M emacs '\es' sesh-sessions
-      bindkey -M vicmd '\es' sesh-sessions
-      bindkey -M viins '\es' sesh-sessions
+      bindkey -M emacs '\ek' sesh-sessions
+      bindkey -M vicmd '\ek' sesh-sessions
+      bindkey -M viins '\ek' sesh-sessions
     '';
   };
 }

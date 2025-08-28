@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       window.opacity = 1.0;
-
+      window.decorations = "NONE";
       font = {
         builtin_box_drawing = true;
         normal = { style = lib.mkForce "Bold"; };
