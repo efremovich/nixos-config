@@ -20,7 +20,7 @@
     ./desktops/niri/swaync
     ./desktops/niri/xwayland-satellite.nix
     ./desktops/qt5.nix
-    ./desktops/services/mako
+    # ./desktops/services/mako
     ./desktops/waybar
     ./desktops/xdg.nix
 

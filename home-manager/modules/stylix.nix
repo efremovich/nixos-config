@@ -53,13 +53,8 @@
       };
       monospace = {
         name = "CaskaydiaCoveNerdFont";
-        # name = "CaskaydiaCoveNerdFontMono";
         package = pkgs.cascadia-code;
       };
-      # monospace = {
-      #   name = "JetBrains Mono";
-      #   package = pkgs.jetbrains-mono;
-      # };
       sansSerif = {
         name = "Noto Sans";
         package = pkgs.nerd-fonts.noto;
