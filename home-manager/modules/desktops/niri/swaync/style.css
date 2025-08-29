@@ -1,50 +1,4 @@
 /* Цветовая палитра Catppuccin Latte */
-:root {
-  /* Основные цвета */
-  --rosewater: #dc8a78;
-  --flamingo: #dd7878;
-  --pink: #ea76cb;
-  --mauve: #8839ef;
-  --red: #d20f39;
-  --maroon: #e64553;
-  --peach: #fe640b;
-  --yellow: #df8e1d;
-  --green: #40a02b;
-  --teal: #179299;
-  --sky: #04a5e5;
-  --sapphire: #209fb5;
-  --blue: #1e66f5;
-  --lavender: #7287fd;
-  
-  /* Текст */
-  --text: #4c4f69;
-  --subtext1: #5c5f77;
-  --subtext0: #6c6f85;
-  
-  /* Оверлеи */
-  --overlay2: #7c7f93;
-  --overlay1: #8c8fa1;
-  --overlay0: #9ca0b0;
-  
-  /* Поверхности */
-  --surface2: #acb0be;
-  --surface1: #bcc0cc;
-  --surface0: #ccd0da;
-  
-  /* Базовые цвета */
-  --base: #eff1f5;
-  --mantle: #e6e9ef;
-  --crust: #dce0e8;
-  
-  /* Дополнительные переменные для удобства */
-  --bg-color: var(--base);
-  --text-color: var(--text);
-  --surface-color: var(--surface0);
-  --border-color: var(--surface2);
-  --accent-color: var(--blue);
-  --critical-color: var(--red);
-  --close-button-color: var(--maroon);
-}
 
 * {
   all: unset;
@@ -52,30 +6,29 @@
   font-family: "CaskaydiaCove Nerd Font";
   transition: 200ms;
 }
-
 trough highlight {
-  background: var(--text-color);
+  background: #4c4f69;
 }
 
 scale trough {
   margin: 0rem 1rem;
-  background-color: var(--surface0);
+  background-color: #ccd0da;
   min-height: 8px;
   min-width: 70px;
 }
 
-slider {
-  background-color: var(--blue);
+scale slider {
+  background-color: #1e66f5;
 }
 
 .floating-notifications.background .notification-row .notification-background {
   box-shadow:
     0 0 8px 0 rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px var(--surface0);
+    inset 0 0 0 1px #ccd0da;
   border-radius: 12.6px;
   margin: 18px;
-  background-color: var(--base);
-  color: var(--text-color);
+  background-color: #eff1f5;
+  color: #4c4f69;
   padding: 0;
 }
 
@@ -91,7 +44,7 @@ slider {
   .notification-row
   .notification-background
   .notification.critical {
-  box-shadow: inset 0 0 7px 0 var(--critical-color);
+  box-shadow: inset 0 0 7px 0 #d20f39;
 }
 
 .floating-notifications.background
@@ -108,7 +61,7 @@ slider {
   .notification
   .notification-content
   .summary {
-  color: var(--text-color);
+  color: #4c4f69;
 }
 
 .floating-notifications.background
@@ -117,7 +70,7 @@ slider {
   .notification
   .notification-content
   .time {
-  color: var(--subtext0);
+  color: #6c6f85;
 }
 
 .floating-notifications.background
@@ -126,7 +79,7 @@ slider {
   .notification
   .notification-content
   .body {
-  color: var(--text-color);
+  color: #4c4f69;
 }
 
 .floating-notifications.background
@@ -146,9 +99,9 @@ slider {
   > *
   .notification-action {
   border-radius: 7px;
-  color: var(--text-color);
-  background-color: var(--surface0);
-  box-shadow: inset 0 0 0 1px var(--surface2);
+  color: #4c4f69;
+  background-color: #ccd0da;
+  box-shadow: inset 0 0 0 1px #acb0be;
   margin: 7px;
 }
 
@@ -159,9 +112,9 @@ slider {
   > *:last-child
   > *
   .notification-action:hover {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--surface1);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #bcc0cc;
+  color: #4c4f69;
 }
 
 .floating-notifications.background
@@ -171,9 +124,9 @@ slider {
   > *:last-child
   > *
   .notification-action:active {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--sapphire);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #209fb5;
+  color: #4c4f69;
 }
 
 .floating-notifications.background
@@ -183,67 +136,67 @@ slider {
   margin: 7px;
   padding: 2px;
   border-radius: 6.3px;
-  color: var(--base);
-  background-color: var(--close-button-color);
+  color: #eff1f5;
+  background-color: #e64553;
 }
 
 .floating-notifications.background
   .notification-row
   .notification-background
   .close-button:hover {
-  background-color: var(--red);
-  color: var(--base);
+  background-color: #d20f39;
+  color: #eff1f5;
 }
 
 .floating-notifications.background
   .notification-row
   .notification-background
   .close-button:active {
-  background-color: var(--close-button-color);
-  color: var(--base);
+  background-color: #e64553;
+  color: #eff1f5;
 }
 
 .control-center {
   box-shadow:
     0 0 8px 0 rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px var(--surface0);
+    inset 0 0 0 1px #ccd0da;
   border-radius: 12.6px;
   margin: 18px;
-  background-color: var(--base);
-  color: var(--text-color);
+  background-color: #eff1f5;
+  color: #4c4f69;
   padding: 14px;
 }
 
 .control-center .widget-title > label {
-  color: var(--text-color);
+  color: #4c4f69;
   font-size: 1.3em;
 }
 
 .control-center .widget-title button {
   border-radius: 7px;
-  color: var(--text-color);
-  background-color: var(--surface0);
-  box-shadow: inset 0 0 0 1px var(--surface2);
+  color: #4c4f69;
+  background-color: #ccd0da;
+  box-shadow: inset 0 0 0 1px #acb0be;
   padding: 8px;
 }
 
 .control-center .widget-title button:hover {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--surface1);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #bcc0cc;
+  color: #4c4f69;
 }
 
 .control-center .widget-title button:active {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--sapphire);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #209fb5;
+  color: #4c4f69;
 }
 
 .control-center .notification-row .notification-background {
   border-radius: 7px;
-  color: var(--text-color);
-  background-color: var(--surface0);
-  box-shadow: inset 0 0 0 1px var(--surface2);
+  color: #4c4f69;
+  background-color: #ccd0da;
+  box-shadow: inset 0 0 0 1px #acb0be;
   margin-top: 14px;
 }
 
@@ -256,7 +209,7 @@ slider {
   .notification-row
   .notification-background
   .notification.critical {
-  box-shadow: inset 0 0 7px 0 var(--critical-color);
+  box-shadow: inset 0 0 7px 0 #d20f39;
 }
 
 .control-center
@@ -273,7 +226,7 @@ slider {
   .notification
   .notification-content
   .summary {
-  color: var(--text-color);
+  color: #4c4f69;
 }
 
 .control-center
@@ -282,7 +235,7 @@ slider {
   .notification
   .notification-content
   .time {
-  color: var(--subtext0);
+  color: #6c6f85;
 }
 
 .control-center
@@ -291,7 +244,7 @@ slider {
   .notification
   .notification-content
   .body {
-  color: var(--text-color);
+  color: #4c4f69;
 }
 
 .control-center
@@ -311,9 +264,9 @@ slider {
   > *
   .notification-action {
   border-radius: 7px;
-  color: var(--text-color);
-  background-color: var(--mantle);
-  box-shadow: inset 0 0 0 1px var(--surface2);
+  color: #4c4f69;
+  background-color: #e6e9ef;
+  box-shadow: inset 0 0 0 1px #acb0be;
   margin: 7px;
 }
 
@@ -324,9 +277,9 @@ slider {
   > *:last-child
   > *
   .notification-action:hover {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--surface0);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #ccd0da;
+  color: #4c4f69;
 }
 
 .control-center
@@ -336,17 +289,17 @@ slider {
   > *:last-child
   > *
   .notification-action:active {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--sapphire);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #209fb5;
+  color: #4c4f69;
 }
 
 .control-center .notification-row .notification-background .close-button {
   margin: 7px;
   padding: 2px;
   border-radius: 6.3px;
-  color: var(--base);
-  background-color: var(--maroon);
+  color: #eff1f5;
+  background-color: #e64553;
 }
 
 .close-button {
@@ -354,53 +307,53 @@ slider {
 }
 
 .control-center .notification-row .notification-background .close-button:hover {
-  background-color: var(--red);
-  color: var(--base);
+  background-color: #d20f39;
+  color: #eff1f5;
 }
 
 .control-center
   .notification-row
   .notification-background
   .close-button:active {
-  background-color: var(--close-button-color);
-  color: var(--base);
+  background-color: #e64553;
+  color: #eff1f5;
 }
 
 .control-center .notification-row .notification-background:hover {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--overlay1);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #8c8fa1;
+  color: #4c4f69;
 }
 
 .control-center .notification-row .notification-background:active {
-  box-shadow: inset 0 0 0 1px var(--surface2);
-  background-color: var(--sapphire);
-  color: var(--text-color);
+  box-shadow: inset 0 0 0 1px #acb0be;
+  background-color: #209fb5;
+  color: #4c4f69;
 }
 
 .notification.critical progress {
-  background-color: var(--critical-color);
+  background-color: #d20f39;
 }
 
 .notification.low progress,
 .notification.normal progress {
-  background-color: var(--blue);
+  background-color: #1e66f5;
 }
 
 .control-center-dnd {
   margin-top: 5px;
   border-radius: 8px;
-  background: var(--surface0);
-  border: 1px solid var(--surface2);
+  background: #ccd0da;
+  border: 1px solid #acb0be;
   box-shadow: none;
 }
 
 .control-center-dnd:checked {
-  background: var(--surface0);
+  background: #ccd0da;
 }
 
 .control-center-dnd slider {
-  background: var(--surface2);
+  background: #acb0be;
   border-radius: 8px;
 }
 
@@ -412,23 +365,23 @@ slider {
 .widget-dnd > switch {
   font-size: initial;
   border-radius: 8px;
-  background: var(--surface0);
-  border: 1px solid var(--surface2);
+  background: #ccd0da;
+  border: 1px solid #acb0be;
   box-shadow: none;
 }
 
 .widget-dnd > switch:checked {
-  background: var(--surface0);
+  background: #ccd0da;
 }
 
 .widget-dnd > switch slider {
-  background: var(--surface2);
+  background: #acb0be;
   border-radius: 8px;
-  border: 1px solid var(--overlay0);
+  border: 1px solid #9ca0b0;
 }
 
 .widget-mpris .widget-mpris-player {
-  background: var(--surface0);
+  background: #ccd0da;
   padding: 7px;
 }
 
@@ -446,17 +399,17 @@ slider {
 }
 
 .widget-menubar > box > .menu-button-bar > :last-child {
-  color: var(--critical-color);
+  color: #d20f39;
 }
 
 .power-buttons button:hover,
 .powermode-buttons button:hover,
 .screenshot-buttons button:hover {
-  background: var(--surface0);
+  background: #ccd0da;
 }
 
 .control-center .widget-label > label {
-  color: var(--text-color);
+  color: #4c4f69;
   font-size: 2rem;
 }
 
@@ -474,20 +427,20 @@ slider {
 
 .widget-volume label {
   font-size: 1.5rem;
-  color: var(--sapphire);
+  color: #209fb5;
 }
 
 .widget-volume trough highlight {
-  background: var(--sapphire);
+  background: #209fb5;
 }
 
 .widget-backlight trough highlight {
-  background: var(--yellow);
+  background: #df8e1d;
 }
 
 .widget-backlight label {
   font-size: 1.5rem;
-  color: var(--yellow);
+  color: #df8e1d;
 }
 
 .widget-backlight .KB {

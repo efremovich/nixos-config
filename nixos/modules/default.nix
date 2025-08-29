@@ -17,7 +17,7 @@
     ./net.nix
     ./nh.nix
     ./nix.nix
-    ./obs.nix
+    # ./obs.nix
     ./ssh.nix
     ./timezone.nix
     ./user.nix

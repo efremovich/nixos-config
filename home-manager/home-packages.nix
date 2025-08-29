@@ -63,6 +63,8 @@
     # WM stuff
     libsForQt5.xwaylandvideobridge
     libnotify
+    # xdg-desktop-portal-gtk
+    # xdg-desktop-portal-hyprland
 
     nekoray
     # Other
@@ -77,5 +79,6 @@
     remmina
 
     nix-search-cli
+    v2raya
   ];
 }
