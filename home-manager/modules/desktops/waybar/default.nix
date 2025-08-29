@@ -171,7 +171,7 @@
         pulseaudio = {
           format = "{icon}";
           format-bluetooth = "󰂰";
-          format-muted = "";
+          format-muted = " muted";
           tooltip-format = "{name} {volume}%";
           format-icons = {
             "alsa_output.pci-0000_00_1f.3.analog-stereo" = "";

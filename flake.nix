@@ -4,6 +4,7 @@
   inputs = {
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -20,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.niri-stable.follows = "niri-stable";
     };
-    niri-stable.url = "github:YaLTeR/niri/v25.05.1";
+    niri-stable.url = "github:YaLTeR/niri/v25.08";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
