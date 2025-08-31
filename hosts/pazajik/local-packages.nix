@@ -8,6 +8,7 @@
     libiconv
     libtool
     makeWrapper
+    sqlite
     pkg-config
     rustc
   ];
