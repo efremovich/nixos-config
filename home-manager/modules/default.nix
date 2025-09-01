@@ -13,13 +13,14 @@
     # ./niri
     # для niri
     ./apps/walker
+    # ./apps/ghostty
     ./desktops/fuzzel.nix
     ./desktops/niri
     ./desktops/niri/swayidle.nix
     ./desktops/niri/swaylock.nix
     ./desktops/niri/swaync
     ./desktops/niri/xwayland-satellite.nix
-    ./desktops/qt5.nix
+    # ./desktops/qt5.nix
     # ./desktops/services/mako
     ./desktops/waybar
     ./desktops/xdg.nix

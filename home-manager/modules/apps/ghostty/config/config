@@ -1,12 +1,12 @@
-font-family = "Monaspace Neon Frozen"
-font-family-bold = "Monaspace Krypton Frozen"
-font-family-italic = "Monaspace Radon Frozen"
-font-family-bold-italic = "Monaspace Radon Frozen"
+font-family = "CaskaydiaCoveNerdFont"
+font-family-bold = "CaskaydiaCoveNerdFont"
+font-family-italic = "CaskaydiaCoveNerdFont"
+font-family-bold-italic = "CaskaydiaCoveNerdFont"
 font-style = "Light"
 font-style-bold = "Bold"
 font-style-italic= "Light"
 font-style-bold-italic = "Bold"
-adjust-cell-height = 20%
+#adjust-cell-height = 20%
 font-size = "13.0"
 
 font-feature = -calt
@@ -14,15 +14,15 @@ font-feature = -liga
 font-feature = -dlig
 font-feature = -ss05
 
-theme = "catppuccin-mocha"
+theme = "catppuccin-latte"
 bold-is-bright = true
 cursor-style = block
 shell-integration-features = no-cursor
 # custom-shader = shaders/bloom.gsl
 
 gtk-titlebar = false
-window-padding-x = 0
-window-padding-y = 0
+window-padding-x = 15
+window-padding-y = 15
 window-padding-balance = true
 
 copy-on-select = true

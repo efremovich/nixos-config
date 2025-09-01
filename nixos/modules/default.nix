@@ -22,8 +22,9 @@
     ./gc.nix
     ./timezone.nix
     ./user.nix
-    ./zapret.nix
+    # ./zapret.nix
     #./zerotierone.nix
+    ./v2raya.nix
     ./zram.nix
   ];
 }
