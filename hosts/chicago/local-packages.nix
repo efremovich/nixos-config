@@ -11,7 +11,6 @@
     pkg-config
     sqlite
     rustc
-    insomnia
   ];
 
 }

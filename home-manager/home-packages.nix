@@ -79,6 +79,7 @@
     remmina
 
     nix-search-cli
-    v2raya
+    libxml2
+    # v2raya
   ];
 }

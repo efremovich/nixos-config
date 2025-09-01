@@ -23,7 +23,7 @@
       gc = "git commit";
       gp = "git push";
 
-      upnix = "sudo nixos-rebuild switch -- flake ${flakeDir}";
+      upnix = "sudo nixos-rebuild switch --flake ${flakeDir}";
       uphome = "home-manager switch --flake ${flakeDir}";
 
       ".." = "cd ..";

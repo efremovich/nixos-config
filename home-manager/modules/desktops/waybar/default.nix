@@ -3,6 +3,10 @@
   home.file.".config/waybar/toggl_status.py".source = ./toggl_status.py;
   home.file.".config/waybar/vpn_status.py".source = ./vpn_status.py;
   home.file.".config/waybar/vpn_toggle.py".source = ./vpn_toggle.py;
+  home.file.".config/waybar/ssh_tunnel_status.py".source =
+    ./ssh_tunnel_status.py;
+  home.file.".config/waybar/ssh_tunnel_toggle.py".source =
+    ./ssh_tunnel_toggle.py;
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -41,7 +45,8 @@
           "battery"
           "battery#bat2"
           "network"
-          "custom/vpn"
+          # "custom/vpn"
+          "custom/ssh-tunnel"
           "idle_inhibitor"
           "pulseaudio"
           "tray"
@@ -259,6 +264,14 @@
           interval = 10;
           on-click = "$HOME/.config/waybar/vpn_toggle.py";
         };
+        "custom/ssh-tunnel" = {
+          format = "{}";
+          exec = "$HOME/.config/waybar/ssh_tunnel_status.py";
+          interval = 10;
+          on-click = "$HOME/.config/waybar/ssh_tunnel_toggle.py";
+          # tooltip = true;
+          # tooltip-format = "SSH Tunnel: {icon}";
+        };
         "custom/toggl" = {
           format = "{}";
           exec = "$HOME/.config/waybar/toggl_status.py";
@@ -314,6 +327,7 @@
         "custom/mpris-icon" = { format = " "; };
         "custom/idle-icon" = { format = " "; };
         "custom/vpn-icon" = { format = " "; };
+        "custom/ssh_tunnel-icon" = { format = " "; };
         "custom/language-icon" = { format = "󰌍 "; };
         "custom/tray-icon" = {
           format = "󱊖";

@@ -124,6 +124,15 @@ layout {
     }
 }
 
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    DISPLAY ":0"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_TYPE "wayland"
+    QT_QPA_PLATFORM "wayland"
+    MOZ_ENABLE_WAYLAND "1"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+}
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.

@@ -10,10 +10,9 @@
     ./lazygit.nix
     ./neovim.nix
     ./obsidian.nix
-    # ./niri
     # для niri
     ./apps/walker
-    # ./apps/ghostty
+    ./apps/ghostty
     ./desktops/fuzzel.nix
     ./desktops/niri
     ./desktops/niri/swayidle.nix

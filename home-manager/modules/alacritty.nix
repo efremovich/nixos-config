@@ -6,7 +6,7 @@
       window.decorations = "NONE";
       font = {
         builtin_box_drawing = true;
-        normal = { style = lib.mkForce "Regular"; };
+        normal = { style = lib.mkForce "SemiBold"; };
         bold = { style = lib.mkForce "Bold"; };
         italic = { style = lib.mkForce "Italic"; };
       };

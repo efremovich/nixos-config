@@ -309,6 +309,7 @@ window#waybar.swallowing {
 }
 
 #custom-vpn,
+#custom-ssh-tunnel,
 #idle_inhibitor {
   background: @crust;
   padding: 0 5px;
@@ -316,9 +317,11 @@ window#waybar.swallowing {
   border-bottom: 2px solid @text;
 }
 
+#custom-ssh-tunnel,
 #custom-vpn {
   color: @yellow;
 }
+
 #idle_inhibitor {
   color: @yellow;
 }
@@ -332,6 +335,7 @@ window#waybar.swallowing {
 }
 
 #custom-vpn-icon,
+#custom-ssh-tunnel-icon,
 #custom-idle-icon,
 #custom-window-icon {
   color: @crust;
@@ -340,6 +344,7 @@ window#waybar.swallowing {
   margin-right: 5px;
 }
 
+#custom-ssh-tunnel-icon,
 #custom-vpn-icon {
   background: @peach;
 }
@@ -352,4 +357,17 @@ window#waybar.swallowing {
 #custom-window-icon {
   background: @blue;
 }
+#custom-ssh-tunnel {
+  background: @crust;
+  padding: 0 5px;
+  border-top: 2px solid @text;
+  border-bottom: 2px solid @text;
+}
 
+#custom-ssh-tunnel-icon {
+  background: @blue;
+  color: @crust;
+  padding: 0px 10px;
+  border-radius: 0 5px 5px 0;
+  margin-right: 5px;
+}
