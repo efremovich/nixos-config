@@ -80,6 +80,7 @@
 
     nix-search-cli
     libxml2
+    jq
     # v2raya
   ];
 }

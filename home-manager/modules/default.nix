@@ -5,6 +5,7 @@
     # ./chromium.nix
     ./eza.nix
     ./firefox.nix
+    ./fish.nix
     ./git.nix
     # ./hyprland
     ./lazygit.nix

@@ -32,6 +32,8 @@
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";
 
+    initExtra = "";
+
     initContent = ''
       function sesh-sessions() {
         {
