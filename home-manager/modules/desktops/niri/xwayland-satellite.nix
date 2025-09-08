@@ -1,7 +1,8 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
-    xwayland-satellite
-  ];
+{ pkgs, ... }: {
+  home.packages = with pkgs;
+    [
+      # xwayland-satellite
+    ];
 
   # Switch from `Install.WantedBy = [ "graphical-session.target" ]` as defined
   # in the service file provided by the xwayland-satellite package. This links
@@ -21,6 +22,6 @@
       ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
       StandardOutput = "journal";
     };
-    Install.WantedBy = ["niri.service"];
+    Install.WantedBy = [ "niri.service" ];
   };
 }

@@ -7,13 +7,13 @@
     # Desktop apps
     dbeaver-bin
     imv
-    kicad
+    # kicad
     libreoffice
     mpv
-    obsidian
+    # obsidian
     pavucontrol
     telegram-desktop
-    yandex-music
+    # yandex-music
     anydesk
 
     # CLI utils

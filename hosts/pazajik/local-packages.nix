@@ -11,6 +11,9 @@
     sqlite
     pkg-config
     rustc
+    libxml2
   ];
+
+  environment.variables.PKG_CONFIG_PATH = "${pkgs.libxml2.dev}/lib/pkgconfig";
 
 }

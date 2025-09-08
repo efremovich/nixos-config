@@ -10,14 +10,14 @@
     # ./hyprland
     ./lazygit.nix
     ./neovim.nix
-    ./obsidian.nix
+    # ./obsidian.nix
     # для niri
     ./apps/walker
     ./apps/ghostty
     ./desktops/fuzzel.nix
     ./desktops/niri
     ./desktops/niri/swayidle.nix
-    ./desktops/niri/swaylock.nix
+    # ./desktops/niri/swaylock.nix
     ./desktops/niri/swaync
     ./desktops/niri/xwayland-satellite.nix
     # ./desktops/qt5.nix

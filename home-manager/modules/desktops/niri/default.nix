@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   imports = [ ./services.nix ./swaylock.nix ./xwayland-satellite.nix ];
 
   home.packages = with pkgs; [
