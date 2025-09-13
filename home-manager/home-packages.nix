@@ -49,6 +49,8 @@
     freerdp
     k9s
     kubectl
+    openssl
+    grpcurl
 
     # Coding stuff
     go
@@ -82,5 +84,8 @@
     libxml2
     jq
     # v2raya
+    pass
+    gnupg
+    keepassxc
   ];
 }
