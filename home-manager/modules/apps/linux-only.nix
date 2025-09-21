@@ -1,0 +1,45 @@
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    ./ssh.nix
+    ./gpg.nix
+    ./spicetify.nix
+    ./syncthing.nix
+  ];
+  home.packages = with pkgs; [
+    inputs.neovim.packages.${system}.default
+    appimage-run
+    brave
+    brightnessctl
+    code-cursor
+    eog
+    gnome-frog
+    gparted
+    kdePackages.wacomtablet
+    libgcc
+    libreoffice-fresh
+    libsForQt5.okular
+    libwacom
+    lshw
+    mission-center
+    morgen
+    nautilus
+    nodejs_22
+    obsidian
+    pdfarranger
+    proton-pass
+    protonvpn-cli
+    protonvpn-gui
+    psmisc
+    seahorse
+    signal-desktop
+    udisks
+    vivaldi
+    zoom-us
+    zotero
+    opencode-latest
+  ];
+}
