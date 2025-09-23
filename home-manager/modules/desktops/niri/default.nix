@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [ ./services.nix ./swaylock.nix ./xwayland-satellite.nix ];
 
   home.packages = with pkgs; [
@@ -21,7 +21,7 @@
     wl-clip-persist
     wl-clipboard
     wlogout
-    wlr-which-key
+    inputs.unstable.legacyPackages.${pkgs.system}.wlr-which-key
   ];
 
   services.hyprpaper = { enable = true; };
