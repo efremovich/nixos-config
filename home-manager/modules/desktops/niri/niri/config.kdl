@@ -146,14 +146,17 @@ environment {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "waybar"
+spawn-at-startup "bash" "-c" "swww img ~/Pictures/wallpapers/default-wallpaper.jpg --transition-type center"
 spawn-at-startup "bash" "-c" "sleep 15 && ~/.nix-profile/bin/wl-paste --watch cliphist store"
+spawn-at-startup "bash" "-c" "python ~/.config/niri/scripts/blur-wallpaper.py"
+spawn-at-startup "bash" "-c" "python ~/.config/niri/scripts/change-wallpaper.py"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
-    // skip-at-startup
+    skip-at-startup
 }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.

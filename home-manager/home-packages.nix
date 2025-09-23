@@ -21,6 +21,7 @@
     cliphist
     ffmpeg
     ffmpegthumbnailer
+    freerdp
     fzf
     git-graph
     grimblast

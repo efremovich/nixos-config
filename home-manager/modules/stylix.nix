@@ -77,9 +77,9 @@
       light = "Papirus-Light";
     };
 
-    image = pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/vp/wallhaven-vp92q5.jpg";
-      sha256 = "sha256-d8J7pDYFs8ZvEq6AbViFDofFXAicFHdPUPLdnVBnz1s=";
-    };
+    # image = pkgs.fetchurl {
+    #   url = "https://w.wallhaven.cc/full/vp/wallhaven-vp92q5.jpg";
+    #   sha256 = "sha256-d8J7pDYFs8ZvEq6AbViFDofFXAicFHdPUPLdnVBnz1s=";
+    # };
   };
 }
