@@ -40,15 +40,13 @@ input {
 // Remember to uncomment the node by removing "/-"!
 output "LG Electronics LG HDR 4K 110NTRLHK094" {
     scale 1
-
     transform "normal"
 }
-// output "HDMI-A-1" {
-//
-//     scale 1
-//
-//     transform "normal"
-// }
+
+output "AU Optronics 0x76A8 Unknown" {
+    scale 1
+    transform "normal"
+}
 
 output "Microstep MSI MP251 PC2M334502532" {
     scale 1
