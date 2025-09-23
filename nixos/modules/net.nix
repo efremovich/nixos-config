@@ -3,7 +3,12 @@
 
   networking.networkmanager = {
     enable = true;
-    plugins = with pkgs; [ networkmanager-l2tp networkmanager-openvpn ];
+    plugins = with pkgs; [ 
+      networkmanager-openvpn
+      networkmanager-l2tp
+      networkmanager-fortisslvpn
+      networkmanager-openconnect
+    ];
   };
 
   networking.hosts = {
