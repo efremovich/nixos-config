@@ -2,24 +2,18 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    #niri
-    niri
-    swaylock
-    swayidle
-    swaybg
-    fuzzel
-
     # Desktop apps
     dbeaver-bin
     imv
     # kicad
     libreoffice
     mpv
-    # obsidian
+    obsidian
     pavucontrol
     telegram-desktop
     # yandex-music
     anydesk
+    remmina
 
     # CLI utils
     bc
@@ -31,12 +25,16 @@
     git-graph
     grimblast
     gum
+    grpcurl
     htop
     hyprpicker
+    k9s
+    kubectl
     mediainfo
     microfetch
     nixpkgs-fmt
     ntfs3g
+    openssl
     playerctl
     rar
     ripgrep
@@ -49,13 +47,7 @@
     wl-clipboard
     wtype
     yt-dlp
-    rar
     zip
-    freerdp
-    k9s
-    kubectl
-    openssl
-    grpcurl
 
     # Coding stuff
     go
@@ -68,27 +60,20 @@
     # WM stuff
     libsForQt5.xwaylandvideobridge
     libnotify
-    qt6.qtwayland
-    libsForQt5.qt5.qtwayland
+    # qt6.qtwayland
+    # libsForQt5.qt5.qtwayland
     # xdg-desktop-portal-gtk
     # xdg-desktop-portal-hyprland
 
-    nekoray
     # Other
     bemoji
     nix-prefetch-scripts
-
-    swaylock
-    swayidle
-    niri
+    nix-search-cli
 
     pciutils
-    remmina
 
-    nix-search-cli
     libxml2
     jq
-    # v2raya
     pass
     gnupg
     keepassxc

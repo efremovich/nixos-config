@@ -17,7 +17,6 @@
     ./nekoray.nix
     ./net.nix
     ./nh.nix
-    # ./niri.nix
     ./nix.nix
     # ./obs.nix
     ./ssh.nix

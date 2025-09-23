@@ -2,24 +2,26 @@
   imports = [ ./services.nix ./swaylock.nix ./xwayland-satellite.nix ];
 
   home.packages = with pkgs; [
-    swww
-    swaybg
-    swaynotificationcenter
-    wl-clipboard
-    wlr-which-key
     cliphist
-    wl-clip-persist
-    wlogout
+    grim
+    hyprpicker
     libinput
     networkmanagerapplet
     pavucontrol
-    playerctl
     pipewire
-    hyprpicker
+    playerctl
     python312Packages.toggl-cli
-    grim
     slurp
     swappy
+    swaybg
+    swaylock
+    swayidle
+    swaynotificationcenter
+    swww
+    wl-clip-persist
+    wl-clipboard
+    wlogout
+    wlr-which-key
   ];
 
   services.hyprpaper = { enable = true; };
@@ -41,9 +43,9 @@
 
   home.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    # XDG_CURRENT_DESKTOP = "sway";
-    # XDG_SESSION_TYPE = "wayland";
-    # XDG_SESSION_DESKTOP = "Hyprland";
-    # QT_QPA_PLATFORM = "wayland";
+    XDG_CURRENT_DESKTOP = "sway";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "Hyprland";
+    QT_QPA_PLATFORM = "wayland";
   };
 }
