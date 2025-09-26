@@ -146,7 +146,7 @@ environment {
 // spawn-at-startup "waybar"
 spawn-at-startup "bash" "-c" "swww img ~/Pictures/wallpapers/default-wallpaper.jpg --transition-type center"
 spawn-at-startup "bash" "-c" "sleep 15 && ~/.nix-profile/bin/wl-paste --watch cliphist store"
-spawn-at-startup "bash" "-c" "python ~/.config/niri/scripts/blur-wallpaper.py"
+// spawn-at-startup "bash" "-c" "python ~/.config/niri/scripts/blur-wallpaper.py"
 spawn-at-startup "bash" "-c" "python ~/.config/niri/scripts/change-wallpaper.py"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
@@ -226,9 +226,16 @@ window-rule {
 }
 
 window-rule {
-    match is-active=false
-    opacity 0.95
+    // match is-active=false
+    // opacity 0.95
 }
+
+// workspace "chat"
+// window-rule {
+//     match app-id=r#"^org\.telegram\.desktop$"#
+//
+//     open-on-workspace "chat"
+// }
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name

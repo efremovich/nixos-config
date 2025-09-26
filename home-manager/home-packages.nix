@@ -5,7 +5,7 @@
     # Desktop apps
     dbeaver-bin
     imv
-    # kicad
+    kicad
     libreoffice
     mpv
     obsidian
@@ -13,7 +13,7 @@
     telegram-desktop
     # yandex-music
     anydesk
-    remmina
+    # remmina
 
     # CLI utils
     bc
