@@ -5,7 +5,7 @@
     # Desktop apps
     dbeaver-bin
     imv
-    # kicad
+    kicad
     libreoffice
     mpv
     obsidian
