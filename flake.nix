@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -50,28 +49,45 @@
       ];
       makeSystem = { hostname, stateVersion }:
         nixpkgs.lib.nixosSystem {
-          system = system;
+          inherit system;
           specialArgs = { inherit inputs stateVersion hostname user; };
           modules = [ ./hosts/${hostname}/configuration.nix ];
         };
-    in {
-      overlays = import ./overlays { inherit inputs outputs; };
 
-      nixosConfigurations = nixpkgs.lib.foldl' (configs: host:
-        configs // {
-          "${host.hostname}" =
-            makeSystem { inherit (host) hostname stateVersion; };
-        }) { } hosts;
+      # Исправляем определение lib и pkgsFor
+      lib = nixpkgs.lib;
+      supportedSystems = [ "x86_64-linux" ];
+
+      # Функция для создания pkgs для каждой системы
+      pkgsFor = lib.genAttrs supportedSystems (system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        });
+
+      # Функция для создания devShells для каждой системы
+      forEachSystem = f:
+        lib.genAttrs supportedSystems (system: f pkgsFor.${system});
+
+    in {
+      # overlays = import ./overlays { inherit inputs outputs; };
+
+      # Исправляем devShells
+      devShells = forEachSystem
+        (pkgs: { default = import ./shell.nix { inherit pkgs; }; });
+
+      nixosConfigurations = builtins.listToAttrs (map (host: {
+        name = host.hostname;
+        value = makeSystem {
+          hostname = host.hostname;
+          stateVersion = host.stateVersion;
+        };
+      }) hosts);
 
       homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs = { inherit inputs homeStateVersion user; };
         modules = [ ./home-manager/home.nix ];
       };
-
-      # # Экспортим niri для использования в модулях
-      # overlays.default = final: prev: {
-      #   inherit (niri.packages.${system}) niri niri-stable niri-unstable;
-      # };
     };
 }

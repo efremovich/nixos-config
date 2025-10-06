@@ -9,6 +9,8 @@
         "https://git.astralnalog.ru/";
       url."ssh://git@git.laretto.ru:9822/".insteadOf =
         "https://git.laretto.ru/";
+      url."ssh://git@git.autocard-yug.ru:9822/".insteadOf =
+        "https://git.autocard-yug.ru/";
     };
   };
 }
