@@ -80,6 +80,25 @@ layout {
     struts {
 
     }
+
+    background-color "transparent"
+}
+
+
+layer-rule {
+    match namespace="^swww-daemon$"
+    place-within-backdrop true
+}
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+cursor {
+    hide-when-typing
+    hide-after-inactive-ms 1000
 }
 
 environment {
@@ -172,30 +191,6 @@ window-rule {
     open-floating true
 }
 
-// File dialogs - Open/Save/Select
-window-rule {
-    match title=r#".*(Open|Save|Select).*"#
-    open-floating true
-    default-column-width { proportion 0.0; }
-    max-width 800
-    max-height 1000
-}
-
-window-rule {
-    match title=r#".*File.*"#
-    open-floating true
-    default-column-width { proportion 0.0; }
-    max-width 800
-    max-height 1000
-}
-
-window-rule {
-    match app-id=r#"org\.gtk\.FileChooserDialog"#
-    open-floating true
-    default-column-width { proportion 0.0; }
-    max-width 800
-    max-height 1000
-}
 
 window-rule {
     match title=r#".*Sign in - Google Accounts — Mozilla Firefox"#

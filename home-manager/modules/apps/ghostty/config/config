@@ -1,11 +1,11 @@
-font-family = "CaskaydiaCoveNerdFont"
-font-family-bold = "CaskaydiaCoveNerdFont"
-font-family-italic = "CaskaydiaCoveNerdFont"
-font-family-bold-italic = "CaskaydiaCoveNerdFont"
-font-style = "SemiBold"
+font-family = "CaskaydiaMonoNerdFont"
+font-family-bold = "CaskaydiaMonoNerdFont"
+font-family-italic = "CaskaydiaMonoNerdFont"
+font-family-bold-italic = "CaskaydiaMonoNerdFont"
+font-style = "Regular"
 font-style-bold = "Bold"
-font-style-italic= "Light"
-font-style-bold-italic = "Bold"
+font-style-italic= "Italic"
+font-style-bold-italic = "BoldItalic"
 #adjust-cell-height = 20%
 font-size = "13.0"
 
