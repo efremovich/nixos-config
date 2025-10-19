@@ -53,7 +53,7 @@
         package = pkgs.noto-fonts-color-emoji;
       };
       monospace = {
-        name = "CaskaydiaCoveNerdFontMono";
+        name = "CaskaydiaCoveNerdFontPropo";
         package = pkgs.cascadia-code;
       };
       sansSerif = {

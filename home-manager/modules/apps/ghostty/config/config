@@ -1,10 +1,10 @@
-font-family = "CaskaydiaMonoNerdFont"
-font-family-bold = "CaskaydiaMonoNerdFont"
-font-family-italic = "CaskaydiaMonoNerdFont"
-font-family-bold-italic = "CaskaydiaMonoNerdFont"
-font-style = "Regular"
+font-family = "CaskaydiaMonoNerdFontPropo"
+font-family-bold = "CaskaydiaMonoNerdFontPropo"
+font-family-italic = "CaskaydiaMonoNerdFontPropo"
+font-family-bold-italic = "CaskaydiaMonoNerdFontPropo"
+font-style = "SemiBold"
 font-style-bold = "Bold"
-font-style-italic= "Italic"
+font-style-italic= "SemiBoldItalic"
 font-style-bold-italic = "BoldItalic"
 #adjust-cell-height = 20%
 font-size = "13.0"
@@ -15,9 +15,9 @@ font-size = "13.0"
 #font-feature = -ss05
 
 theme = "catppuccin-latte"
-bold-is-bright = true
+# bold-is-bright = true
 cursor-style = block
-shell-integration-features = no-cursor
+# shell-integration-features = no-cursor
 # custom-shader = shaders/bloom.gsl
 
 gtk-titlebar = false
