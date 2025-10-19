@@ -3,17 +3,16 @@
 
   home.packages = with pkgs; [
     # Desktop apps
+    anydesk
     dbeaver-bin
     imv
+    insomnia
     kicad
     libreoffice
     mpv
     obsidian
     pavucontrol
     telegram-desktop
-    # yandex-music
-    anydesk
-    # remmina
 
     # CLI utils
     bc
@@ -25,14 +24,15 @@
     fzf
     git-graph
     grimblast
-    gum
     grpcurl
+    gum
     htop
     hyprpicker
     k9s
     kubectl
     mediainfo
     microfetch
+    mysql84
     nixpkgs-fmt
     ntfs3g
     openssl
@@ -52,19 +52,15 @@
 
     # Coding stuff
     go
+    lazydocker
     nodejs
     openjdk23
-    python311
     postgresql
-    lazydocker
+    python311
 
     # WM stuff
-    libsForQt5.xwaylandvideobridge
     libnotify
-    # qt6.qtwayland
-    # libsForQt5.qt5.qtwayland
-    # xdg-desktop-portal-gtk
-    # xdg-desktop-portal-hyprland
+    libsForQt5.xwaylandvideobridge
 
     # Other
     bemoji
@@ -73,10 +69,10 @@
 
     pciutils
 
-    libxml2
-    jq
-    pass
     gnupg
+    jq
     keepassxc
+    libxml2
+    pass
   ];
 }
