@@ -13,6 +13,7 @@
     obsidian
     pavucontrol
     telegram-desktop
+    google-chrome
 
     # CLI utils
     bc
