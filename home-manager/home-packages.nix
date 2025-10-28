@@ -15,6 +15,11 @@
     telegram-desktop
     google-chrome
 
+    #3D print
+    orca-slicer
+    freecad
+    prusa-slicer
+
     # CLI utils
     bc
     brightnessctl
@@ -58,6 +63,9 @@
     openjdk23
     postgresql
     python311
+    statix
+    luarocks
+    lua51Packages.lua
 
     # WM stuff
     libnotify
