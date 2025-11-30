@@ -8,6 +8,11 @@
       # Executed for all fish instances
       set -x PATH $HOME/.local/bin $PATH
       set -x PATH $HOME/go/bin $PATH
+
+      # Set GOPATH
+      set -gx GOPATH $HOME/go
+      set -x PATH $GOPATH/bin $PATH
+
       # Запуск sesh-session только при запуске в новом терминале (не в сабшелле)
       if status is-interactive
           # Проверяем, что мы не в сессии уже запущенного sesh

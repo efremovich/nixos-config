@@ -1,7 +1,13 @@
 { pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
-  buildInputs = with pkgs; [ kicad ];
+  buildInputs = with pkgs; [
+    kicad
+    platformio
+    python3
+    python3Packages.pip
+    python3Packages.setuptools
+  ];
 
   shellHook = with pkgs.kicad.passthru.libraries;
     let
@@ -34,5 +40,8 @@ pkgs.mkShell {
 
       find ~/kicad -type d -exec chmod 755 {} +
       find ~/kicad -type f -exec chmod 644 {} +
+
+      echo "Setting up PlatformIO environment..."
+      export PYTHONPATH="${pkgs.python3Packages.pip}/${pkgs.python3.sitePackages}"
     '';
 }

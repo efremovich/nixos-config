@@ -14,6 +14,7 @@
     pavucontrol
     telegram-desktop
     google-chrome
+    deluge
 
     #3D print
     orca-slicer
@@ -62,10 +63,20 @@
     nodejs
     openjdk23
     postgresql
-    python311
     statix
     luarocks
     lua51Packages.lua
+    graphviz
+    protobuf
+    natscli
+
+    # MCP
+    platformio
+    python3
+    python3Packages.pip
+    python3Packages.setuptools
+    python3Packages.virtualenv
+    minicom
 
     # WM stuff
     libnotify
@@ -83,5 +94,9 @@
     keepassxc
     libxml2
     pass
+
+    #LLM
+    ollama
+
   ];
 }

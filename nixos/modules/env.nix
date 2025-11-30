@@ -4,6 +4,7 @@
     EDITOR = "nvim";
     XDG_BIN_HOME = "$HOME/.local/bin";
     PATH = [ "${XDG_BIN_HOME}" "$HOME/go/bin" ];
+    GOPATH = "$HOME/go/bin";
     XDG_CURRENT_DESKTOP = "sway";
 
     #go env
