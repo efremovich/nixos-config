@@ -14,6 +14,8 @@
     rustc
     sqlite
     sqlite.dev
+    # wireguard
+    wireguard-tools
   ];
   environment.variables = {
     PKG_CONFIG_PATH = let devPkgs = [ pkgs.sqlite.dev pkgs.libxml2.dev ];

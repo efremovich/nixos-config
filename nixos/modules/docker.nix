@@ -1,3 +1,5 @@
 {
-  virtualisation.docker.enable = true;
-  }
+  services.resolved.enable = true;
+
+  virtualisation.docker = { enable = true; };
+}

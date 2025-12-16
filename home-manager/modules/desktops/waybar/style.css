@@ -162,7 +162,7 @@ window.eDP-1 * {
 
 #window {
   background: @crust;
-  font-family:  "CaskaydiaCove Nerd Font";
+  font-family: "CaskaydiaCove Nerd Font";
   border-radius: 0;
   padding: 0rem 0.7rem;
   border: 2px solid @blue;
@@ -273,6 +273,7 @@ window#waybar.swallowing {
 #custom-backlight-icon,
 #custom-battery-icon,
 #custom-clock-icon,
+#custom-pomodoro-icon,
 #custom-language-icon,
 #custom-mpris-icon,
 #custom-tray-icon {
@@ -297,6 +298,10 @@ window#waybar.swallowing {
 
 #custom-clock-icon {
   background: @pink;
+}
+
+#custom-pomodoro-icon {
+  background: @green;
 }
 
 #custom-language-icon {
@@ -356,6 +361,14 @@ window#waybar.swallowing {
 }
 #custom-window-icon {
   background: @blue;
+}
+#custom-pomodoro {
+  background: @crust;
+  font-family: "CaskaydiaCove Nerd Font";
+  color: @green;
+  padding: 0rem 0.7rem;
+  border-radius: 0 5px 5px 0;
+  border: 2px solid @green;
 }
 #custom-ssh-tunnel {
   background: @crust;

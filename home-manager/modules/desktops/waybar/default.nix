@@ -30,7 +30,12 @@
           "niri/window"
           "custom/window-icon"
         ];
-        modules-center = [ "custom/clock-icon" "clock" ];
+        modules-center = [
+          "custom/clock-icon"
+          "clock"
+          "custom/pomodoro-icon"
+          "custom/pomodoro"
+        ];
         modules-right = [
           # "custom/toggl-icon"
           # "custom/toggl"
@@ -317,6 +322,13 @@
             stopped = "";
           };
         };
+        "custom/pomodoro" = {
+          format = "{}";
+          return-type = "json";
+          exec = "waybar-module-pomodoro";
+          on-click = "waybar-module-pomodoro toggle";
+          on-click-right = "waybar-module-pomodoro reset";
+        };
         # Custom icons
         "custom/toggl-icon" = { format = "󱎫"; };
         "custom/audio-icon" = { format = ""; };
@@ -324,6 +336,7 @@
         "custom/backlight-icon" = { format = "󰌵"; };
         "custom/battery-icon" = { format = "󰁹"; };
         "custom/clock-icon" = { format = ""; };
+        "custom/pomodoro-icon" = { format = ""; };
         "custom/mpris-icon" = { format = " "; };
         "custom/idle-icon" = { format = " "; };
         "custom/vpn-icon" = { format = " "; };

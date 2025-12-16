@@ -71,6 +71,35 @@
           end
         '';
       };
+      source-fish = {
+        body = ''
+          if test (count $argv) -eq 0
+              echo "Usage: source_fish <file>"
+              return 1
+          end
+
+          set env_file $argv[1]
+
+          if not test -f $env_file
+              echo "File '$env_file' does not exist."
+              return 1
+          end
+
+          # Цикл для чтения и экспорта переменных
+          for line in (cat $env_file | string trim | grep -v '^#')
+              # Пропускаем пустые строки
+              if test -z "$line"
+                  continue
+              end
+
+              set key (string split "=" $line)[1]
+              set value (string split "=" $line)[2]
+              set -x $key $value
+          end
+
+          echo "Variables from '$env_file' loaded."
+        '';
+      };
     };
   };
 }

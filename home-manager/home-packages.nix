@@ -20,6 +20,8 @@
     orca-slicer
     freecad
     prusa-slicer
+    squashfsTools
+    git-lfs
 
     # CLI utils
     bc
@@ -94,6 +96,7 @@
     keepassxc
     libxml2
     pass
+    ipset
 
     #LLM
     ollama
