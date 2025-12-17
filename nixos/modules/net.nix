@@ -3,7 +3,7 @@
 
   networking.networkmanager = {
     enable = true;
-    plugins = with pkgs; [ 
+    plugins = with pkgs; [
       networkmanager-openvpn
       networkmanager-l2tp
       networkmanager-fortisslvpn
@@ -30,6 +30,29 @@
 
   services = {
     wg-netmanager = { enable = true; };
-    xl2tpd = { enable = true; };
+    xl2tpd = { enable = false; };
+    strongswan = { enable = true; };
   };
+  # Создание конфигурационного файла strongswan
+  environment.etc."strongswan.conf".text = ''
+    # strongSwan configuration file
+    charon {
+        # number of worker threads in charon
+        threads = 16
+        
+        # send strongSwan vendor ID?
+        send_vendor_id = yes
+        
+        # load the 'random' RNG plugin
+        rng_plugin = random
+        
+        # plugins to load
+        plugins {
+          include strongswan.d/charon/*.conf
+        }
+    }
+
+    # include strongswan.d/*.conf
+    include strongswan.d/*.conf
+  '';
 }
