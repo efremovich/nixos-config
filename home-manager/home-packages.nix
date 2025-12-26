@@ -22,6 +22,7 @@
     prusa-slicer
     squashfsTools
     git-lfs
+    blender
 
     # CLI utils
     bc
@@ -100,6 +101,7 @@
 
     #LLM
     ollama
+    cursor-cli
 
   ];
 }
