@@ -17,6 +17,11 @@
     fsType = "btrfs";
   };
 
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/d8d12283-89d9-49c9-bf72-655e4b32d7eb";
+    fsType = "btrfs";
+  };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/009d764f-8246-4086-a627-be5982d43c02"; }];
 

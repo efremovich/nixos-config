@@ -1,1 +1,2 @@
-{ pkgs, ... }: { services.udev.packages = with pkgs; [ platformio.udevRules ]; }
+{ pkgs, ... }: { services.udev.packages = with pkgs; [ platformio-core.udev ]; }
+

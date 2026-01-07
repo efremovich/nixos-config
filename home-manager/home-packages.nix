@@ -72,6 +72,7 @@
     graphviz
     protobuf
     natscli
+    vscode
 
     # MCP
     platformio
@@ -100,8 +101,6 @@
     ipset
 
     #LLM
-    ollama
-    cursor-cli
 
   ];
 }

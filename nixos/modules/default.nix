@@ -22,6 +22,7 @@
     ./ssh.nix
     ./timezone.nix
     ./user.nix
+    ./udev.nix
     # ./zapret.nix
     #./zerotierone.nix
     ./v2raya.nix
