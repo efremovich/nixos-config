@@ -19,6 +19,7 @@
 
     #3D print
     freecad
+    orca-slicer
     squashfsTools
     blender
 
