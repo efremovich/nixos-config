@@ -384,3 +384,24 @@ window#waybar.swallowing {
   border-radius: 0 5px 5px 0;
   margin-right: 5px;
 }
+
+#custom-operator-queues {
+  color: @green;
+}
+
+#custom-operator-queues.critical {
+  color: @red;
+}
+
+#custom-operator-queues.warning {
+  color: @yellow;
+}
+
+#custom-operator-queues.normal {
+  color: @teal;
+}
+
+#custom-operator-queues.error {
+  color: @mauve;
+  background-color: @lavender;
+}

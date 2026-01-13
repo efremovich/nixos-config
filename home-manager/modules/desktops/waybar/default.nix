@@ -33,9 +33,20 @@
         modules-center = [
           "custom/clock-icon"
           "clock"
-          "custom/pomodoro-icon"
-          "custom/pomodoro"
+          "custom/operator-queues"
+          # "custom/pomodoro-icon"
+          # "custom/pomodoro"
         ];
+
+        "custom/operator-queues" = {
+          exec = "$HOME/.config/waybar/operator-queues.sh";
+          interval = 5;
+          format = "{text}";
+          tooltip = true;
+          tooltip-format = "{tooltip}";
+          on-click = "alacritty -e operator-tui";
+        };
+
         modules-right = [
           # "custom/toggl-icon"
           # "custom/toggl"

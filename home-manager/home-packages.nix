@@ -15,16 +15,15 @@
     telegram-desktop
     google-chrome
     deluge
+    inkscape
 
     #3D print
-    orca-slicer
     freecad
-    prusa-slicer
     squashfsTools
-    git-lfs
     blender
 
     # CLI utils
+    ast-grep
     bc
     brightnessctl
     cliphist
@@ -59,6 +58,7 @@
     wtype
     yt-dlp
     zip
+    fd
 
     # Coding stuff
     go
@@ -72,7 +72,6 @@
     graphviz
     protobuf
     natscli
-    vscode
 
     # MCP
     platformio
