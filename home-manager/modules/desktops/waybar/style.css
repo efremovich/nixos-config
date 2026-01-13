@@ -276,7 +276,8 @@ window#waybar.swallowing {
 #custom-pomodoro-icon,
 #custom-language-icon,
 #custom-mpris-icon,
-#custom-tray-icon {
+#custom-tray-icon,
+#custom-operator-queues-icon {
   background: @crust;
   color: @crust;
   margin-left: 5px;
@@ -306,6 +307,13 @@ window#waybar.swallowing {
 
 #custom-language-icon {
   background: @mauve;
+}
+
+#custom-operator-queues-icon {
+  background: @green;
+  color: @crust;
+  border: 2px solid @green;
+  border-right: none;
 }
 
 #custom-tray-icon {
@@ -386,19 +394,28 @@ window#waybar.swallowing {
 }
 
 #custom-operator-queues {
+  background: @crust;
+  font-family: "CaskaydiaCove Nerd Font";
   color: @green;
+  padding: 0rem 0.7rem;
+  border-radius: 0 5px 5px 0;
+  border: 2px solid @green;
+  border-left: none;
+}
+
+#custom-operator-queues.normal {
+  color: @green;
+  border-color: @green;
+}
+
+#custom-operator-queues.warning {
+  color: @peach;
+  border-color: @peach;
 }
 
 #custom-operator-queues.critical {
   color: @red;
-}
-
-#custom-operator-queues.warning {
-  color: @yellow;
-}
-
-#custom-operator-queues.normal {
-  color: @teal;
+  border-color: @red;
 }
 
 #custom-operator-queues.error {

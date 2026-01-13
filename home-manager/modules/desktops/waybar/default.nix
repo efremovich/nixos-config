@@ -1,12 +1,15 @@
 # https://github.com/Alexays/Waybar
 { pkgs, ... }: {
-  home.file.".config/waybar/toggl_status.py".source = ./toggl_status.py;
-  home.file.".config/waybar/vpn_status.py".source = ./vpn_status.py;
-  home.file.".config/waybar/vpn_toggle.py".source = ./vpn_toggle.py;
-  home.file.".config/waybar/ssh_tunnel_status.py".source =
-    ./ssh_tunnel_status.py;
-  home.file.".config/waybar/ssh_tunnel_toggle.py".source =
-    ./ssh_tunnel_toggle.py;
+  home = {
+    file = {
+      ".config/waybar/toggl_status.py".source = ./toggl_status.py;
+      ".config/waybar/vpn_status.py".source = ./vpn_status.py;
+      ".config/waybar/vpn_toggle.py".source = ./vpn_toggle.py;
+      ".config/waybar/ssh_tunnel_status.py".source = ./ssh_tunnel_status.py;
+      ".config/waybar/ssh_tunnel_toggle.py".source = ./ssh_tunnel_toggle.py;
+      ".config/waybar/operator-queues.py".source = ./operator-queues.py;
+    };
+  };
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -33,19 +36,11 @@
         modules-center = [
           "custom/clock-icon"
           "clock"
+          "custom/operator-queues-icon"
           "custom/operator-queues"
           # "custom/pomodoro-icon"
           # "custom/pomodoro"
         ];
-
-        "custom/operator-queues" = {
-          exec = "$HOME/.config/waybar/operator-queues.sh";
-          interval = 5;
-          format = "{text}";
-          tooltip = true;
-          tooltip-format = "{tooltip}";
-          on-click = "alacritty -e operator-tui";
-        };
 
         modules-right = [
           # "custom/toggl-icon"
@@ -294,6 +289,17 @@
           interval = 180;
           on-click = "toggl stop";
         };
+
+        "custom/operator-queues" = {
+          exec = "python3 $HOME/.config/waybar/operator-queues.py";
+          interval = 5;
+          format = "{text}";
+          return-type = "json";
+          # tooltip = true;
+          # tooltip-format = "{tooltip}";
+          # on-click = "alacritty -e operator-tui";
+        };
+
         "idle_inhibitor" = {
           format = "<i>{icon}</i>";
           start-activated = false;
@@ -348,6 +354,7 @@
         "custom/battery-icon" = { format = "󰁹"; };
         "custom/clock-icon" = { format = ""; };
         "custom/pomodoro-icon" = { format = ""; };
+        "custom/operator-queues-icon" = { format = "󱓻"; };
         "custom/mpris-icon" = { format = " "; };
         "custom/idle-icon" = { format = " "; };
         "custom/vpn-icon" = { format = " "; };
