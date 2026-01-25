@@ -8,6 +8,7 @@
       # Executed for all fish instances
       set -x PATH $HOME/.local/bin $PATH
       set -x PATH $HOME/go/bin $PATH
+      set -x PATH $HOME/.local/share/nvim/mason/bin $PATH
 
       # Set GOPATH
       set -gx GOPATH $HOME/go

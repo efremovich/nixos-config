@@ -309,13 +309,6 @@ window#waybar.swallowing {
   background: @mauve;
 }
 
-#custom-operator-queues-icon {
-  background: @green;
-  color: @crust;
-  border: 2px solid @green;
-  border-right: none;
-}
-
 #custom-tray-icon {
   margin-left: 5px;
   background: @text;
@@ -419,6 +412,33 @@ window#waybar.swallowing {
 }
 
 #custom-operator-queues.error {
+  color: @mauve;
+  background-color: @lavender;
+}
+
+#custom-operator-queues-icon {
+  background: @green;
+  color: @crust;
+  border: 2px solid @green;
+  border-right: none;
+}
+
+#custom-operator-queues-icon.normal {
+  color: @green;
+  border-color: @green;
+}
+
+#custom-operator-queues-icon.warning {
+  color: @peach;
+  border-color: @peach;
+}
+
+#custom-operator-queues-icon.critical {
+  color: @red;
+  border-color: @red;
+}
+
+#custom-operator-queues-icon.error {
   color: @mauve;
   background-color: @lavender;
 }

@@ -73,6 +73,7 @@
     graphviz
     protobuf
     natscli
+    code-cursor
 
     # MCP
     platformio

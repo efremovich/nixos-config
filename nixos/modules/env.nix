@@ -2,7 +2,7 @@
   environment.sessionVariables = rec {
     TERMINAL = "alacritty";
     EDITOR = "nvim";
-    XDG_BIN_HOME = "$HOME/.local/bin";
+    XDG_BIN_HOME = "$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin";
     PATH = [ "${XDG_BIN_HOME}" "$HOME/go/bin" ];
     GOPATH = "$HOME/go/bin";
     XDG_CURRENT_DESKTOP = "sway";
