@@ -14,7 +14,6 @@
     ./kernel.nix
     ./locale.nix
     ./mime.nix
-    ./nekoray.nix
     ./net.nix
     ./nh.nix
     ./nix.nix

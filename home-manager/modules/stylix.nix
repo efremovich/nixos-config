@@ -11,7 +11,7 @@
     lilex
     font-awesome
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     recursive
     sn-pro
     ia-writer-quattro

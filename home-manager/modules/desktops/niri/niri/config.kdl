@@ -135,7 +135,6 @@ environment {
     LIBVA_DRIVER_NAME "iHD"
 }
 
-spawn-at-startup "bash" "-c" "swww img ~/Pictures/wallpapers/default-wallpaper.jpg --transition-type center"
 spawn-at-startup "bash" "-c" "sleep 15 && ~/.nix-profile/bin/wl-paste --watch cliphist store"
 // spawn-at-startup "bash" "-c" "python ~/.config/niri/scripts/blur-wallpaper.py"
 spawn-at-startup "bash" "-c" "python ~/.config/niri/scripts/change-wallpaper.py"

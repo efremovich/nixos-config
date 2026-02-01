@@ -25,6 +25,7 @@
     ./ranger.nix
     ./starship.nix
     ./stylix.nix
+    ./thunar.nix
     ./tmux.nix
     ./zathura.nix
     ./zoxide.nix

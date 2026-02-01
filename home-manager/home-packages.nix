@@ -51,6 +51,8 @@
     ripgrep
     sesh
     udisks
+    udisks2
+    gvfs
     ueberzugpp
     unzip
     w3m
@@ -65,7 +67,7 @@
     go
     lazydocker
     nodejs
-    openjdk23
+    openjdk25
     postgresql
     statix
     luarocks
@@ -85,7 +87,6 @@
 
     # WM stuff
     libnotify
-    libsForQt5.xwaylandvideobridge
 
     # Other
     bemoji
