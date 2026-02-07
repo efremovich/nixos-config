@@ -17,7 +17,8 @@ pkgs.mkShell {
       src-templates = "${templates}/share/kicad/template";
       sym-lib-table = "${symbols}/share/kicad/template/sym-lib-table";
       fp-lib-table = "${footprints}/share/kicad/template/fp-lib-table";
-    in ''
+    in
+    ''
       echo ${symbols}
       echo ${footprints}
       export KICAD9_3DMODEL_DIR=~/kicad/3dmodels/

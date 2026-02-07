@@ -5,29 +5,30 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellAliases = let flakeDir = "~/.nix";
-    in {
-      sw = "nh os switch";
-      upd = "nh os switch --update";
-      hms = "nh home switch";
+    shellAliases =
+      let flakeDir = "~/.nix";
+      in {
+        sw = "nh os switch";
+        upd = "nh os switch --update";
+        hms = "nh home switch";
 
-      pkgs = "nvim ${flakeDir}/nixos/packages.nix";
+        pkgs = "nvim ${flakeDir}/nixos/packages.nix";
 
-      r = "ranger";
-      v = "nvim";
-      se = "sudoedit";
-      microfetch = "microfetch && echo";
+        r = "ranger";
+        v = "nvim";
+        se = "sudoedit";
+        microfetch = "microfetch && echo";
 
-      gs = "git status";
-      ga = "git add";
-      gc = "git commit";
-      gp = "git push";
+        gs = "git status";
+        ga = "git add";
+        gc = "git commit";
+        gp = "git push";
 
-      upnix = "sudo nixos-rebuild switch --flake ${flakeDir}";
-      uphome = "home-manager switch --flake ${flakeDir}";
+        upnix = "sudo nixos-rebuild switch --flake ${flakeDir}";
+        uphome = "home-manager switch --flake ${flakeDir}";
 
-      ".." = "cd ..";
-    };
+        ".." = "cd ..";
+      };
 
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";

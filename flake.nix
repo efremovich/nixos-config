@@ -69,20 +69,23 @@
       forEachSystem = f:
         lib.genAttrs supportedSystems (system: f pkgsFor.${system});
 
-    in {
+    in
+    {
       # overlays = import ./overlays { inherit inputs outputs; };
 
       # Исправляем devShells
       devShells = forEachSystem
         (pkgs: { default = import ./shell.nix { inherit pkgs; }; });
 
-      nixosConfigurations = builtins.listToAttrs (map (host: {
-        name = host.hostname;
-        value = makeSystem {
-          hostname = host.hostname;
-          stateVersion = host.stateVersion;
-        };
-      }) hosts);
+      nixosConfigurations = builtins.listToAttrs (map
+        (host: {
+          name = host.hostname;
+          value = makeSystem {
+            hostname = host.hostname;
+            stateVersion = host.stateVersion;
+          };
+        })
+        hosts);
 
       homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};

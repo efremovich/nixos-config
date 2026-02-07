@@ -6,7 +6,8 @@ let
     sha256 = "sha256-RsbRlNeEAfVOiYuMCEIGMMddQfZIxmWSZClrIQsM1wA=";
   };
 
-in {
+in
+{
   programs.swaylock = {
     enable = true;
     settings = with colors; {

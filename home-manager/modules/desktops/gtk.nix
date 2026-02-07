@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   gtk = {
     enable = true;
     iconTheme = {
@@ -11,7 +11,7 @@
     };
     theme = {
       name = "Orchis-Dark";
-      package = pkgs.orchis-theme.override {tweaks = ["solid" "macos"];};
+      package = pkgs.orchis-theme.override { tweaks = [ "solid" "macos" ]; };
     };
     gtk3.extraConfig = {
       Settings = ''
@@ -26,8 +26,12 @@
     };
   };
 
-  home.sessionVariables.GTK_THEME = "Orchis-Dark";
-  home.pointerCursor.gtk.enable = true;
-  home.pointerCursor.package = pkgs.bibata-cursors;
-  home.pointerCursor.name = "Bibata-Original-Ice";
+  home = {
+    sessionVariables.GTK_THEME = "Orchis-Dark";
+    pointerCursor = {
+      gtk.enable = true;
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Original-Ice";
+    };
+  };
 }

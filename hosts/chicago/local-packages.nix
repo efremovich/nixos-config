@@ -18,7 +18,8 @@
     wireguard-tools
   ];
   environment.variables = {
-    PKG_CONFIG_PATH = let devPkgs = [ pkgs.sqlite.dev pkgs.libxml2.dev ];
-    in lib.concatStringsSep ":" (map (pkg: "${pkg}/lib/pkgconfig") devPkgs);
+    PKG_CONFIG_PATH =
+      let devPkgs = [ pkgs.sqlite.dev pkgs.libxml2.dev ];
+      in lib.concatStringsSep ":" (map (pkg: "${pkg}/lib/pkgconfig") devPkgs);
   };
 }
