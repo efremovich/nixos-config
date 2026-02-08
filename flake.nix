@@ -15,15 +15,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.niri-stable.follows = "niri-stable";
-    };
-    niri-stable.url = "github:YaLTeR/niri/v25.08";
+    # niri = {
+    #   url = "github:sodiboo/niri-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.niri-stable.follows = "niri-stable";
+    # };
+    # niri-stable.url = "github:YaLTeR/niri/v25.08";
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       inherit (self) outputs;
       system = "x86_64-linux";
@@ -69,23 +69,20 @@
       forEachSystem = f:
         lib.genAttrs supportedSystems (system: f pkgsFor.${system});
 
-    in
-    {
+    in {
       # overlays = import ./overlays { inherit inputs outputs; };
 
       # Исправляем devShells
       devShells = forEachSystem
         (pkgs: { default = import ./shell.nix { inherit pkgs; }; });
 
-      nixosConfigurations = builtins.listToAttrs (map
-        (host: {
-          name = host.hostname;
-          value = makeSystem {
-            hostname = host.hostname;
-            stateVersion = host.stateVersion;
-          };
-        })
-        hosts);
+      nixosConfigurations = builtins.listToAttrs (map (host: {
+        name = host.hostname;
+        value = makeSystem {
+          hostname = host.hostname;
+          stateVersion = host.stateVersion;
+        };
+      }) hosts);
 
       homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
