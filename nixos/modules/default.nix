@@ -7,6 +7,7 @@
     ./bluetooth.nix
     ./docker.nix
     ./env.nix
+    ./gsettings.nix
     ./home-manager.nix
     ./locale.nix
     # ./hyprland.nix

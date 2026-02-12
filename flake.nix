@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Старый nixpkgs для понижения версии FreeCAD
+    nixpkgs-25-04.url = "github:NixOS/nixpkgs/nixos-25.04";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
