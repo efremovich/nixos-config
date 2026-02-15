@@ -6,9 +6,9 @@
     ./xwayland-satellite.nix
   ];
 
-  services.hyprpaper = {
-    enable = true;
-  };
+  # services.hyprpaper = {
+  #   enable = true;
+  # };
 
   home = {
 

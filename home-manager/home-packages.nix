@@ -101,6 +101,7 @@
     libxml2
     pass
     ipset
+    file-roller
 
     #LLM
 

@@ -10,7 +10,6 @@
     ./neovim.nix
     ./obsidian.nix
     # для niri
-    ./dconf.nix
     ./apps/walker
     ./apps/ghostty
     ./desktops/fuzzel.nix
@@ -21,8 +20,8 @@
     # ./desktops/qt5.nix
     ./desktops/waybar
     ./desktops/xdg.nix
-    ./desktops/gtk.nix
-    ./desktops/qt.nix
+    # ./desktops/gtk.nix
+    # ./desktops/qt5.nix
 
     ./k9s.nix
     ./ranger.nix
