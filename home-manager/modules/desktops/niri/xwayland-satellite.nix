@@ -1,8 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs;
-    [
-      # xwayland-satellite 
-    ];
+  home.packages = with pkgs; [ xwayland-satellite ];
 
   # Switch from `Install.WantedBy = [ "graphical-session.target" ]` as defined
   # in the service file provided by the xwayland-satellite package. This links
