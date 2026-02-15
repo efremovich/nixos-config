@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
@@ -7,21 +8,20 @@
     dbeaver-bin
     imv
     insomnia
-   # kicad
+    # kicad
     libreoffice
     mpv
     obsidian
     pavucontrol
     telegram-desktop
-   # google-chrome
+    # google-chrome
     deluge
     inkscape
 
-    #3D print
     freecad
-   # orca-slicer
+    # orca-slicer
     squashfsTools
-   # blender
+    # blender
 
     # CLI utils
     ast-grep

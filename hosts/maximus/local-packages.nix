@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     autoconf
     automake
@@ -11,6 +12,8 @@
     sqlite
     pkg-config
     rustc
+    gsettings-desktop-schemas
+    gtk3
   ];
 
 }

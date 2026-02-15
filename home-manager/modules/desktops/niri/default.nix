@@ -1,7 +1,15 @@
-{ pkgs, inputs, ... }: {
-  imports = [ ./services.nix ./swaylock.nix ./xwayland-satellite.nix ];
+{ pkgs, inputs, ... }:
+{
+  imports = [
+    ./services.nix
+    ./swaylock.nix
+    ./xwayland-satellite.nix
+  ];
 
-  services.hyprpaper = { enable = true; };
+  services.hyprpaper = {
+    enable = true;
+  };
+
   home = {
 
     packages = with pkgs; [
@@ -24,7 +32,7 @@
       wl-clip-persist
       wl-clipboard
       wlogout
-      inputs.unstable.legacyPackages.${pkgs.system}.wlr-which-key
+      wlr-which-key
     ];
     file = {
 
@@ -36,11 +44,6 @@
       ".config/swaync" = {
         recursive = true;
         source = ./swaync;
-      };
-
-      ".config/wlr-which-key" = {
-        recursive = true;
-        source = ./wlr-which-key;
       };
     };
 
