@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [ inputs.stylix.homeModules.stylix ];
 
   home.packages = with pkgs; [
@@ -30,9 +31,6 @@
     targets = {
       firefox.profileNames = [ "default" ];
       waybar.enable = false;
-      wofi.enable = false;
-      hyprland.enable = false;
-      hyprlock.enable = false;
       neovim.enable = false;
       gtk.enable = true;
       fuzzel.enable = true;

@@ -20,6 +20,8 @@
     # ./desktops/qt5.nix
     ./desktops/waybar
     ./desktops/xdg.nix
+    # ./desktops/gtk.nix
+    # ./desktops/qt5.nix
 
     ./k9s.nix
     ./ranger.nix
