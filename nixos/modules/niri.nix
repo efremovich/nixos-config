@@ -5,7 +5,7 @@
 
   services = {
     displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
+    # desktopManager.gnome.enable = true;
   };
 
   # Схемы GSettings (org.gtk.Settings.FileChooser и др.) для GTK-приложений

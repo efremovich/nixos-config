@@ -1,18 +1,19 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   gtk = {
     enable = true;
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    cursorTheme = {
-      name = "Bibata-Original-Ice";
-      package = pkgs.bibata-cursors;
-    };
-    theme = {
-      name = "Orchis-Dark";
-      package = pkgs.orchis-theme.override { tweaks = [ "solid" "macos" ]; };
-    };
+    # iconTheme = {
+    #   name = "Papirus-Dark";
+    #   package = pkgs.papirus-icon-theme;
+    # };
+    # cursorTheme = {
+    #   name = "Bibata-Original-Ice";
+    #   package = pkgs.bibata-cursors;
+    # };
+    # theme = {
+    #   name = "Orchis-Dark";
+    #   package = pkgs.orchis-theme.override { tweaks = [ "solid" "macos" ]; };
+    # };
     gtk3.extraConfig = {
       Settings = ''
         gtk-application-prefer-dark-theme=1
