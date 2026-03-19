@@ -8,7 +8,7 @@
     dbeaver-bin
     imv
     insomnia
-    # kicad
+    kicad
     libreoffice
     mpv
     obsidian
@@ -19,7 +19,7 @@
     inkscape
 
     freecad
-    # orca-slicer
+    orca-slicer
     squashfsTools
     # blender
 
@@ -75,7 +75,6 @@
     graphviz
     protobuf
     natscli
-    code-cursor
 
     # MCP
     platformio
