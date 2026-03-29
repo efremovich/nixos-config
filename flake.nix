@@ -3,6 +3,8 @@
   description = "My system configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # WebKit 2.38 + libsoup 2 (для 1С: uiproxywx.so и WebKit в одном процессе без смешивания libsoup 2 и 3).
+    nixpkgs_22_11.url = "github:nixos/nixpkgs/nixos-22.11";
     unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -22,6 +24,7 @@
       self,
       nixpkgs,
       home-manager,
+      nixpkgs_22_11,
       ...
     }@inputs:
     let

@@ -362,8 +362,8 @@
         "custom/language-icon" = { format = "󰌍 "; };
         "custom/tray-icon" = {
           format = "󱊖";
-          on-click = "swaync-client -t";
-          tooltip = "Notification center";
+          on-click = "makoctl history | head -n 10";
+          tooltip = "Notification history";
         };
         "custom/window-icon" = {
           format = " ";

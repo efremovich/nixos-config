@@ -17,6 +17,7 @@
       grim
       hyprpicker
       libinput
+      mako
       networkmanagerapplet
       pavucontrol
       pipewire
@@ -25,9 +26,8 @@
       slurp
       swappy
       swaybg
-      swaylock
       swayidle
-      swaynotificationcenter
+      swaylock
       swww
       wl-clip-persist
       wl-clipboard
@@ -41,9 +41,9 @@
         source = ./niri;
       };
 
-      ".config/swaync" = {
+      ".config/mako" = {
         recursive = true;
-        source = ./swaync;
+        source = ./mako;
       };
     };
 

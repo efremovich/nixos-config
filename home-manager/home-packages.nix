@@ -14,7 +14,7 @@
     obsidian
     pavucontrol
     telegram-desktop
-    # google-chrome
+    google-chrome
     deluge
     inkscape
 
@@ -61,6 +61,7 @@
     wtype
     yt-dlp
     zip
+    p7zip
     fd
 
     # Coding stuff

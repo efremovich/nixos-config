@@ -9,6 +9,7 @@
     ./env.nix
     ./gsettings.nix
     ./home-manager.nix
+    ./hasp.nix
     ./locale.nix
     # ./hyprland.nix
     ./niri.nix
