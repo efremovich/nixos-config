@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.services.hasp;
+  driverUrl = "https://erim.ru/pub/hasp/drivers/linux/Sentinel_LDK_Linux_Run-time_Installer_script.tar.gz";
 in
 {
   options.services.hasp = {
@@ -15,16 +16,6 @@ in
       type = lib.types.str;
       default = "37.233.80.214";
       description = "IP address of HASP License Manager server.";
-    };
-
-    runtimeArchive = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      example = "/var/lib/hasp/aksusbd-10.12.1.tar.gz";
-      description = ''
-        Path to Sentinel LDK Runtime archive (aksusbd-*.tar.gz).
-        If set, a one-shot service installs runtime by running ./dinst.
-      '';
     };
   };
 
@@ -47,8 +38,8 @@ in
       '';
     };
 
-    systemd.services.hasp-runtime-install = lib.mkIf (cfg.runtimeArchive != null) {
-      description = "Install Sentinel HASP runtime from archive";
+    systemd.services.hasp-runtime-install = {
+      description = "Download and install Sentinel HASP runtime";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
@@ -62,25 +53,46 @@ in
         gnutar
         gzip
         findutils
+        wget
       ];
       script = ''
         set -euo pipefail
 
-        if command -v hasplmd >/dev/null 2>&1 || [ -x /etc/init.d/aksusbd ]; then
+        # Проверяем, установлен ли уже драйвер
+        if command -v hasplmd >/dev/null 2>&1 || [ -x /etc/init.d/aksusbd ] || systemctl is-active --quiet aksusbd 2>/dev/null; then
+          echo "HASP runtime already installed, skipping download and installation."
           exit 0
-        fi
-
-        if [ ! -f "${cfg.runtimeArchive}" ]; then
-          echo "HASP runtime archive not found: ${cfg.runtimeArchive}" >&2
-          exit 1
         fi
 
         workdir="$(mktemp -d)"
         trap 'rm -rf "$workdir"' EXIT
 
-        tar -xzf "${cfg.runtimeArchive}" -C "$workdir"
-        dir="$(find "$workdir" -maxdepth 1 -type d -name 'aksusbd-*' | head -n 1)"
+        echo "Downloading HASP runtime from ${driverUrl}..."
+        wget -q --show-progress -O "$workdir/driver.tar.gz" "${driverUrl}"
 
+        echo "Extracting archive..."
+        tar -xzf "$workdir/driver.tar.gz" -C "$workdir"
+
+        # Находим директорию с инсталлятором
+        installer_dir="$(find "$workdir" -maxdepth 1 -type d -name 'Sentinel_LDK_*' | head -n 1)"
+        if [ -z "$installer_dir" ]; then
+          echo "Cannot find Sentinel_LDK_* directory" >&2
+          exit 1
+        fi
+
+        # Распаковываем вложенный архив aksusbd
+        cd "$installer_dir"
+        aksusbd_archive="$(find . -maxdepth 1 -name 'aksusbd-*.tar.gz' | head -n 1)"
+        if [ -z "$aksusbd_archive" ]; then
+          echo "Cannot find aksusbd-*.tar.gz archive" >&2
+          exit 1
+        fi
+
+        echo "Extracting $aksusbd_archive..."
+        tar -xzf "$aksusbd_archive"
+
+        # Находим распакованную директорию aksusbd
+        dir="$(find . -maxdepth 1 -type d -name 'aksusbd-*' | head -n 1)"
         if [ -z "$dir" ]; then
           echo "Cannot find extracted aksusbd-* directory" >&2
           exit 1
@@ -97,6 +109,7 @@ in
         done < <(find "$dir" -type f -print0)
 
         chmod +x ./dinst
+        echo "Running installer..."
         ${pkgs.bash}/bin/bash ./dinst
       '';
     };

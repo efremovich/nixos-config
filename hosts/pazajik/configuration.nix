@@ -1,4 +1,9 @@
-{ pkgs, stateVersion, hostname, ... }:
+{
+  pkgs,
+  stateVersion,
+  hostname,
+  ...
+}:
 
 {
   imports = [
@@ -10,6 +15,8 @@
   ];
 
   environment.systemPackages = [ pkgs.home-manager ];
+
+  services.hasp.enable = true;
 
   networking.hostName = hostname;
 
