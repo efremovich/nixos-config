@@ -12,7 +12,7 @@
     # для niri
     ./apps/walker
     ./apps/ghostty
-    ./apps/mpd
+    ./apps/mpd.nix
     ./desktops/fuzzel.nix
     ./desktops/niri
     ./desktops/niri/mako

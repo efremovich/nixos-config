@@ -29,7 +29,10 @@
         "kube-api-edo.astralnalog.ru"
       ];
       "10.0.29.11" = [ "monitoring.operator.etpgpb.ru" ];
-      "10.10.44.125" = [ "monitoring-preprod-edo-point.astralnalog.ru" ];
+      "10.10.44.125" = [
+        "monitoring-preprod-edo-point.astralnalog.ru"
+        "kube-api-prod-edo-point.astralnalog.ru"
+      ];
     };
   };
 
@@ -59,13 +62,13 @@
     charon {
         # number of worker threads in charon
         threads = 16
-        
+
         # send strongSwan vendor ID?
         send_vendor_id = yes
-        
+
         # load the 'random' RNG plugin
         rng_plugin = random
-        
+
         # plugins to load
         plugins {
           include strongswan.d/charon/*.conf

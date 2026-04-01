@@ -340,6 +340,68 @@ window#waybar.swallowing {
   border: 2px solid @green;
 }
 
+/* MPD (mpc): строка статуса + кнопки */
+#custom-mpd {
+  background: @crust;
+  font-family: "CaskaydiaCove Nerd Font";
+  color: @green;
+  padding: 0rem 0.65rem;
+  border-top: 2px solid @green;
+  border-bottom: 2px solid @green;
+}
+
+#custom-mpd.mpd-paused {
+  color: @yellow;
+  border-top-color: @yellow;
+  border-bottom-color: @yellow;
+}
+
+#custom-mpd.mpd-stopped,
+#custom-mpd.mpd-off {
+  color: @subtext0;
+  border-top-color: @overlay1;
+  border-bottom-color: @overlay1;
+}
+
+#custom-mpd-prev,
+#custom-mpd-play-pause,
+#custom-mpd-next {
+  background: @crust;
+  font-family: "CaskaydiaCove Nerd Font";
+  color: @green;
+  padding: 0 0.5rem;
+  border-top: 2px solid @green;
+  border-bottom: 2px solid @green;
+}
+
+#custom-mpd-prev {
+  border-left: 2px solid @green;
+}
+
+#custom-mpd-play-pause {
+  border-left: 1px solid @surface1;
+}
+
+#custom-mpd-next {
+  border-right: 2px solid @green;
+  border-radius: 0 5px 5px 0;
+  margin-right: 5px;
+}
+
+#custom-mpd-play-pause.mpd-paused {
+  color: @yellow;
+  border-top-color: @yellow;
+  border-bottom-color: @yellow;
+  border-left-color: @surface1;
+}
+
+#custom-mpd-play-pause.mpd-stopped,
+#custom-mpd-play-pause.mpd-off {
+  color: @subtext0;
+  border-top-color: @overlay1;
+  border-bottom-color: @overlay1;
+}
+
 #custom-vpn-icon,
 #custom-ssh-tunnel-icon,
 #custom-idle-icon,

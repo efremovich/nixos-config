@@ -13,7 +13,7 @@ in
 
     serverAddress = lib.mkOption {
       type = lib.types.str;
-      default = "51.254.148.241";
+      default = "37.233.80.214";
       description = "IP address of HASP License Manager server.";
     };
 
