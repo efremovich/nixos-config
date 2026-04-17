@@ -1,54 +1,5 @@
 # https://github.com/Alexays/Waybar
 { pkgs, ... }:
-let
-  mpc = "${pkgs.mpc}/bin/mpc";
-  jq = "${pkgs.jq}/bin/jq";
-  # JSON для custom/mpd: первая строка mpc status совпадает с тем, что видно в терминале (радио/треки).
-  waybarMpdBlock = pkgs.writeShellScript "waybar-mpd-block" ''
-    set -euo pipefail
-    if ! ${mpc} status >/dev/null 2>&1; then
-      ${jq} -cn --arg cls mpd-off \
-        '{text:"󰝛",tooltip:"Нет связи с MPD",class:$cls}'
-      exit 0
-    fi
-    out=$(${mpc} status)
-    line1=$(printf '%s\n' "$out" | head -1)
-    line2=$(printf '%s\n' "$out" | sed -n '2p')
-    class=mpd-stopped
-    if [[ "$line2" == *"[playing]"* ]]; then
-      class=mpd-playing
-    elif [[ "$line2" == *"[paused]"* ]]; then
-      class=mpd-paused
-    else
-      if [[ -z "$line1" || "$line1" == volume:* ]]; then
-        line1="—"
-      fi
-    fi
-    if [[ -z "$line1" ]]; then
-      line1="—"
-    fi
-    ${jq} -cn \
-      --arg text "$line1" \
-      --arg tip "$out" \
-      --arg cls "$class" \
-      '{text:$text,tooltip:$tip,class:$cls}'
-  '';
-  waybarMpdPlayPause = pkgs.writeShellScript "waybar-mpd-play-pause" ''
-    set -euo pipefail
-    if ! ${mpc} status >/dev/null 2>&1; then
-      ${jq} -cn --arg cls mpd-off '{text:"󰐊",tooltip:"MPD недоступен",class:$cls}'
-      exit 0
-    fi
-    st=$(${mpc} status 2>/dev/null | sed -n '2p' || true)
-    if [[ "$st" == *"[playing]"* ]]; then
-      ${jq} -cn '{text:"󰏤",tooltip:"Пауза",class:"mpd-playing"}'
-    elif [[ "$st" == *"[paused]"* ]]; then
-      ${jq} -cn '{text:"󰐊",tooltip:"Продолжить",class:"mpd-paused"}'
-    else
-      ${jq} -cn '{text:"󰐊",tooltip:"Воспроизвести",class:"mpd-stopped"}'
-    fi
-  '';
-in
 {
   home = {
     file = {
@@ -96,10 +47,7 @@ in
           # "custom/toggl-icon"
           # "custom/toggl"
           "custom/mpris-icon"
-          "custom/mpd"
-          "custom/mpd-prev"
-          "custom/mpd-play-pause"
-          "custom/mpd-next"
+          "mpris"
           "custom/language-icon"
           "niri/language"
           "custom/tray-icon"
@@ -389,7 +337,7 @@ in
           tooltip-format-deactivated = "Swayidle active";
         };
         mpris = {
-          interval = 1;
+          interval = 2;
           format = "{player_icon}{dynamic}{status_icon}";
           format-paused = "{player_icon}{dynamic}{status_icon}";
           tooltip = true;
@@ -399,7 +347,7 @@ in
           on-click-right = "playerctl next";
           scroll-step = 5.0;
           smooth-scrolling-threshold = 1;
-          dynamic-len = 30;
+          dynamic-len = 60;
           player-icons = {
             chromium = " ";
             brave-browser = " ";
@@ -410,42 +358,12 @@ in
             mpv = "󰐹 ";
             spotify = " ";
             vlc = "󰕼 ";
-            mpd = " ";
           };
           status-icons = {
             playing = "";
             paused = "";
             stopped = "";
           };
-        };
-        "custom/mpd" = {
-          exec = "${waybarMpdBlock}";
-          return-type = "json";
-          interval = 2;
-          format = "{}";
-          max-length = 48;
-          tooltip = true;
-          on-click = "${mpc} toggle";
-          on-click-middle = "${mpc} prev";
-          on-click-right = "${mpc} next";
-        };
-        "custom/mpd-prev" = {
-          format = "󰒮";
-          tooltip = "MPD: предыдущий";
-          on-click = "${mpc} prev";
-        };
-        "custom/mpd-play-pause" = {
-          exec = "${waybarMpdPlayPause}";
-          return-type = "json";
-          interval = 2;
-          format = "{}";
-          tooltip = true;
-          on-click = "${mpc} toggle";
-        };
-        "custom/mpd-next" = {
-          format = "󰒭";
-          tooltip = "MPD: следующий";
-          on-click = "${mpc} next";
         };
         "custom/pomodoro" = {
           format = "{}";
@@ -496,8 +414,8 @@ in
         };
         "custom/tray-icon" = {
           format = "󱊖";
-          on-click = "makoctl history | head -n 10";
-          tooltip = "Notification history";
+          on-click = "swaync-client -t";
+          tooltip = "Notification center";
         };
         "custom/window-icon" = {
           format = " ";
