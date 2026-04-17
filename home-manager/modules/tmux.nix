@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -29,6 +30,8 @@
       bind -n M-k select-pane -U
       bind -n M-l select-pane -R
 
+      bind r display-popup -d "#{pane_current_path}" -w 90% -h 90% -E "ranger"
+
       bind-key "T" run-shell "sesh connect \"$(
         sesh list --icons | fzf-tmux -p 80%,70% \
           --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
@@ -49,15 +52,17 @@
       )\""
 
     '';
-    plugins = with pkgs; [{
-      plugin = tmuxPlugins.catppuccin;
-      extraConfig = ''
-        set -g status-left "#{E:@catppuccin_status_session}"
-        set -g status-position top       # macOS / darwin style
-        set -g status-left-length 100    # increase length (from 10)
-        set -g @catppuccin_flavor "latte"
-        set -g @catppuccin_window_status_style "basic"
-      '';
-    }];
+    plugins = with pkgs; [
+      {
+        plugin = tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g status-left "#{E:@catppuccin_status_session}"
+          set -g status-position top       # macOS / darwin style
+          set -g status-left-length 100    # increase length (from 10)
+          set -g @catppuccin_flavor "latte"
+          set -g @catppuccin_window_status_style "basic"
+        '';
+      }
+    ];
   };
 }
