@@ -18,7 +18,7 @@
     deluge
     inkscape
     zed-editor
-    opencode-latest
+    opencode
 
     freecad
     orca-slicer
