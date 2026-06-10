@@ -1,16 +1,17 @@
 {
-  environment.sessionVariables = rec {
+  environment.sessionVariables = {
     TERMINAL = "alacritty";
     EDITOR = "nvim";
-    XDG_BIN_HOME = "$HOME/.local/bin:$HOME/.local/share/nvim/mason/bin";
-    PATH = [ "${XDG_BIN_HOME}" "$HOME/go/bin" ];
-    GOPATH = "$HOME/go/bin";
+    PATH = [
+      "$HOME/go/bin"
+      "$HOME/.local/bin"
+      "$HOME/.local/share/nvim/mason/bin"
+    ];
+    GOPATH = "$HOME/go";
     XDG_CURRENT_DESKTOP = "sway";
-
     #go env
     GONOPROXY = "*.astralnalog.ru";
     GONOSUMDB = "*.astralnalog.ru";
     GOPRIVATE = "*.astralnalog.ru";
   };
 }
-

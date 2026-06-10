@@ -8,11 +8,13 @@
       # Executed for all fish instances
       set -x PATH $HOME/.local/bin $PATH
       set -x PATH $HOME/go/bin $PATH
-      set -x PATH $HOME/.local/share/nvim/mason/bin $PATH
 
       # Set GOPATH
       set -gx GOPATH $HOME/go
       set -x PATH $GOPATH/bin $PATH
+
+      # Mason в конце PATH: иначе битый gopls (старый PT_INTERP) перекрывает nixpkgs
+      set -x PATH $PATH $HOME/.local/share/nvim/mason/bin
 
       # Запуск sesh-session только при запуске в новом терминале (не в сабшелле)
       if status is-interactive

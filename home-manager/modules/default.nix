@@ -35,5 +35,6 @@
     ./zsh.nix
 
     ./1c.nix
+    ./yandex-messager.nix
   ];
 }

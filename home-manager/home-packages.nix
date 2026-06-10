@@ -17,6 +17,8 @@
     google-chrome
     deluge
     inkscape
+    zed-editor
+    opencode-latest
 
     freecad
     orca-slicer
@@ -63,6 +65,7 @@
     zip
     p7zip
     fd
+    podman
 
     # Coding stuff
     go

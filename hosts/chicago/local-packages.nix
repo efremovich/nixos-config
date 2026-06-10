@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   environment.systemPackages = with pkgs; [
     autoconf
     automake
@@ -19,7 +20,12 @@
   ];
   environment.variables = {
     PKG_CONFIG_PATH =
-      let devPkgs = [ pkgs.sqlite.dev pkgs.libxml2.dev ];
-      in lib.concatStringsSep ":" (map (pkg: "${pkg}/lib/pkgconfig") devPkgs);
+      let
+        devPkgs = [
+          pkgs.sqlite.dev
+          pkgs.libxml2.dev
+        ];
+      in
+      lib.concatStringsSep ":" (map (pkg: "${pkg}/lib/pkgconfig") devPkgs);
   };
 }
