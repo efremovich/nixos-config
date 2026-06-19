@@ -1,5 +1,11 @@
-{ homeStateVersion, user, ... }: {
+{
+  homeStateVersion,
+  user,
+  ...
+}: {
   imports = [ ./modules ./home-packages.nix ];
+
+  kesl.enable = true;
 
   home = {
     username = user;

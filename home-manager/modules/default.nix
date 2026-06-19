@@ -35,6 +35,7 @@
     ./zsh.nix
 
     ./1c.nix
+    ./kesl.nix
     # ./yandex-messager.nix
   ];
 }
