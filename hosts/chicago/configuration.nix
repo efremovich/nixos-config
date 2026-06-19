@@ -18,6 +18,7 @@
   environment.systemPackages = [ pkgs.home-manager ];
 
   services.hasp.enable = true;
+  services.ideco.enable = true;
 
   networking.hostName = hostname;
 
