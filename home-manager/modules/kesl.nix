@@ -34,9 +34,15 @@ let
   '';
 
   keslControl = pkgs.writeShellScriptBin "kesl-control" ''
-    exec ${pkgs.glibc}/bin/ld-linux-x86-64.so.2 \
-      --library-path "${installDir}/lib64:${pkgs.glibc}/lib" \
-      ${installDir}/bin/kesl-control "$@"
+    set -euo pipefail
+    kesl_bin=${installDir}/bin/kesl-control
+
+    if [ ! -x "$kesl_bin" ]; then
+      echo "KESL is not installed at ${installDir}" >&2
+      exit 1
+    fi
+
+    exec "$kesl_bin" "$@"
   '';
 
   installerCandidates = lib.filter (p: p != null) [
@@ -44,6 +50,114 @@ let
     "/home/${user}/Downloads/KESL_12-4.sh"
     "/home/${user}/.nix/nixos/installers/KESL_12-4.sh"
   ];
+
+  installScript = ''
+    set -euo pipefail
+
+    prepare_vendor_paths() {
+      mkdir -p /usr/bin /usr/sbin
+      ln -sfn ${pkgs.systemd}/bin/systemctl /usr/bin/systemctl 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/bin/groupadd /usr/bin/groupadd 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/bin/useradd /usr/bin/useradd 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/bin/usermod /usr/bin/usermod 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/bin/groupmod /usr/bin/groupmod 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/bin/passwd /usr/bin/passwd 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/sbin/groupadd /usr/sbin/groupadd 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/sbin/useradd /usr/sbin/useradd 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/sbin/usermod /usr/sbin/usermod 2>/dev/null || true
+      ln -sfn ${pkgs.shadow}/sbin/groupmod /usr/sbin/groupmod 2>/dev/null || true
+      ln -sfn ${pkgs.coreutils}/bin/chown /usr/bin/chown 2>/dev/null || true
+    }
+
+    is_kesl_configured() {
+      grep -qE '^EulaId=.+$' /var/opt/kaspersky/kesl/common/agreements.ini 2>/dev/null
+    }
+
+    configure_kesl() {
+      if [ ! -x ${installDir}/bin/setup ]; then
+        echo "KESL is not installed yet." >&2
+        return 1
+      fi
+
+      if is_kesl_configured; then
+        echo "KESL already configured."
+        return 0
+      fi
+
+      if ${installDir}/libexec/launcher --status >/dev/null 2>&1; then
+        echo "KESL is already running."
+        return 0
+      fi
+
+      ln -sfn ${systemctlWrapper}/bin/systemctl /usr/bin/systemctl
+      trap 'ln -sfn ${pkgs.systemd}/bin/systemctl /usr/bin/systemctl' RETURN
+      ${installDir}/bin/setup --autoinstall=${autoinstallIni} || true
+
+      if is_kesl_configured || ${installDir}/libexec/launcher --status >/dev/null 2>&1; then
+        echo "KESL configured successfully."
+        return 0
+      fi
+
+      echo "KESL configuration incomplete." >&2
+      return 1
+    }
+
+    if [ -d "${installDir}" ] && [ -x "${installDir}/bin/kesl-control" ]; then
+      configure_kesl || true
+      exit 0
+    fi
+
+    if [ ! -f ${installerStore} ]; then
+      echo "KESL installer not found at ${installerStore}" >&2
+      exit 1
+    fi
+
+    workdir="$(mktemp -d)"
+    systemd_mounted=false
+
+    cleanup() {
+      if [ "$systemd_mounted" = true ] && mountpoint -q /etc/systemd/system; then
+        umount /etc/systemd/system
+      fi
+      rm -rf "$workdir" ${systemdOverlay}
+    }
+    trap cleanup EXIT
+
+    prepare_vendor_paths
+
+    archive_line=$(grep -an '^${marker}$' ${installerStore} | cut -d: -f1 | tail -1)
+    tail -n +$((archive_line + 1)) ${installerStore} | tar -xzf - -C "$workdir"
+
+    mkdir -p /var/lib/dpkg
+    touch /var/lib/dpkg/status
+
+    rm -rf ${installDir}/* /var/opt/kaspersky/kesl/*
+    dpkg-deb -x "$workdir/kesl_12.4.0-1225_amd64.deb" /
+
+    rm -rf ${systemdOverlay}
+    mkdir -p ${systemdOverlay}
+    cp -a /etc/systemd/system/. ${systemdOverlay}/
+    mount --bind ${systemdOverlay} /etc/systemd/system
+    systemd_mounted=true
+
+    chmod +x ${launcherInstallDir}/libexec/launcher
+    if ! ${launcherInstallDir}/libexec/launcher \
+      --install "$(date +%s)" --package-type deb; then
+      echo "KESL launcher reported an error; checking install result..."
+    fi
+
+    if mountpoint -q /etc/systemd/system; then
+      umount /etc/systemd/system
+      systemd_mounted=false
+    fi
+
+    if [ ! -x "${installDir}/bin/kesl-control" ]; then
+      echo "KESL installation incomplete." >&2
+      exit 1
+    fi
+
+    configure_kesl
+  '';
 in
 {
   options.kesl = {
@@ -59,19 +173,24 @@ in
   config = lib.mkIf cfg.enable (
     lib.recursiveUpdate
       (lib.optionalAttrs isHomeManager {
-        home.packages = [
-          pkgs.dpkg
-          keslControl
-        ];
+        home.packages = [ keslControl ];
       })
       (lib.optionalAttrs (!isHomeManager) {
-        environment.systemPackages = [
-          pkgs.dpkg
-          keslControl
-        ];
+        # NixOS stage-2-init.sh sets /nix/store to 1775 root:nixbld on every boot
+        # (multi-user Nix). kesl-control rejects group-writable store directories.
+        system.activationScripts.kesl-nix-store-permissions = {
+          text = ''
+            if [ -d /nix/store ]; then
+              chmod 555 /nix/store
+            fi
+          '';
+        };
 
         system.activationScripts.kesl-installer = {
-          deps = [ "users" ];
+          deps = [
+            "kesl-nix-store-permissions"
+            "users"
+          ];
           text = ''
             mkdir -p /usr/local/share/kesl-installer
             for candidate in ${lib.concatStringsSep " " installerCandidates}; do
@@ -81,34 +200,13 @@ in
                 break
               fi
             done
-
-            if [ "$(stat -c '%a' /nix/store 2>/dev/null || echo 0)" != "555" ]; then
-              mount -o remount,rw /nix/store 2>/dev/null || true
-              chmod 555 /nix/store 2>/dev/null || true
-              mount -o remount,ro /nix/store 2>/dev/null || true
-            fi
-
-            mkdir -p /usr/bin /usr/sbin
-            ln -sfn ${pkgs.systemd}/bin/systemctl /usr/bin/systemctl 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/bin/groupadd /usr/bin/groupadd 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/bin/useradd /usr/bin/useradd 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/bin/usermod /usr/bin/usermod 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/bin/groupmod /usr/bin/groupmod 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/bin/passwd /usr/bin/passwd 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/sbin/groupadd /usr/sbin/groupadd 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/sbin/useradd /usr/sbin/useradd 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/sbin/usermod /usr/sbin/usermod 2>/dev/null || true
-            ln -sfn ${pkgs.shadow}/sbin/groupmod /usr/sbin/groupmod 2>/dev/null || true
-            ln -sfn ${pkgs.coreutils}/bin/chown /usr/bin/chown 2>/dev/null || true
           '';
         };
 
         systemd.services.kesl-install = {
-          description = "Install Kaspersky Endpoint Security for Linux";
+          description = "Install and configure Kaspersky Endpoint Security for Linux";
           wantedBy = [ "multi-user.target" ];
-          after = [ "network-online.target" ];
-          wants = [ "network-online.target" ];
-          before = [ "kesl-configure.service" ];
+          before = [ "kesl.service" ];
           serviceConfig = {
             Type = "oneshot";
             RemainAfterExit = true;
@@ -118,122 +216,14 @@ in
             bash
             coreutils
             dpkg
-            findutils
-            gawk
             gnugrep
             gnused
             gnutar
             gzip
-            procps
             systemd
             util-linux
-            which
           ];
-          script = ''
-            set -euo pipefail
-
-            if [ -d "${installDir}" ] && [ -x "${installDir}/bin/kesl-control" ]; then
-              echo "KESL already installed, skipping."
-              exit 0
-            fi
-
-            if [ ! -f ${installerStore} ]; then
-              echo "KESL installer not found at ${installerStore}" >&2
-              exit 1
-            fi
-
-            workdir="$(mktemp -d)"
-            systemd_mounted=false
-
-            cleanup() {
-              if [ "$systemd_mounted" = true ] && mountpoint -q /etc/systemd/system; then
-                umount /etc/systemd/system
-              fi
-              rm -rf "$workdir" ${systemdOverlay}
-            }
-            trap cleanup EXIT
-
-            echo "Extracting KESL installer..."
-            archive_line=$(grep -an '^${marker}$' ${installerStore} | cut -d: -f1 | tail -1)
-            tail -n +$((archive_line + 1)) ${installerStore} | tar -xzf - -C "$workdir"
-
-            mkdir -p /var/lib/dpkg
-            touch /var/lib/dpkg/status
-
-            rm -rf /opt/kaspersky/kesl/*
-            rm -rf /var/opt/kaspersky/kesl/*
-
-            dpkg-deb -x "$workdir/kesl_12.4.0-1225_amd64.deb" /
-
-            rm -rf ${systemdOverlay}
-            mkdir -p ${systemdOverlay}
-            cp -a /etc/systemd/system/. ${systemdOverlay}/
-            mount --bind ${systemdOverlay} /etc/systemd/system
-            systemd_mounted=true
-
-            chmod +x ${launcherInstallDir}/libexec/launcher
-            if ! ${launcherInstallDir}/libexec/launcher \
-              --install "$(date +%s)" --package-type deb; then
-              echo "KESL launcher reported an error; checking install result..."
-            fi
-
-            if mountpoint -q /etc/systemd/system; then
-              umount /etc/systemd/system
-              systemd_mounted=false
-            fi
-
-            if [ -d "${installDir}" ] && [ -x "${installDir}/bin/kesl-control" ]; then
-              echo "KESL installed successfully."
-              exit 0
-            fi
-
-            echo "KESL installation incomplete." >&2
-            exit 1
-          '';
-        };
-
-        systemd.services.kesl-configure = {
-          description = "Initial configuration of Kaspersky Endpoint Security for Linux";
-          wantedBy = [ "multi-user.target" ];
-          after = [ "kesl-install.service" ];
-          before = [ "kesl.service" ];
-          requires = [ "kesl-install.service" ];
-          serviceConfig = {
-            Type = "oneshot";
-            RemainAfterExit = true;
-            Restart = "no";
-          };
-          path = with pkgs; [
-            bash
-            coreutils
-            systemd
-          ];
-          script = ''
-            set -euo pipefail
-
-            if [ ! -x ${installDir}/bin/setup ]; then
-              echo "KESL is not installed yet." >&2
-              exit 1
-            fi
-
-            if ${installDir}/libexec/launcher --status >/dev/null 2>&1; then
-              echo "KESL is already configured and running."
-              exit 0
-            fi
-
-            ${pkgs.systemd}/bin/systemctl stop kesl.service 2>/dev/null || true
-            ln -sfn ${systemctlWrapper}/bin/systemctl /usr/bin/systemctl
-            trap 'ln -sfn ${pkgs.systemd}/bin/systemctl /usr/bin/systemctl' EXIT
-            ${installDir}/bin/setup --autoinstall=${autoinstallIni} || true
-
-            if ${installDir}/libexec/launcher --status >/dev/null 2>&1; then
-              echo "KESL configured successfully."
-              exit 0
-            fi
-
-            echo "KESL configuration incomplete." >&2
-            exit 1
-          '';
+          script = installScript;
         };
 
         systemd.services.kesl = {
@@ -241,8 +231,9 @@ in
           after = [
             "local-fs.target"
             "network.target"
-            "kesl-configure.service"
+            "kesl-install.service"
           ];
+          wants = [ "kesl-install.service" ];
           wantedBy = [ "multi-user.target" ];
           serviceConfig = {
             Type = "forking";

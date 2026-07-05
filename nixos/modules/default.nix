@@ -7,7 +7,7 @@
     ./bluetooth.nix
     ./docker.nix
     ./env.nix
-    ./ideco.nix
+    # ./ideco.nix
     ./gsettings.nix
     ./home-manager.nix
     ./hasp.nix

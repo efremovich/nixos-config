@@ -58,7 +58,7 @@
       gc = "git commit";
       gp = "git push";
 
-      upnix = "sudo nixos-rebuild switch --flake ~/.nix";
+      upnix = "sudo nixos-rebuild switch --flake ~/.nix#$(hostname)";
       uphome = "home-manager switch --flake ~/.nix";
 
       ".." = "cd ..";

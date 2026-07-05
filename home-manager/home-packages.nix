@@ -15,6 +15,7 @@
     pavucontrol
     telegram-desktop
     google-chrome
+    yandex-music
     deluge
     inkscape
     zed-editor
@@ -87,6 +88,7 @@
     python3Packages.setuptools
     python3Packages.virtualenv
     minicom
+    openvpn3
 
     # WM stuff
     libnotify
