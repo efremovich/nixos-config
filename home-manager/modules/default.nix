@@ -16,6 +16,7 @@
     ./desktops/fuzzel.nix
     ./desktops/niri
     ./desktops/niri/mako
+    ./desktops/niri/swaync
     ./desktops/niri/swayidle.nix
     ./desktops/niri/xwayland-satellite.nix
     # ./desktops/qt5.nix

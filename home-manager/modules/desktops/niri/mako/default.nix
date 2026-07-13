@@ -1,6 +1,6 @@
 {
   services.mako = {
-    enable = true;
+    enable = false;
     settings = {
       # Внешний вид
       border-radius = 4;

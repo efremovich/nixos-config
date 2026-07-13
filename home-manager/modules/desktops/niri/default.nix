@@ -17,7 +17,6 @@
       grim
       hyprpicker
       libinput
-      mako
       networkmanagerapplet
       pavucontrol
       pipewire
@@ -41,9 +40,9 @@
         source = ./niri;
       };
 
-      ".config/mako" = {
+      ".config/swaync" = {
         recursive = true;
-        source = ./mako;
+        source = ./swaync;
       };
     };
 
