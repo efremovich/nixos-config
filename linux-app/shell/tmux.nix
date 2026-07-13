@@ -12,7 +12,8 @@
       set -g set-clipboard on      # use system clipboard
       set -g allow-passthrough on
       set -g detach-on-destroy off # don't exit from tmux when closing a session
-      set -g allow-passthrough on
+      set -g set-titles on
+      set -g set-titles-string "#S: #W"
 
       bind -n M-r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 

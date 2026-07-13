@@ -13,10 +13,10 @@ nixos/           # системные модули (сеть, niri, docker, sops
 linux-app/       # пользовательские программы и Home Manager-модули
   shell/         # zsh, fish, starship, tmux
   cli/           # bat, eza, git, k9s, …
-  editors/       # neovim, ghostty, alacritty
+  editors/       # neovim, alacritty
   browsers/      # firefox
   desktop/       # niri, waybar, stylix, fuzzel
-  apps/          # 1c, walker, mpd, obsidian, …
+  apps/          # 1c, mpd, obsidian, …
   packages.nix   # пакеты без отдельного конфига
 secrets/         # зашифрованные секреты (sops)
 ```
@@ -86,17 +86,17 @@ sops secrets/secrets.yaml
 
 ### Какие секреты используются
 
-| Ключ | Назначение |
-|------|------------|
-| `tfs_pat` | Personal Access Token для `https://tfs.astralnalog.ru/` (git) |
-| `anthropic_api_key` | API-ключ для walker (niri) |
-| `waybar_ssh_host` | Хост SSH-туннеля в waybar |
-| `waybar_ssh_user` | Пользователь SSH-туннеля |
-| `waybar_ssh_port` | Порт SSH |
-| `waybar_proxy_port` | Локальный SOCKS-порт туннеля |
-| `waybar_ssh_key_file` | Путь к приватному SSH-ключу |
-| `waybar_nats_url` | URL NATS для operator-queues |
-| `waybar_nats_creds_file` | Путь к creds-файлу NATS |
+| Ключ                     | Назначение                                         |
+| ------------------------ | -------------------------------------------------- |
+| `tfs_pat`                | Personal Access Token для `https://tfs.com/` (git) |
+| `anthropic_api_key`      | Опциональный API-ключ (резерв)                     |
+| `waybar_ssh_host`        | Хост SSH-туннеля в waybar                          |
+| `waybar_ssh_user`        | Пользователь SSH-туннеля                           |
+| `waybar_ssh_port`        | Порт SSH                                           |
+| `waybar_proxy_port`      | Локальный SOCKS-порт туннеля                       |
+| `waybar_ssh_key_file`    | Путь к приватному SSH-ключу                        |
+| `waybar_nats_url`        | URL NATS для operator-queues                       |
+| `waybar_nats_creds_file` | Путь к creds-файлу NATS                            |
 
 После `nh os switch` секреты доступны в `/run/secrets/<имя>`. Приложения читают их в runtime — секреты **не попадают** в Nix store при сборке.
 
@@ -122,8 +122,8 @@ sops.secrets.my_new_secret = {
 };
 ```
 
-3. Использовать в конфиге через `/run/secrets/my_new_secret` или в activation-скрипте Home Manager
-4. Применить: `sudo nh os switch`
+1. Использовать в конфиге через `/run/secrets/my_new_secret` или в activation-скрипте Home Manager
+2. Применить: `sudo nh os switch`
 
 ### Добавить ключ на другую машину
 
@@ -150,11 +150,11 @@ sops updatekeys secrets/secrets.yaml
 
 ## Хосты
 
-| Хост | Boot | GPU |
-|------|------|-----|
-| maximus | systemd-boot | — |
-| lenovo | systemd-boot | — |
-| chicago | grub | AMD |
+| Хост    | Boot         | GPU |
+| ------- | ------------ | --- |
+| maximus | systemd-boot | —   |
+| lenovo  | systemd-boot | —   |
+| chicago | grub         | AMD |
 | pazajik | systemd-boot | AMD |
 
 Хост-специфичные пакеты — в `hosts/<hostname>/host.nix`.

@@ -1,6 +1,6 @@
 {
   environment.sessionVariables = {
-    TERMINAL = "ghostty";
+    TERMINAL = "alacritty";
     EDITOR = "nvim";
     PATH = [
       "$HOME/go/bin"

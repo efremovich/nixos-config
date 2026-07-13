@@ -114,9 +114,10 @@
         };
         "wlr/taskbar" = {
           all-outputs = false;
-          format = "{icon}";
+          format = "{icon} {title:.20}";
           icon-theme = "Papirus-Light";
           icon-size = 16;
+          truncate = true;
           tooltip = true;
           tooltip-format = "{title}";
           active-first = true;
@@ -130,42 +131,12 @@
           icon-size = 13;
         };
         "niri/window" = {
-          max-length = 50;
-          format = "{app_id}";
+          max-length = 40;
+          format = "<span foreground='#89b4fa'>󰊠</span> {title}";
           separate-outputs = true;
-          on-click = "walker --modules windows";
-          # icon = true;
-          # icon-size = 18;
+          on-click = "niri msg action toggle-overview";
           rewrite = {
             "" = "<span foreground='#89b4fa'> Niri</span>";
-            " " = "<span foreground='#89b4fa'> Niri</span>";
-            # terminals
-            "com.mitchellh.ghostty" = "<span foreground='#89b4fa'>󰊠 Ghostty</span>";
-            "org.wezfurlong.wezterm" = "<span foreground='#89b4fa'> Wezterm</span>";
-            "kitty" = "<span foreground='#89b4fa'>󰄛 Kitty</span>";
-            # code
-            "code" = "<span foreground='#89b4fa'>󰨞 Code</span>";
-            "Cursor" = "<span foreground='#89b4fa'>󰨞 Cursor</span>";
-            # browsers
-            "brave-browser" = "<span foreground='#89b4fa'> Brave</span>";
-            "Vivaldi-stable" = "<span foreground='#89b4fa'> Vivaldi</span>";
-            "firefox" = "<span foreground='#89b4fa'> Firefox</span>";
-            "zen" = "<span foreground='#89b4fa'> Zen</span>";
-            # gnome/gtk
-            "org.gnome.Nautilus" = "<span foreground='#89b4fa'>󰪶 Files</span>";
-            # misc
-            "spotify" = "<span foreground='#89b4fa'> Spotify</span>";
-            "Slack" = "<span foreground='#89b4fa'> Slack</span>";
-            "signal" = "<span foreground='#89b4fa'>󰭹 Signal</span>";
-            # Productivity
-            "Morgen" = "<span foreground='#89b4fa'> Morgen</span>";
-            "org.kde.okular" = "<span foreground='#89b4fa'> Okular</span>";
-            "tana" = "<span foreground='#89b4fa'>󰠮 Tana</span>";
-            "obsidian" = "<span foreground='#89b4fa'>󰠮 Obsdian</span>";
-            "Zotero" = "<span foreground='#89b4fa'>󰬡 Zotero</span>";
-            "org.pulseaudio.pavucontrol" = "<span foreground='#89b4fa'> Pavucontrol</span>";
-            # Everything else
-            "(.*)" = "<span foreground='#89b4fa'>$1</span>";
           };
         };
 
@@ -419,7 +390,7 @@
         };
         "custom/window-icon" = {
           format = " ";
-          on-click = "walker --modules windows";
+          on-click = "niri msg action toggle-overview";
           tooltip = "Window list";
         };
       };

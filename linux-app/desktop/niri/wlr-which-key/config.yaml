@@ -30,7 +30,7 @@ menu:
         cmd: brave
       - key: t
         desc: Terminal
-        cmd: ghostty
+        cmd: alacritty
       - key: s
         desc: Slack
         cmd: Slack
@@ -54,7 +54,7 @@ menu:
     submenu:
       - key: t
         desc: Terminal
-        cmd: ~/.config/niri/scripts/window-switcher.sh com.mitchellh.ghostty
+        cmd: ~/.config/niri/scripts/window-switcher.sh Alacritty
       - key: n
         desc: Notes
         cmd: ~/.config/niri/scripts/window-switcher.sh obsidian
