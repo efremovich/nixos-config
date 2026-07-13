@@ -1,2 +1,10 @@
 *.zip
-secrets/
+secrets/tfs_pat.txt
+!secrets/.sops.yaml
+!secrets/secrets.yaml
+!secrets/*.example
+*.age
+*.key
+*.pem
+*.creds
+.env

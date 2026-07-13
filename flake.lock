@@ -84,22 +84,6 @@
         "type": "github"
       }
     },
-    "flake-compat": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1767039857,
-        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -239,9 +223,29 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs_22_11": "nixpkgs_22_11",
+        "sops-nix": "sops-nix",
         "stylix": "stylix",
-        "unstable": "unstable",
-        "yandex-browser": "yandex-browser"
+        "unstable": "unstable"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783174389,
+        "narHash": "sha256-aCWC8ngycU7OdJrU2+Je3qf+1a2ykuBvpPhZT/9tXMc=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "f1406619a3884cd5c47992a70b8b35c9c0fcb4c9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "stylix": {
@@ -388,27 +392,6 @@
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "yandex-browser": {
-      "inputs": {
-        "flake-compat": "flake-compat",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781744930,
-        "narHash": "sha256-em1LRja3OjSqulIdu5Cja36DzebV8jUWLmJebbFCVH8=",
-        "owner": "miuirussia",
-        "repo": "yandex-browser.nix",
-        "rev": "c697049c591aa40e075801df4a61aa643cce8445",
-        "type": "github"
-      },
-      "original": {
-        "owner": "miuirussia",
-        "repo": "yandex-browser.nix",
         "type": "github"
       }
     }

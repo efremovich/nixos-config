@@ -17,8 +17,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    yandex-browser = {
-      url = "github:miuirussia/yandex-browser.nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -35,26 +35,6 @@
       system = "x86_64-linux";
       homeStateVersion = "25.11";
       user = "efremov";
-      tfsPat = nixpkgs.lib.removeSuffix "\n" (
-        builtins.readFile (
-          builtins.path {
-            path = ./secrets/tfs_pat.txt;
-            name = "tfs-pat.txt";
-          }
-        )
-      );
-      tfsGitExtraHeader =
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        nixpkgs.lib.removeSuffix "\n" (
-          builtins.readFile (
-            pkgs.runCommand "tfs-git-basic-auth" { } ''
-              ${pkgs.coreutils}/bin/printf '%s' ${nixpkgs.lib.escapeShellArg "efremov_an:${tfsPat}"} \
-                | ${pkgs.coreutils}/bin/base64 -w0 > $out
-            ''
-          )
-        );
       hosts = [
         {
           hostname = "maximus";
@@ -83,16 +63,15 @@
               stateVersion
               hostname
               user
+              homeStateVersion
               ;
           };
           modules = [ ./hosts/${hostname}/configuration.nix ];
         };
 
-      # Исправляем определение lib и pkgsFor
       inherit (nixpkgs) lib;
       supportedSystems = [ "x86_64-linux" ];
 
-      # Функция для создания pkgs для каждой системы
       pkgsFor = lib.genAttrs supportedSystems (
         system:
         import nixpkgs {
@@ -101,14 +80,10 @@
         }
       );
 
-      # Функция для создания devShells для каждой системы
       forEachSystem = f: lib.genAttrs supportedSystems (system: f pkgsFor.${system});
 
     in
     {
-      # overlays = import ./overlays { inherit inputs outputs; };
-
-      # Исправляем devShells
       devShells = forEachSystem (pkgs: {
         default = import ./shell.nix { inherit pkgs; };
       });
@@ -122,11 +97,5 @@
           };
         }) hosts
       );
-
-      homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        extraSpecialArgs = { inherit inputs homeStateVersion user tfsGitExtraHeader; };
-        modules = [ ./home-manager/home.nix ];
-      };
     };
 }

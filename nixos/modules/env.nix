@@ -1,6 +1,6 @@
 {
   environment.sessionVariables = {
-    TERMINAL = "alacritty";
+    TERMINAL = "ghostty";
     EDITOR = "nvim";
     PATH = [
       "$HOME/go/bin"
@@ -8,7 +8,7 @@
       "$HOME/.local/share/nvim/mason/bin"
     ];
     GOPATH = "$HOME/go";
-    XDG_CURRENT_DESKTOP = "sway";
+    XDG_CURRENT_DESKTOP = "niri";
     #go env
     GONOPROXY = "*.astralnalog.ru";
     GONOSUMDB = "*.astralnalog.ru";

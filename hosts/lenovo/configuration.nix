@@ -8,9 +8,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./local-packages.nix
+    ./host.nix
     ../../nixos/modules
-    # ../../nixos/desktop
     ../../nixos/boot/systemd-boot.nix
   ];
 

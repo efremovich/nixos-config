@@ -8,7 +8,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./local-packages.nix
+    ./host.nix
     ../../nixos/modules
     ../../nixos/boot/systemd-boot.nix
     ../../nixos/graphics/amd.nix

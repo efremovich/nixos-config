@@ -10,12 +10,12 @@
     # ./ideco.nix
     ./gsettings.nix
     ./home-manager.nix
+    ./linux-app.nix
+    ./sops.nix
     ./hasp.nix
     ./locale.nix
-    # ./hyprland.nix
     ./niri.nix
     ./kernel.nix
-    ./locale.nix
     ./mime.nix
     ./net.nix
     ./nh.nix

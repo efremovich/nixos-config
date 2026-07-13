@@ -1,0 +1,57 @@
+{ pkgs, inputs, ... }:
+{
+  imports = [
+    ./services.nix
+    ./swaylock.nix
+    ./xwayland-satellite.nix
+  ];
+
+  # services.hyprpaper = {
+  #   enable = true;
+  # };
+
+  home = {
+
+    packages = with pkgs; [
+      cliphist
+      grim
+      hyprpicker
+      libinput
+      networkmanagerapplet
+      pavucontrol
+      pipewire
+      playerctl
+      python312Packages.toggl-cli
+      slurp
+      swappy
+      swaybg
+      swayidle
+      swaylock
+      swww
+      wl-clip-persist
+      wl-clipboard
+      wlogout
+      wlr-which-key
+    ];
+    file = {
+
+      ".config/niri" = {
+        recursive = true;
+        source = ./niri;
+      };
+
+      ".config/swaync" = {
+        recursive = true;
+        source = ./swaync;
+      };
+    };
+
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1";
+      XDG_CURRENT_DESKTOP = "niri";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "niri";
+      QT_QPA_PLATFORM = "wayland";
+    };
+  };
+}
