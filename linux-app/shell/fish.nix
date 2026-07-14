@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.fish = {
     enable = true;
 
@@ -32,15 +33,17 @@
       set fish_greeting ""  # Disable greeting
       fish_config theme choose "Catppuccin Latte"
     '';
-    plugins = [{
-      name = "fish";
-      src = pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "fish";
-        rev = "6a85af2ff722ad0f9fbc8424ea0a5c454661dfed";
-        sha256 = "sha256-Oc0emnIUI4LV7QJLs4B2/FQtCFewRFVp7EDv8GawFsA=";
-      };
-    }];
+    plugins = [
+      {
+        name = "fish";
+        src = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "fish";
+          rev = "6a85af2ff722ad0f9fbc8424ea0a5c454661dfed";
+          sha256 = "sha256-Oc0emnIUI4LV7QJLs4B2/FQtCFewRFVp7EDv8GawFsA=";
+        };
+      }
+    ];
     shellAliases = {
       sw = "nh os switch";
       upd = "nh os switch --update";
@@ -57,9 +60,6 @@
       ga = "git add";
       gc = "git commit";
       gp = "git push";
-
-      upnix = "nh os switch";
-      uphome = "nh os switch";
 
       ".." = "cd ..";
     };

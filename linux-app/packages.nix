@@ -13,7 +13,6 @@
     mpv
     obsidian
     telegram-desktop
-    google-chrome
     yandex-music
     deluge
     inkscape

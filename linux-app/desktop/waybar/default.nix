@@ -114,10 +114,9 @@
         };
         "wlr/taskbar" = {
           all-outputs = false;
-          format = "{icon} {title:.20}";
+          format = "{icon}";
           icon-theme = "Papirus-Light";
           icon-size = 16;
-          truncate = true;
           tooltip = true;
           tooltip-format = "{title}";
           active-first = true;
@@ -131,7 +130,7 @@
           icon-size = 13;
         };
         "niri/window" = {
-          max-length = 40;
+          max-length = 50;
           format = "<span foreground='#89b4fa'>󰊠</span> {title}";
           separate-outputs = true;
           on-click = "niri msg action toggle-overview";
@@ -390,7 +389,7 @@
         };
         "custom/window-icon" = {
           format = " ";
-          on-click = "niri msg action toggle-overview";
+          on-click = "walker --modules windows";
           tooltip = "Window list";
         };
       };

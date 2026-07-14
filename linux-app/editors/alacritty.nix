@@ -18,6 +18,7 @@
     };
   };
   programs.alacritty.settings.window = {
+    dynamic_title = true;
     padding.x = 15;
     padding.y = 15;
   };

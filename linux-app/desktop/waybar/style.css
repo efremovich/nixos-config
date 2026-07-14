@@ -175,10 +175,6 @@ window.eDP-1 * {
   border: 2px solid @blue;
 }
 
-#taskbar button label {
-  margin-left: 4px;
-}
-
 window#waybar.fullscreen,
 window#waybar.swallowing {
   color: @red;
