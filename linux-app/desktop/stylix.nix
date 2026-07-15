@@ -30,7 +30,6 @@
     gtk.enable = true;
     fuzzel.enable = true;
     k9s.enable = true;
-    mako.enable = false;
     swaync.enable = false;
     swaylock.enable = false;
   };

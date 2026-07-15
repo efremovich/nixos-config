@@ -11,7 +11,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 # Константы
 BINARY_PATH = Path.home() / ".local" / "bin" / "operator-tui-waybar"
 SCRIPT_DIR = Path(__file__).parent.resolve()

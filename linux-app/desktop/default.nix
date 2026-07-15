@@ -1,7 +1,6 @@
 {
   imports = [
     ./niri
-    ./niri/mako
     ./niri/swaync
     ./niri/swayidle.nix
     ./waybar

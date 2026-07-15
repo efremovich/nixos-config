@@ -4,12 +4,7 @@ let
 in
 lib.mkIf enable {
   home.packages = with pkgs; [
-    imv
-    mpv
-    ffmpeg
-    ffmpegthumbnailer
-    mediainfo
-    yt-dlp
-    ueberzugpp
+    keepassxc
+    pass
   ];
 }

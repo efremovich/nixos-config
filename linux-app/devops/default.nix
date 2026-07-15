@@ -5,7 +5,6 @@ in
 lib.mkIf enable {
   home.packages = with pkgs; [
     go
-    lazydocker
     nodejs
     openjdk25
     postgresql
@@ -16,5 +15,10 @@ lib.mkIf enable {
     natscli
     grpcurl
     ast-grep
+    lazydocker
+    podman
+    kubectl
+    dbeaver-bin
+    insomnia
   ];
 }

@@ -4,8 +4,7 @@ let
 in
 lib.mkIf enable {
   home.packages = with pkgs; [
-    anydesk
-    telegram-desktop
-    yandex-music
+    zed-editor
+    opencode
   ];
 }
