@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+# Enable from profile/host: xdg.portal.enable = true;
+{ lib, pkgs, config, ... }:
 {
-  xdg = {
-    portal = {
-      enable = true;
+  config = lib.mkIf config.xdg.portal.enable {
+    xdg.portal = {
       extraPortals = with pkgs; [
         xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk  # GTK file chooser и org.gtk.Settings.*
+        xdg-desktop-portal-gtk
         xdg-desktop-portal-gnome
       ];
       config.common.default = [

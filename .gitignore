@@ -1,4 +1,10 @@
-.cursor/
+# Keep Cursor junk local, but track project rules and continuation plans.
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
+!.cursor/plans/
+!.cursor/plans/**
+
 *.zip
 secrets/tfs_pat.txt
 !secrets/.sops.yaml
@@ -9,3 +15,9 @@ secrets/tfs_pat.txt
 *.pem
 *.creds
 .env
+
+# One-off agent leftovers
+.cursor-profile-overlay/
+prefetch-hook.log
+prefetch-out.txt
+shell-fix-done.txt

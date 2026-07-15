@@ -63,16 +63,21 @@ def error_json(message: str) -> None:
 
 def find_binary() -> Path | None:
     """Ищет бинарник operator-tui-waybar."""
-    # Проверяем основной путь
-    if BINARY_PATH.exists() and os.access(BINARY_PATH, os.X_OK):
-        return BINARY_PATH
+    candidates = [
+        BINARY_PATH,
+        Path.home() / ".local" / "bin" / "operator-tui-waybar",
+        Path("/etc/profiles/per-user")
+        / Path.home().name
+        / "bin"
+        / "operator-tui-waybar",
+    ]
+    # SCRIPT_DIR may be a nix store symlink; also check sibling project layouts.
+    for root in (SCRIPT_DIR.parent, Path.home() / "Dev"):
+        candidates.append(root / "bin" / "operator-tui-waybar")
 
-    # Пробуем найти в директории проекта
-    project_root = SCRIPT_DIR.parent
-    binary_path = project_root / "bin" / "operator-tui-waybar"
-
-    if binary_path.exists() and os.access(binary_path, os.X_OK):
-        return binary_path
+    for binary_path in candidates:
+        if binary_path.exists() and os.access(binary_path, os.X_OK):
+            return binary_path
 
     return None
 

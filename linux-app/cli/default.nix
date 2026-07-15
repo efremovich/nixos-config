@@ -8,5 +8,6 @@
     ./ranger.nix
     ./git.nix
     ./k9s.nix
+    ./nix-tools.nix
   ];
 }

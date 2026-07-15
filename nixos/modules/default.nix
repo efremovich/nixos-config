@@ -8,22 +8,26 @@
     ./docker.nix
     ./env.nix
     ./gsettings.nix
-    ./home-manager.nix
-    ./linux-app.nix
-    ./sops.nix
     ./hasp.nix
+    ./home-manager.nix
     ./ideco.nix
-    ./locale.nix
-    ./niri.nix
     ./kernel.nix
+    ./linux-app.nix
+    ./locale.nix
     ./mime.nix
     ./net.nix
     ./nh.nix
+    ./niri.nix
     ./nix.nix
+    ./obs.nix
+    ./sops.nix
     ./ssh.nix
+    ./stylix.nix
     ./timezone.nix
-    ./user.nix
     ./udev.nix
+    ./user.nix
+    ./xdg.nix
+    ./zapret.nix
     ./zram.nix
   ];
 }

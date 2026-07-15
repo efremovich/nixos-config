@@ -6,10 +6,6 @@
     ./xwayland-satellite.nix
   ];
 
-  # services.hyprpaper = {
-  #   enable = true;
-  # };
-
   home = {
 
     packages = with pkgs; [
@@ -38,11 +34,6 @@
       ".config/niri" = {
         recursive = true;
         source = ./niri;
-      };
-
-      ".config/swaync" = {
-        recursive = true;
-        source = ./swaync;
       };
     };
 

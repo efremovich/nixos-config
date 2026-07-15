@@ -276,7 +276,7 @@ window#waybar.swallowing {
 #custom-pomodoro-icon,
 #custom-language-icon,
 #custom-mpris-icon,
-#custom-tray-icon,
+#custom-notification,
 #custom-operator-queues-icon {
   background: @crust;
   color: @crust;
@@ -309,9 +309,20 @@ window#waybar.swallowing {
   background: @mauve;
 }
 
-#custom-tray-icon {
+#custom-notification {
   margin-left: 5px;
   background: @text;
+  color: @crust;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+#custom-notification.notification,
+#custom-notification.dnd-notification,
+#custom-notification.inhibited-notification,
+#custom-notification.dnd-inhibited-notification {
+  background: @red;
+  color: @crust;
 }
 
 #custom-vpn,
@@ -424,21 +435,25 @@ window#waybar.swallowing {
 }
 
 #custom-operator-queues-icon.normal {
-  color: @green;
+  background: @green;
+  color: @crust;
   border-color: @green;
 }
 
 #custom-operator-queues-icon.warning {
-  color: @peach;
+  background: @peach;
+  color: @crust;
   border-color: @peach;
 }
 
 #custom-operator-queues-icon.critical {
-  color: @red;
+  background: @red;
+  color: @crust;
   border-color: @red;
 }
 
 #custom-operator-queues-icon.error {
+  background: @lavender;
   color: @mauve;
-  background-color: @lavender;
+  border-color: @mauve;
 }

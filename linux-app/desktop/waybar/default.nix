@@ -1,5 +1,15 @@
 # https://github.com/Alexays/Waybar
-{ pkgs, ... }:
+{
+  config,
+  pkgs,
+  ...
+}:
+let
+  homeDir = config.home.homeDirectory;
+  python3 = "${pkgs.python3}/bin/python3";
+  swayncClient = "${pkgs.swaynotificationcenter}/bin/swaync-client";
+  operatorQueues = "${homeDir}/.config/waybar/operator-queues.py";
+in
 {
   home = {
     file = {
@@ -50,7 +60,7 @@
           "mpris"
           "custom/language-icon"
           "niri/language"
-          "custom/tray-icon"
+          "custom/notification"
           "memory"
           "cpu"
           "backlight"
@@ -74,24 +84,6 @@
           on-click = "niri msg action toggle-overview";
           size = 22;
           tooltip = false;
-        };
-        "hyprland/workspaces" = {
-          disable-scroll = false;
-          all-outputs = false;
-          active-only = false;
-          format = "<span><b>{icon}</b></span>";
-          format-icons = {
-            "1" = "1";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
-            urgent = " ";
-          };
         };
         "niri/workspaces" = {
           all-outputs = false;
@@ -121,13 +113,6 @@
           tooltip-format = "{title}";
           active-first = true;
           on-click = "activate";
-        };
-        "hyprland/window" = {
-          max-length = 50;
-          format = "<i>{title}</i>";
-          separate-outputs = true;
-          icon = true;
-          icon-size = 13;
         };
         "niri/window" = {
           max-length = 50;
@@ -287,13 +272,12 @@
         };
 
         "custom/operator-queues" = {
-          exec = "python3 $HOME/.config/waybar/operator-queues.py";
+          exec = "${python3} ${operatorQueues}";
           interval = 5;
           format = "{text}";
           return-type = "json";
-          # tooltip = true;
-          # tooltip-format = "{tooltip}";
-          # on-click = "alacritty -e operator-tui";
+          escape = false;
+          tooltip = true;
         };
 
         "idle_inhibitor" = {
@@ -382,10 +366,24 @@
         "custom/language-icon" = {
           format = "󰌍 ";
         };
-        "custom/tray-icon" = {
-          format = "󱊖";
-          on-click = "swaync-client -t";
-          tooltip = "Notification center";
+        "custom/notification" = {
+          tooltip = true;
+          format = "{icon}";
+          format-icons = {
+            notification = "󱑻";
+            none = "󰂚";
+            dnd-notification = "󱑻";
+            dnd-none = "󰂛";
+            inhibited-notification = "󱑻";
+            inhibited-none = "󰂚";
+            dnd-inhibited-notification = "󱑻";
+            dnd-inhibited-none = "󰂛";
+          };
+          return-type = "json";
+          exec = "${swayncClient} -swb";
+          on-click = "${swayncClient} -t -sw";
+          on-click-right = "${swayncClient} -d -sw";
+          escape = true;
         };
         "custom/window-icon" = {
           format = " ";

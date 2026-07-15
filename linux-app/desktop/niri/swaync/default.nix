@@ -1,6 +1,9 @@
+{ pkgs, ... }:
 {
   services.swaync = {
     enable = true;
+    # Don't recursive-copy this directory into ~/.config/swaync (that also dropped default.nix).
+    style = ./style.css;
     settings = {
       positionX = "right";
       positionY = "top";
@@ -17,10 +20,10 @@
       timeout-low = 5;
       timeout-critical = 0;
 
+      # mpris widget caused assert spam / memory growth; MPRIS lives in waybar.
       widgets = [
         "inhibitors"
         "dnd"
-        "mpris"
         "notifications"
       ];
       widget-config = {
@@ -32,11 +35,10 @@
         dnd = {
           text = "Do Not Disturb";
         };
-        mpris = {
-          image-size = 96;
-          blur = true;
-        };
       };
     };
   };
+
+  # Ensure client is on PATH for waybar on-click / exec.
+  home.packages = [ pkgs.swaynotificationcenter ];
 }

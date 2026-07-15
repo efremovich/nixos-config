@@ -1,0 +1,32 @@
+---
+description: NixOS flake architecture and module conventions for this repo
+alwaysApply: true
+---
+
+# NixOS flake conventions
+
+## Layout
+
+- `hosts/<name>/` — thin host: hardware, boot, graphics; prefer empty `host.nix`
+- `nixos/modules/` — system modules (options + `mkIf`), imported via `default.nix`
+- `nixos/profiles/` — role composition (`common.nix`, `desktop.nix` set enables)
+- `linux-app/` — home-manager: `apps/`, `browsers/`, `cli/`, `shell/`, `desktop/`
+- Home Manager is **only** as a NixOS module (`nh os switch`), no standalone `homeConfigurations`
+
+## Patterns
+
+- Shared toolchain → `nixos/modules/devtools.nix` (not per-host copies)
+- Host-specific services → `mkEnableOption` / default off; turn on in profile or host
+- Heavy HM apps → own file under `linux-app/apps/` with local `enable = true/false` + `lib.mkIf`
+- Packages: prefer domain modules over growing `linux-app/packages.nix`
+- Unfree/insecure: only in `nixos/modules/nix.nix`; HM uses `home-manager.useGlobalPkgs = true`
+- Shells: fish is default; zsh optional via HM — do not put bare `zsh` in `packages.nix`
+- Apply changes with `nh os switch ./` (alias `sw`), not `nh home switch`
+
+## Anti-patterns
+
+- Hardcoded `/nix/store/...` paths in app configs (e.g. KiCad lib tables)
+- Copying KiCad libs into `~/kicad` (wrapper already sets `KICAD9_*`)
+- Duplicating toolchain lists in `hosts/*/host.nix`
+- Impure `wget` in activation when a FOD/`fetchurl` + hash exists
+- Setting `nixpkgs.config.*` inside HM modules when `useGlobalPkgs` is on
