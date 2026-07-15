@@ -109,10 +109,6 @@ let
   };
 in
 lib.mkIf enable {
-  nixpkgs.config.permittedInsecurePackages = [
-    "libsoup-2.74.3"
-  ];
-
   home.packages = [
     onecstart
     edtstart

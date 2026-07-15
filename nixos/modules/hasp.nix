@@ -7,10 +7,17 @@
 let
   cfg = config.services.hasp;
   driverUrl = "https://erim.ru/pub/hasp/drivers/linux/Sentinel_LDK_Linux_Run-time_Installer_script.tar.gz";
-  driverSrc = pkgs.fetchurl {
-    url = driverUrl;
-    hash = cfg.driverHash;
-  };
+  # Empty hash disables store-based install (nethasp.ini still applied).
+  # Prefetch then set: nix-prefetch-url --type sha256 <url> && nix hash to-sri --type sha256 <base32>
+  installFromStore = cfg.driverHash != "";
+  driverSrc =
+    if installFromStore then
+      pkgs.fetchurl {
+        url = driverUrl;
+        hash = cfg.driverHash;
+      }
+    else
+      null;
 in
 {
   options.services.hasp = {
@@ -24,9 +31,8 @@ in
 
     driverHash = lib.mkOption {
       type = lib.types.str;
-      # Prefetch: nix-prefetch-url --type sha256 <url> && nix hash to-sri --type sha256 <base32>
-      default = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-      description = "SRI hash of the Sentinel LDK runtime installer tarball.";
+      default = "sha256-v99DWn5G3rWuwKsHvdr/Lm9uIBsPazDi+ET/YyJFlRg=";
+      description = "SRI hash of the Sentinel LDK runtime installer tarball. Empty skips store install.";
     };
   };
 
@@ -49,7 +55,7 @@ in
       '';
     };
 
-    systemd.services.hasp-runtime-install = {
+    systemd.services.hasp-runtime-install = lib.mkIf installFromStore {
       description = "Install Sentinel HASP runtime from Nix store";
       wantedBy = [ "multi-user.target" ];
       after = [ "network-online.target" ];
@@ -68,7 +74,6 @@ in
       script = ''
         set -euo pipefail
 
-        # Проверяем, установлен ли уже драйвер
         if command -v hasplmd >/dev/null 2>&1 || [ -x /etc/init.d/aksusbd ] || systemctl is-active --quiet aksusbd 2>/dev/null; then
           echo "HASP runtime already installed, skipping installation."
           exit 0
@@ -80,14 +85,12 @@ in
         echo "Extracting HASP runtime from ${driverSrc}..."
         tar -xzf "${driverSrc}" -C "$workdir"
 
-        # Находим директорию с инсталлятором
         installer_dir="$(find "$workdir" -maxdepth 1 -type d -name 'Sentinel_LDK_*' | head -n 1)"
         if [ -z "$installer_dir" ]; then
           echo "Cannot find Sentinel_LDK_* directory" >&2
           exit 1
         fi
 
-        # Распаковываем вложенный архив aksusbd
         cd "$installer_dir"
         aksusbd_archive="$(find . -maxdepth 1 -name 'aksusbd-*.tar.gz' | head -n 1)"
         if [ -z "$aksusbd_archive" ]; then
@@ -98,7 +101,6 @@ in
         echo "Extracting $aksusbd_archive..."
         tar -xzf "$aksusbd_archive"
 
-        # Находим распакованную директорию aksusbd
         dir="$(find . -maxdepth 1 -type d -name 'aksusbd-*' | head -n 1)"
         if [ -z "$dir" ]; then
           echo "Cannot find extracted aksusbd-* directory" >&2
@@ -107,7 +109,6 @@ in
 
         cd "$dir"
 
-        # Vendor installer uses /bin/bash shebangs; patch for NixOS layout.
         while IFS= read -r -d "" f; do
           first_line="$(head -n 1 "$f" || true)"
           if [ "$first_line" = "#!/bin/bash" ]; then

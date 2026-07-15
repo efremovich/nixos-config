@@ -2,10 +2,13 @@
 let
   enable = true;
 in
-lib.mkIf enable {
-  home.packages = with pkgs; [
-    kicad
-    freecad
-    orca-slicer
-  ];
+{
+  imports = [ ./kicad.nix ];
+
+  config = lib.mkIf enable {
+    home.packages = with pkgs; [
+      freecad
+      orca-slicer
+    ];
+  };
 }
