@@ -1,15 +1,8 @@
-{
-  pkgs,
-  inputs,
-  ...
-}:
+{ pkgs, lib, ... }:
 let
-  # Стабильный nixpkgs часто отстаёт; для потоков нужен mpd-mpris ≥0.4.2 —
-  # иначе при том же URL радио MPRIS не обновляет title/artist при смене трека в ICY,
-  # хотя mpc уже показывает новые данные.
-  # mpd-mpris-pkg = inputs.unstable.legacyPackages.${pkgs.system}.mpd-mpris;
+  enable = true;
 in
-{
+lib.mkIf enable {
   services.mpd = {
     enable = true;
     musicDirectory = "~/Music";

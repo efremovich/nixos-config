@@ -1,11 +1,4 @@
 {
-  pkgs,
-  stateVersion,
-  hostname,
-  ...
-}:
-
-{
   imports = [
     ./hardware-configuration.nix
     ./host.nix
@@ -13,12 +6,4 @@
     ../../nixos/boot/grub.nix
     ../../nixos/graphics/amd.nix
   ];
-
-  environment.systemPackages = [ pkgs.home-manager ];
-
-  services.hasp.enable = true;
-
-  networking.hostName = hostname;
-
-  system.stateVersion = stateVersion;
 }

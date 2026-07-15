@@ -1,18 +1,18 @@
 {
   imports = [
-    #./boot
-    #./xdg.nix
-    #./zerotierone.nix
+    ../profiles/common.nix
+    ../profiles/desktop.nix
     ./audio.nix
     ./bluetooth.nix
+    ./devtools.nix
     ./docker.nix
     ./env.nix
-    # ./ideco.nix
     ./gsettings.nix
     ./home-manager.nix
     ./linux-app.nix
     ./sops.nix
     ./hasp.nix
+    ./ideco.nix
     ./locale.nix
     ./niri.nix
     ./kernel.nix
@@ -20,14 +20,10 @@
     ./net.nix
     ./nh.nix
     ./nix.nix
-    # ./obs.nix
     ./ssh.nix
     ./timezone.nix
     ./user.nix
     ./udev.nix
-    # ./zapret.nix
-    #./zerotierone.nix
-    ./v2raya.nix
     ./zram.nix
   ];
 }

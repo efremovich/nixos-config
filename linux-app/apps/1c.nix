@@ -1,5 +1,7 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 let
+  enable = true;
+
   pkgsWebkit = import inputs.nixpkgs_22_11 {
     system = pkgs.stdenv.hostPlatform.system;
     config = {
@@ -106,7 +108,7 @@ let
     runScript = "${edtStartInner}/bin/1cedtstart-inner";
   };
 in
-{
+lib.mkIf enable {
   nixpkgs.config.permittedInsecurePackages = [
     "libsoup-2.74.3"
   ];

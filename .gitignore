@@ -1,3 +1,4 @@
+.cursor/
 *.zip
 secrets/tfs_pat.txt
 !secrets/.sops.yaml

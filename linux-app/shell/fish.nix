@@ -47,9 +47,8 @@
     shellAliases = {
       sw = "nh os switch";
       upd = "nh os switch --update";
-      hms = "nh home switch";
 
-      pkgs = "nvim ~/.nix/nixos/packages.nix";
+      pkgs = "nvim ~/.nix/linux-app/packages.nix";
 
       r = "ranger";
       v = "nvim";

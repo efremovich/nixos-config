@@ -1,26 +1,16 @@
 { pkgs, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
-
   home.packages = with pkgs; [
     # Desktop apps
-    anydesk
     dbeaver-bin
     imv
     insomnia
-    kicad
     libreoffice
     mpv
-    obsidian
-    telegram-desktop
-    yandex-music
     deluge
     inkscape
     zed-editor
     opencode
-
-    freecad
-    orca-slicer
     squashfsTools
 
     # CLI utils
@@ -29,7 +19,6 @@
     ffmpeg
     ffmpegthumbnailer
     freerdp
-    fzf
     git-graph
     grimblast
     grpcurl
@@ -86,6 +75,7 @@
     bemoji
     nix-prefetch-scripts
     nix-search-cli
+    zsh
     pciutils
     jq
     keepassxc

@@ -4,7 +4,11 @@
 
   sops = {
     defaultSopsFile = ../../secrets/secrets.yaml;
-    age.keyFile = "/home/${user}/.config/sops/age/keys.txt";
+    # Prefer the system location; migrate once before switch:
+    #   sudo install -d -m 0700 /var/lib/sops-nix
+    #   sudo cp ~/.config/sops/age/keys.txt /var/lib/sops-nix/key.txt
+    #   sudo chmod 400 /var/lib/sops-nix/key.txt
+    age.keyFile = "/var/lib/sops-nix/key.txt";
 
     secrets = {
       tfs_pat = {

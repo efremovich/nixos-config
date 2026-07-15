@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
+  enable = true;
+
   gitSyncObsidian = pkgs.writeScriptBin "git-sync-obsidian" ''
     #!/bin/sh
 
@@ -10,8 +12,11 @@ let
     git push || exit 0
   '';
 in
-{
-  home.packages = [ gitSyncObsidian ];
+lib.mkIf enable {
+  home.packages = [
+    pkgs.obsidian
+    gitSyncObsidian
+  ];
 
   systemd.user.services.git-sync-obsidian = {
     Unit = {

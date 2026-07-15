@@ -1,6 +1,8 @@
 {
   imports = [
     ./1c.nix
+    ./cad.nix
+    ./comms.nix
     ./obsidian.nix
     ./thunar.nix
     ./zathura.nix

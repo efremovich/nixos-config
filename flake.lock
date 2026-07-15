@@ -224,8 +224,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs_22_11": "nixpkgs_22_11",
         "sops-nix": "sops-nix",
-        "stylix": "stylix",
-        "unstable": "unstable"
+        "stylix": "stylix"
       }
     },
     "sops-nix": {
@@ -376,22 +375,6 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
-        "type": "github"
-      }
-    },
-    "unstable": {
-      "locked": {
-        "lastModified": 1783776592,
-        "narHash": "sha256-UgCQzxeWI75XM8G+hPrPh+MKzEPjG3SpAj7dtqSbksA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "e7a3ca8092b61ff85b6a45bf863ea2b2d6a661b3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
         "type": "github"
       }
     }
