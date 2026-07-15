@@ -4,6 +4,7 @@
     ./cad.nix
     ./comms.nix
     ./obsidian.nix
+    ./platformio.nix
     ./thunar.nix
     ./zathura.nix
     ./mpd.nix

@@ -12,6 +12,10 @@
     libxml2.dev
     makeWrapper
     pkg-config
+    python3
+    python3Packages.pip
+    python3Packages.setuptools
+    python3Packages.virtualenv
     rustc
     sqlite
     sqlite.dev

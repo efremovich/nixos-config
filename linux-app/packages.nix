@@ -60,12 +60,7 @@
     protobuf
     natscli
 
-    # MCP / embedded
-    platformio
-    python3
-    python3Packages.pip
-    python3Packages.setuptools
-    python3Packages.virtualenv
+    # Embedded / VPN
     minicom
     openvpn3
 
