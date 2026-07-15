@@ -70,7 +70,6 @@
     bemoji
     nix-prefetch-scripts
     nix-search-cli
-    zsh
     pciutils
     jq
     keepassxc
