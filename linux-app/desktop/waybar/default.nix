@@ -7,7 +7,6 @@
 let
   homeDir = config.home.homeDirectory;
   python3 = "${pkgs.python3}/bin/python3";
-  swayncClient = "${pkgs.swaynotificationcenter}/bin/swaync-client";
   operatorQueues = "${homeDir}/.config/waybar/operator-queues.py";
 in
 {
@@ -60,7 +59,6 @@ in
           "mpris"
           "custom/language-icon"
           "niri/language"
-          "custom/notification"
           "memory"
           "cpu"
           "backlight"
@@ -365,25 +363,6 @@ in
         };
         "custom/language-icon" = {
           format = "󰌍 ";
-        };
-        "custom/notification" = {
-          tooltip = true;
-          format = "{icon}";
-          format-icons = {
-            notification = "󱑻";
-            none = "󰂚";
-            dnd-notification = "󱑻";
-            dnd-none = "󰂛";
-            inhibited-notification = "󱑻";
-            inhibited-none = "󰂚";
-            dnd-inhibited-notification = "󱑻";
-            dnd-inhibited-none = "󰂛";
-          };
-          return-type = "json";
-          exec = "${swayncClient} -swb";
-          on-click = "${swayncClient} -t -sw";
-          on-click-right = "${swayncClient} -d -sw";
-          escape = true;
         };
         "custom/window-icon" = {
           format = " ";

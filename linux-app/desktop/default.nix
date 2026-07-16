@@ -1,7 +1,7 @@
 {
   imports = [
     ./niri
-    ./niri/swaync
+    ./niri/mako
     ./niri/swayidle.nix
     ./waybar
     ./fuzzel.nix
@@ -9,3 +9,4 @@
     ./stylix.nix
   ];
 }
+

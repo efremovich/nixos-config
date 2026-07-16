@@ -276,7 +276,6 @@ window#waybar.swallowing {
 #custom-pomodoro-icon,
 #custom-language-icon,
 #custom-mpris-icon,
-#custom-notification,
 #custom-operator-queues-icon {
   background: @crust;
   color: @crust;
@@ -307,22 +306,6 @@ window#waybar.swallowing {
 
 #custom-language-icon {
   background: @mauve;
-}
-
-#custom-notification {
-  margin-left: 5px;
-  background: @text;
-  color: @crust;
-  border-radius: 5px;
-  padding: 0 10px;
-}
-
-#custom-notification.notification,
-#custom-notification.dnd-notification,
-#custom-notification.inhibited-notification,
-#custom-notification.dnd-inhibited-notification {
-  background: @red;
-  color: @crust;
 }
 
 #custom-vpn,
