@@ -1,5 +1,6 @@
+{ lib, config, ... }:
 {
-  services.resolved.enable = true;
-
-  virtualisation.docker = { enable = true; };
+  config = lib.mkIf config.virtualisation.docker.enable {
+    services.resolved.enable = true;
+  };
 }

@@ -1,85 +1,171 @@
-# ❄️ NixOS Config Reborn
+# NixOS Config
 
-Welcome to my redesigned NixOS configuration built for efficiency and aesthetics. Right now I'm trying to commit something everyday. Let's see how long I can go.
+Конфигурация NixOS на flake с несколькими хостами, Home Manager, встроенным в систему, и управлением секретами через sops-nix.
 
-![screenshot](./screenshots/screenshot1.png)
+![Desktop screenshot](./screenshots/swappy-20260713_180218.png)
 
-You can still find my old configuration [here](https://github.com/Andrey0189/nixos-config)
+## Структура репозитория
 
-## ✨ Features
+```
+flake.nix
+hosts/           # конфигурация конкретных машин
+nixos/           # системные модули (сеть, niri, docker, sops, …)
+linux-app/       # пользовательские программы и Home Manager-модули
+  shell/         # zsh, fish, starship, tmux
+  cli/           # bat, eza, git, k9s, …
+  editors/       # neovim, alacritty
+  browsers/      # firefox
+  desktop/       # niri, waybar, stylix, fuzzel
+  apps/          # 1c, mpd, obsidian, …
+  packages.nix   # пакеты без отдельного конфига
+secrets/         # зашифрованные секреты (sops)
+```
 
-- 🖥️ **Multiple Hosts Support**: Easy to configure for different hosts.
-- 🎨 **Gruvbox Theme**: A perfect blend of vibrant and subtle colors.
-- 🪟 **Hyprland + Waybar**: 10/10 window compositor on Wayland.
-- 🏠 **Home Manager Integration**: lots of stuff configured.
-- 🧇 **Tmux**: with my own hotkeys.
-- 🌟 **Zsh + starship**: Efficient shell setup with lots of aliases.
+## Возможности
 
-## 🚀 Installation
+- Несколько хостов: `maximus`, `chicago`, `lenovo`, `pazajik`
+- Рабочий стол: Niri + Waybar + SwayNC на Wayland
+- Тема: Stylix (Catppuccin Latte)
+- Home Manager встроен в NixOS — один rebuild для системы и пользователя
+- Секреты через [sops-nix](https://github.com/Mic92/sops-nix) (age)
 
-To get started with this setup, follow these steps:
+## Быстрый старт
 
-1. **Install NixOS**: If you haven't already installed NixOS, follow the [NixOS Installation Guide](https://nixos.org/manual/nixos/stable/#sec-installation) for detailed instructions.
-2. **Clone the Repository**:
+### 1. Клонировать репозиторий
 
-   ```bash
-   git clone https://github.com/efremovich/nixos-config
-   cd nixos-config
-   ```
+```bash
+git clone git@github.com:efremovich/nixos-config.git ~/.nix
+cd ~/.nix
+```
 
-3. **Copy one of the hosts configuration to set up your own**:
+### 2. Настроить секреты
 
-   ```bash
-   cd hosts
-   cp -r slim3 <your_hostname>
-   cd <your_hostname>
-   ```
+См. раздел [Работа с секретами](#работа-с-секретами) ниже.
 
-4. **Put your `hardware-configuration.nix` file there**:
+### 3. Подготовить хост
 
-   ```bash
-   cp /etc/nixos/hardware-configuration.nix ./
-   ```
+```bash
+cd hosts
+cp -r maximus <your_hostname>
+cd <your_hostname>
+cp /etc/nixos/hardware-configuration.nix ./
+```
 
-5. **Edit `hosts/<your_hostname>/local-packages.nix` and `nixos/packages.nix` files if needed**:
+Отредактируйте `host.nix` при необходимости и добавьте хост в `flake.nix`.
 
-   ```bash
-   vim local-packages.nix
-   vim ../../nixos/packages.nix
-   ```
+### 4. Применить конфигурацию
 
-6. **Finally, edit the `flake.nix` file**:
+```bash
+sudo nh os switch
+# или
+sudo nixos-rebuild switch --flake ~/.nix#<hostname>
+```
 
-   ```diff
-   ...
-     outputs = { self, nixpkgs, home-manager, ... }@inputs: let
-       system = "x86_64-linux";
-   --  homeStateVersion = "24.11";
-   ++  homeStateVersion = "<your_home_manager_state_version>";
-   --  user = "amper";
-   ++  user = "<your_username>";
-       hosts = [
-   --    { hostname = "slim3"; stateVersion = "24.05"; }
-   --    { hostname = "330-15ARR"; stateVersion = "24.11"; }
-   ++    { hostname = "<your_hostname>"; stateVersion = "<your_state_version>"; }
-       ];
-   ...
-   ```
+Алиасы в shell: `upnix`, `uphome`, `sw` — все ведут на `nh os switch`.
 
-7. **Rebuilding**:
+## Работа с секретами
 
-   ```bash
-   cd nixos-config-reborn
-   git add .
-   nixos-rebuild switch --flake ./#<hostname>
-   # or nixos-install --flake ./#<hostname> if you are installing on a fresh system
-   home-manager switch
-   ```
+Секреты хранятся в зашифрованном файле [`secrets/secrets.yaml`](secrets/secrets.yaml). В git попадает только шифротекст; расшифровка возможна только при наличии age-ключа на машине.
 
-## 😎 Enjoy
+### Первичная настройка (один раз на машине)
 
-![screenshot](./screenshots/screenshot2.png)
+```bash
+# 1. Создать age-ключ
+mkdir -p ~/.config/sops/age
+age-keygen -o ~/.config/sops/age/keys.txt
 
-## 🤝 Contributions
+# 2. Добавить публичный ключ в secrets/.sops.yaml (если настраиваете с нуля)
+age-keygen -y ~/.config/sops/age/keys.txt
+# вставить ключ в creation_rules → key_groups → age
 
-Feel free to fork the repository and submit pull requests if you'd like to contribute improvements. Open issues if you encounter any problems with the config or have ideas for new features.
+# 3. Заполнить секреты
+sops secrets/secrets.yaml
+```
+
+Шаблон полей — в [`secrets/secrets.yaml.example`](secrets/secrets.yaml.example).
+
+### Какие секреты используются
+
+| Ключ                     | Назначение                                         |
+| ------------------------ | -------------------------------------------------- |
+| `tfs_pat`                | Personal Access Token для `https://tfs.com/` (git) |
+| `anthropic_api_key`      | Опциональный API-ключ (резерв)                     |
+| `waybar_ssh_host`        | Хост SSH-туннеля в waybar                          |
+| `waybar_ssh_user`        | Пользователь SSH-туннеля                           |
+| `waybar_ssh_port`        | Порт SSH                                           |
+| `waybar_proxy_port`      | Локальный SOCKS-порт туннеля                       |
+| `waybar_ssh_key_file`    | Путь к приватному SSH-ключу                        |
+| `waybar_nats_url`        | URL NATS для operator-queues                       |
+| `waybar_nats_creds_file` | Путь к creds-файлу NATS                            |
+
+После `nh os switch` секреты доступны в `/run/secrets/<имя>`. Приложения читают их в runtime — секреты **не попадают** в Nix store при сборке.
+
+### Редактирование секретов
+
+```bash
+# открыть зашифрованный файл в редакторе (sops расшифрует и зашифрует обратно)
+sops secrets/secrets.yaml
+
+# посмотреть расшифрованное содержимое
+sops -d secrets/secrets.yaml
+```
+
+### Добавить новый секрет
+
+1. Добавить ключ в `secrets/secrets.yaml` через `sops secrets/secrets.yaml`
+2. Зарегистрировать в [`nixos/modules/sops.nix`](nixos/modules/sops.nix):
+
+```nix
+sops.secrets.my_new_secret = {
+  owner = user;
+  mode = "0400";
+};
+```
+
+1. Использовать в конфиге через `/run/secrets/my_new_secret` или в activation-скрипте Home Manager
+2. Применить: `sudo nh os switch`
+
+### Добавить ключ на другую машину
+
+```bash
+# на новой машине — сгенерировать ключ и показать публичную часть
+age-keygen -o ~/.config/sops/age/keys.txt
+age-keygen -y ~/.config/sops/age/keys.txt
+
+# на машине с доступом к репозиторию — добавить ключ в .sops.yaml и обновить
+sops updatekeys secrets/secrets.yaml
+```
+
+### Что не хранится в sops
+
+- Публичные CA-сертификаты (`nixos/certs/`) — в git намеренно
+- Приватные SSH-ключи — остаются в `~/.ssh/`, в sops только путь к ним
+- NATS creds-файлы — остаются в `~/.config/nats/`, в sops только путь
+
+### Безопасность
+
+- Не коммитьте `~/.config/sops/age/keys.txt` и `secrets/tfs_pat.txt`
+- При утечке PAT — немедленно отозвать токен в TFS и обновить через `sops secrets/secrets.yaml`
+- Репозиторий публичный: внутренние IP и хосты зашифрованы в `secrets.yaml`
+
+## Хосты
+
+| Хост    | Boot         | GPU |
+| ------- | ------------ | --- |
+| maximus | systemd-boot | —   |
+| lenovo  | systemd-boot | —   |
+| chicago | grub         | AMD |
+| pazajik | systemd-boot | AMD |
+
+Хост-специфичные пакеты — в `hosts/<hostname>/host.nix`.
+
+## Обновление
+
+```bash
+sudo nh os switch              # применить конфиг
+sudo nh os switch --update     # обновить flake inputs и применить
+```
+
+## Лицензия
+
+См. [LICENSE](LICENSE).

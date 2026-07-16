@@ -1,33 +1,33 @@
 {
   imports = [
-    #./boot
-    #./xdg.nix
-    #./zerotierone.nix
+    ../profiles/common.nix
+    ../profiles/desktop.nix
     ./audio.nix
     ./bluetooth.nix
+    ./devtools.nix
     ./docker.nix
     ./env.nix
-    # ./ideco.nix
     ./gsettings.nix
-    ./home-manager.nix
     ./hasp.nix
-    ./locale.nix
-    # ./hyprland.nix
-    ./niri.nix
+    ./home-manager.nix
+    ./ideco.nix
     ./kernel.nix
+    ./linux-app.nix
     ./locale.nix
     ./mime.nix
     ./net.nix
     ./nh.nix
+    ./niri.nix
     ./nix.nix
-    # ./obs.nix
+    ./obs.nix
+    ./sops.nix
     ./ssh.nix
+    ./stylix.nix
     ./timezone.nix
-    ./user.nix
     ./udev.nix
-    # ./zapret.nix
-    #./zerotierone.nix
-    ./v2raya.nix
+    ./user.nix
+    ./xdg.nix
+    ./zapret.nix
     ./zram.nix
   ];
 }

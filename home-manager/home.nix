@@ -4,12 +4,7 @@
   ...
 }:
 {
-  imports = [
-    ./modules
-    ./home-packages.nix
-  ];
-
-  # kesl.enable = true;
+  imports = [ ../linux-app ];
 
   home = {
     username = user;
