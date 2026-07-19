@@ -1,4 +1,5 @@
-{ pkgs, user, ... }: {
+{ pkgs, user, ... }:
+{
   programs.fish.enable = true;
   programs.zsh.enable = true;
 
@@ -6,7 +7,15 @@
     defaultUserShell = pkgs.fish;
     users.${user} = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "docker" "storage" ];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+        "storage"
+        "dialout"
+        "plugdev"
+        "kmv"
+      ];
     };
   };
 
