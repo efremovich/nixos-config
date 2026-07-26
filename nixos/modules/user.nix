@@ -14,7 +14,7 @@
         "storage"
         "dialout"
         "plugdev"
-        "kmv"
+        "kvm"
       ];
     };
   };

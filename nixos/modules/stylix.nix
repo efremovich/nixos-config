@@ -7,6 +7,10 @@
     enable = true;
     polarity = "light";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+    targets = {
+      grub.enable = false;
+      console.enable = false;
+    };
 
     cursor = {
       name = "Bibata-Original-Ice";

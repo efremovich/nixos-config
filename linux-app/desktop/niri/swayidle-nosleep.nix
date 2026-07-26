@@ -1,7 +1,8 @@
 # Ref: https://github.com/hallettj/home.nix/blob/main/home-manager/features/niri/swayidle.nix
-{ pkgs
-, lib
-, ...
+{
+  pkgs,
+  lib,
+  ...
 }:
 let
   niri-bin = "${pkgs.niri-unstable}/bin/niri";
@@ -15,7 +16,7 @@ in
       lock-after-blank-timeout = 5 * minutes;
 
       loginctl = "${pkgs.systemd}/bin/loginctl";
-      swaylock = "usr/bin/swaylock";
+      swaylock = "/usr/bin/swaylock";
 
       lock-session = pkgs.writeShellScript "lock-session" ''
         ${swaylock} -f

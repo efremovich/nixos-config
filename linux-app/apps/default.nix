@@ -8,5 +8,6 @@
     ./mpd.nix
     ./gpg.nix
     ./syncthing.nix
+    ./xmos.nix
   ];
 }

@@ -1,8 +1,11 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }:
+{
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [ egl-wayland nvidia-vaapi-driver ];
+    extraPackages = with pkgs; [
+      egl-wayland
+    ];
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];

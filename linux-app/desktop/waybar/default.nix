@@ -188,6 +188,7 @@ in
           interval = 1;
           format = "{icon}";
           rotate = 270;
+          on-click = "alacritty -e btop";
           format-icons = [
             "<span color='#7287fd'>󰝦</span>"
             "<span color='#7287fd'>󰪞</span>"

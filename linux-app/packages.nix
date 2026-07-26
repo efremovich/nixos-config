@@ -3,7 +3,6 @@
   # Misc leftovers that do not belong to a role module yet.
   home.packages = with pkgs; [
     grimblast
-    mysql84
     ntfs3g
     openssl
     rar
@@ -20,5 +19,8 @@
     jq
     libxml2
     ipset
+    gh
+    wine-staging
+    ngspice
   ];
 }
