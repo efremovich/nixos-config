@@ -1,4 +1,12 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
+let
+  tfsCredentialHelper = pkgs.writeShellScript "tfs-git-credential" ''
+    if [ "$1" = get ]; then
+      echo "username=efremov_an"
+      echo "password=$(cat /run/secrets/tfs_pat)"
+    fi
+  '';
+in
 {
   programs.git = {
     enable = true;
@@ -6,8 +14,8 @@
       user.name = "Efremov Aleksandr";
       user.email = "efremov_an@astral.ru";
       pull.rebase = true;
-      include = {
-        path = "~/.config/git/tfs-auth";
+      credential."https://tfs.astralnalog.ru" = {
+        helper = toString tfsCredentialHelper;
       };
       url = {
         "ssh://git@git.astralnalog.ru:60001/".insteadOf = "https://git.astralnalog.ru/";

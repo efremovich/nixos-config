@@ -6,18 +6,12 @@
 }:
 let
   cfg = config.services.ideco;
-  installerUrl = "https://91.239.5.9/lk/IdecoClient.sh";
+  installerUrl = "https://91.239.5.53/lk/IdecoClient.sh";
   installDir = "/usr/local/Ideco/Agent";
-  bashPath = "${pkgs.bash}/bin/bash";
 
   clientWrapper = pkgs.writeShellScript "IdecoClient.sh" ''
     APP_DIR="$(dirname "$(readlink -f "$0")")"
     exec "$APP_DIR/ld.so" --argv0 IdecoClient --library-path "$APP_DIR/lib" "$APP_DIR/IdecoClient" "$@"
-  '';
-
-  serviceWrapper = pkgs.writeShellScript "IdecoService.sh" ''
-    APP_DIR="$(dirname "$(readlink -f "$0")")"
-    exec "$APP_DIR/ld.so" --argv0 IdecoService --library-path "$APP_DIR/lib" "$APP_DIR/IdecoService" "$@"
   '';
 in
 {
@@ -140,7 +134,10 @@ in
 
     systemd.services.ideco-service = {
       description = "IdecoService";
-      after = [ "network.target" "ideco-install.service" ];
+      after = [
+        "network.target"
+        "ideco-install.service"
+      ];
       wants = [ "ideco-install.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {

@@ -22,5 +22,6 @@
     gh
     wine-staging
     ngspice
+    sops
   ];
 }

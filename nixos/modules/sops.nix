@@ -1,4 +1,4 @@
-{ inputs, user, config, ... }:
+{ inputs, user, ... }:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
@@ -12,10 +12,6 @@
 
     secrets = {
       tfs_pat = {
-        owner = user;
-        mode = "0400";
-      };
-      tfs_git_auth_header = {
         owner = user;
         mode = "0400";
       };
@@ -52,16 +48,6 @@
         mode = "0400";
       };
 
-    };
-
-    templates.tfs-git-auth = {
-      owner = user;
-      path = "/home/${user}/.config/git/tfs-auth";
-      mode = "0400";
-      content = ''
-        [http "https://tfs.astralnalog.ru/"]
-          extraHeader = Authorization: Basic ${config.sops.placeholder.tfs_git_auth_header}
-      '';
     };
   };
 }

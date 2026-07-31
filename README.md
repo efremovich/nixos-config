@@ -86,17 +86,17 @@ sops secrets/secrets.yaml
 
 ### Какие секреты используются
 
-| Ключ                     | Назначение                                         |
-| ------------------------ | -------------------------------------------------- |
-| `tfs_pat`                | Personal Access Token для `https://tfs.com/` (git) |
-| `anthropic_api_key`      | Опциональный API-ключ (резерв)                     |
-| `waybar_ssh_host`        | Хост SSH-туннеля в waybar                          |
-| `waybar_ssh_user`        | Пользователь SSH-туннеля                           |
-| `waybar_ssh_port`        | Порт SSH                                           |
-| `waybar_proxy_port`      | Локальный SOCKS-порт туннеля                       |
-| `waybar_ssh_key_file`    | Путь к приватному SSH-ключу                        |
-| `waybar_nats_url`        | URL NATS для operator-queues                       |
-| `waybar_nats_creds_file` | Путь к creds-файлу NATS                            |
+| Ключ                     | Назначение                                          |
+| ------------------------ | --------------------------------------------------- |
+| `tfs_pat`                | PAT для git к `https://tfs.ru/` (credential helper) |
+| `anthropic_api_key`      | Опциональный API-ключ (резерв)                      |
+| `waybar_ssh_host`        | Хост SSH-туннеля в waybar                           |
+| `waybar_ssh_user`        | Пользователь SSH-туннеля                            |
+| `waybar_ssh_port`        | Порт SSH                                            |
+| `waybar_proxy_port`      | Локальный SOCKS-порт туннеля                        |
+| `waybar_ssh_key_file`    | Путь к приватному SSH-ключу                         |
+| `waybar_nats_url`        | URL NATS для operator-queues                        |
+| `waybar_nats_creds_file` | Путь к creds-файлу NATS                             |
 
 После `nh os switch` секреты доступны в `/run/secrets/<имя>`. Приложения читают их в runtime — секреты **не попадают** в Nix store при сборке.
 
