@@ -1,6 +1,8 @@
 {
   programs.firefox = {
     enable = true;
+    # HM 26.05: keep profile in ~/.mozilla/firefox (not XDG).
+    configPath = ".mozilla/firefox";
     profiles.default = {
       settings = {
         "browser.toolbars.visible" = false; # Hides the entire toolbar

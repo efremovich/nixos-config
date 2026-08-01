@@ -5,8 +5,8 @@
 
     network-manager-applet.enable = true;
 
-    # Wallpaper
-    swww.enable = true;
+    # Wallpaper (swww → awww in nixpkgs/HM 26.05)
+    awww.enable = true;
 
     # Use Gnome Keyring as SSH agent
     gnome-keyring = {

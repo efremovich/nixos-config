@@ -44,10 +44,10 @@ let
         glib
         libepoxy
         libunwind
-        xorg.libX11
-        xorg.libXxf86vm
-        xorg.libSM
-        xorg.libXext
+        libx11
+        libxxf86vm
+        libsm
+        libxext
         libGL
         libGLU
         dbus

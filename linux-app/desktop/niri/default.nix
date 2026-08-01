@@ -23,7 +23,7 @@
       swaybg
       swayidle
       swaylock
-      swww
+      awww
       wl-clip-persist
       wl-clipboard
       wlogout

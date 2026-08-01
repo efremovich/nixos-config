@@ -4,7 +4,6 @@ import json
 import os
 import subprocess
 
-wallpapers_cache_path = os.path.expanduser("~/.cache/swww/")
 events_of_interest = ["Workspace focused", "Window opened", "Window closed"]
 
 
@@ -14,16 +13,39 @@ def get_niri_msg_output(msg):
     return output
 
 
+def wallpaper_cache_dir():
+    for base_name in ("awww", "swww"):
+        base = os.path.expanduser(f"~/.cache/{base_name}")
+        if not os.path.isdir(base):
+            continue
+        subdirs = sorted(
+            d
+            for d in os.listdir(base)
+            if os.path.isdir(os.path.join(base, d))
+        )
+        if subdirs:
+            return os.path.join(base, subdirs[-1])
+        return base
+    return os.path.expanduser("~/.cache/awww")
+
+
 def get_current_wallpaper(monitor):
-    with open(os.path.join(wallpapers_cache_path, monitor)) as f:
-        wallpaper = str(f.readlines()[-1].strip())
-        return wallpaper
+    path = os.path.join(wallpaper_cache_dir(), monitor)
+    with open(path, "rb") as f:
+        data = f.read()
+    # awww: namespace\0resize\0filter\0img_path (repeated)
+    parts = [p.decode(errors="replace") for p in data.split(b"\0") if p]
+    if len(parts) >= 4:
+        return parts[-1]
+    # legacy swww line-based cache
+    lines = data.decode(errors="replace").splitlines()
+    return lines[-1].strip() if lines else ""
 
 
 def set_wallpaper(monitor, wallpaper):
     subprocess.run(
         [
-            "swww",
+            "awww",
             "img",
             "--transition-type",
             "grow",
