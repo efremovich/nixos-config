@@ -27,11 +27,11 @@ let
         udev
         systemd
         python3
-        xorg.libX11
-        xorg.libXext
-        xorg.libXrender
-        xorg.libXi
-        xorg.libXtst
+        libx11
+        libxext
+        libxrender
+        libxi
+        libxtst
         libGL
         glib
         dbus

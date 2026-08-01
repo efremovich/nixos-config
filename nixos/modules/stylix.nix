@@ -24,8 +24,8 @@
         package = pkgs.noto-fonts-color-emoji;
       };
       monospace = {
-        name = "CaskaydiaCoveNerdFontPropo";
-        package = pkgs.cascadia-code;
+        name = "CaskaydiaCove Nerd Font Mono";
+        package = pkgs.nerd-fonts.caskaydia-cove;
       };
       sansSerif = {
         name = "Noto Sans";

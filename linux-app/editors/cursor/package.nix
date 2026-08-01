@@ -1,10 +1,9 @@
 # Official Cursor desktop from https://cursor.com/download (AppImage),
-# packaged with nixpkgs vscode-generic (same approach as pkgs.code-cursor).
+# packaged with nixpkgs buildVscode (same approach as pkgs.code-cursor).
 {
   lib,
   stdenv,
-  callPackage,
-  vscode-generic,
+  buildVscode,
   fetchurl,
   appimageTools,
   commandLineArgs ? "",
@@ -25,7 +24,7 @@ let
 
   source = sources.${hostPlatform.system};
 in
-(callPackage vscode-generic rec {
+(buildVscode rec {
   inherit useVSCodeRipgrep;
   inherit (sourcesJson) version vscodeVersion;
   commandLineArgs = finalCommandLineArgs;

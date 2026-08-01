@@ -20,4 +20,7 @@ secrets/tfs_pat.txt
 .cursor-profile-overlay/
 prefetch-hook.log
 prefetch-out.txt
-shell-fix-done.txt
+shell-test-done.txt
+
+# Accidental nested store copies must never enter the dirty flake tree
+/nix/

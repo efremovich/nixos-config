@@ -86,7 +86,7 @@ layout {
 
 
 layer-rule {
-    match namespace="^swww-daemon$"
+    match namespace="^awww-daemon$"
     place-within-backdrop true
 }
 

@@ -83,7 +83,7 @@ def set_wallpaper(wallpaper):
     try:
         subprocess.run(
             [
-                "swww",
+                "awww",
                 "img",
                 wallpaper,
                 "--transition-type",
@@ -96,7 +96,7 @@ def set_wallpaper(wallpaper):
         print(f"Ошибка при установке обоев: {e}")
         return False
     except FileNotFoundError:
-        print("Ошибка: команда 'swww' не найдена. Убедитесь, что swww установлен.")
+        print("Ошибка: команда 'awww' не найдена. Убедитесь, что awww установлен.")
         return False
 
 

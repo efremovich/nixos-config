@@ -2,6 +2,8 @@
 {
   programs.zsh = {
     enable = true;
+    # HM 26.05: lock legacy default (dotfiles in $HOME) until XDG migration.
+    dotDir = config.home.homeDirectory;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
