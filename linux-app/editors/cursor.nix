@@ -2,9 +2,7 @@
 { pkgs, lib, ... }:
 let
   enable = true;
-  cursor = pkgs.callPackage ./cursor/package.nix {
-    vscode-generic = pkgs.path + "/pkgs/applications/editors/vscode/generic.nix";
-  };
+  cursor = pkgs.callPackage ./cursor/package.nix { };
 in
 lib.mkIf enable {
   home.packages = [ cursor ];
