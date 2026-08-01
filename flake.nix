@@ -3,6 +3,8 @@
   description = "My system configuration";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    # KiCad 10.x (на nixos-25.11 ещё 9.0.6).
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # WebKit 2.38 + libsoup 2 (для 1С: uiproxywx.so и WebKit в одном процессе без смешивания libsoup 2 и 3).
     nixpkgs_22_11.url = "github:nixos/nixpkgs/nixos-22.11";
 
