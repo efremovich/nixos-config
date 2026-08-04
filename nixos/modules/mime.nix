@@ -1,6 +1,6 @@
 {
   xdg.mime.defaultApplications = {
-    "inode/directory" = "ranger.desktop";
+    "inode/directory" = "thunar.desktop";
     # Archive files
     "application/zip" = "file-roller.desktop";
     "application/x-zip" = "file-roller.desktop";
@@ -21,5 +21,6 @@
     "application/x-lzma" = "file-roller.desktop";
     "application/x-lzip" = "file-roller.desktop";
     "application/x-zstd" = "file-roller.desktop";
+    "application/pdf" = "org.pwmt.zathura.desktop";
   };
 }
