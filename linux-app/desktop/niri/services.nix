@@ -8,10 +8,13 @@
     # Wallpaper (swww → awww in nixpkgs/HM 26.05)
     awww.enable = true;
 
-    # Use Gnome Keyring as SSH agent
+    # Gnome Keyring для secrets; SSH-агент — gpg-agent (apps/gpg.nix)
     gnome-keyring = {
       enable = true;
-      components = [ "pkcs11" "secrets" "ssh" ];
+      components = [
+        "pkcs11"
+        "secrets"
+      ];
     };
 
     # OSD for volume, brightness changes
@@ -43,5 +46,4 @@
       };
     };
   };
-  home.sessionVariables.SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/keyring/ssh";
 }

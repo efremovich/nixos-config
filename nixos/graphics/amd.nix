@@ -7,12 +7,11 @@
       egl-wayland
     ];
   };
+  services = {
+    xserver = {
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  services.xserver.enable = true;
-
-  # Если используется Wayland (например, Sway или GNOME на Wayland)
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1"; # Фикс для курсора в Wayland
+      videoDrivers = [ "amdgpu" ];
+      enable = true;
+    };
   };
 }

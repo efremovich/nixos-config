@@ -1,11 +1,12 @@
+{ user, ... }:
 {
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
     settings = {
+      # При переводе всех хостов на ключи выставить false.
       PasswordAuthentication = true;
       PermitRootLogin = "no";
-      AllowUsers = [ "efremov" ];
+      AllowUsers = [ user ];
     };
   };
 }

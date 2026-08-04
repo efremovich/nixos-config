@@ -19,7 +19,6 @@
     ./nh.nix
     ./niri.nix
     ./nix.nix
-    ./obs.nix
     ./sops.nix
     ./ssh.nix
     ./stylix.nix

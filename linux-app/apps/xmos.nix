@@ -1,7 +1,5 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
-  enable = true;
-
   xmosFhs = pkgs.buildFHSEnv {
     name = "xmos-fhs";
     targetPkgs =
@@ -18,7 +16,6 @@ let
         less
         zlib
         ncurses
-        # xgdb/xrun: libcrypt.so.1 (glibc больше не кладёт)
         libxcrypt-legacy
         stdenv.cc.cc.lib
         gcc
@@ -45,7 +42,7 @@ let
         if [ -n "''${XMOS_TOOL_PATH:-}" ] && [ -f "$XMOS_TOOL_PATH/SetEnv" ]; then
           setenv="$XMOS_TOOL_PATH/SetEnv"
         else
-          for root in "$HOME/Dev/Xmosi/XMOS/XTC" "$HOME/XMOS/XTC"; do
+          for root in "$HOME/Dev/Amplifier/Xmosi/XMOS/XTC" "$HOME/XMOS/XTC"; do
             if [ -d "$root" ]; then
               local latest
               latest="$(ls -1d "$root"/*/ 2>/dev/null | sort -V | tail -n1 || true)"
@@ -73,7 +70,7 @@ let
           echo "XMOS: SetEnv не найден."
           echo "  Ожидается: ~/Dev/Xmosi/XMOS/XTC/<version>/SetEnv"
           echo "  или ~/XMOS/XTC/<version>/SetEnv / XMOS_TOOL_PATH=..."
-          echo "  См. ~/Dev/Xmosi/scripts/install-xtc.md"
+          echo "  См. ~/Dev/Amplifier/Xmosi/scripts/install-xtc.md"
         fi
       }
       source_xmos_setenv
@@ -82,6 +79,6 @@ let
     runScript = "bash";
   };
 in
-lib.mkIf enable {
+{
   home.packages = [ xmosFhs ];
 }

@@ -1,10 +1,6 @@
-{ pkgs, lib, ... }:
-let
-  enable = true;
-in
-lib.mkIf enable {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
-    zed-editor
-    opencode
+    # opencode
   ];
 }

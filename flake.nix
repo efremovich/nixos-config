@@ -32,7 +32,7 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      homeStateVersion = "25.11";
+      homeStateVersion = "26.05";
       user = "efremov";
       hosts = [
         {
@@ -41,15 +41,15 @@
         }
         {
           hostname = "chicago";
-          stateVersion = "25.11";
+          stateVersion = "26.05";
         }
         {
           hostname = "lenovo";
-          stateVersion = "25.11";
+          stateVersion = "26.05";
         }
         {
           hostname = "pazajik";
-          stateVersion = "25.11";
+          stateVersion = "26.05";
         }
       ];
       makeSystem =

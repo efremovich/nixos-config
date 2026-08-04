@@ -20,18 +20,12 @@
   boot.kernelModules = [ "kvm-intel" "wl" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
 
-  # FIX: bradcom_sta marked insecure
+  # broadcom_sta помечен insecure; разрешение — централизованно в
+  # nixos/modules/nix.nix (allowInsecurePredicate по имени пакета).
+  # Не задавать nixpkgs.config.permittedInsecurePackages здесь:
+  # nixpkgs.config мержится shallow и затирает значение из nix.nix.
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-57-6.16.1"
-    "broadcom-sta-6.30.223.271-57-6.15.8"
-  ];
   hardware.enableAllFirmware = true;
-
-  # nixpkgs.config.allowInsecurePredicate = pkg:
-  #   builtins.elem (lib.getName pkg) [
-  #     "broadcom-sta" # aka “wl”
-  #   ];
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/510a17f9-cfa7-4f6c-9d92-2b5a065cef8a";
     fsType = "btrfs";

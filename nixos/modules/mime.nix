@@ -1,6 +1,6 @@
 {
   xdg.mime.defaultApplications = {
-    "inode/directory" = "ranger";
+    "inode/directory" = "ranger.desktop";
     # Archive files
     "application/zip" = "file-roller.desktop";
     "application/x-zip" = "file-roller.desktop";

@@ -17,6 +17,15 @@ in
 {
   options.services.ideco = {
     enable = lib.mkEnableOption "Ideco Client (VPN/ZTNA agent)";
+
+    installerHash = lib.mkOption {
+      type = lib.types.str;
+      # sha256 (hex) of https://91.239.5.53/lk/IdecoClient.sh, version 22.4.1045.0.
+      # Update: curl -ksS -o /tmp/IdecoClient.sh <url> && sha256sum /tmp/IdecoClient.sh
+      # Empty disables integrity check (NOT recommended).
+      default = "d052b2701b33f4c8bc8ef30de6ad23c6b761a5e8dda24f6f6e64f7499621e1c4";
+      description = "SHA256 (hex) of the IdecoClient installer. Verified before execution.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -56,7 +65,17 @@ in
         trap 'rm -rf "$workdir"' EXIT
 
         echo "Downloading IdecoClient installer..."
+        # -k неизбежен: сертификат сервера не содержит IP в SAN.
+        # Целостность обеспечивается проверкой installerHash ниже.
         curl -k --fail -o "$workdir/installer.sh" "${installerUrl}"
+
+        if [ -n "${cfg.installerHash}" ]; then
+          echo "Verifying installer checksum..."
+          echo "${cfg.installerHash}  $workdir/installer.sh" | sha256sum --check --status \
+            || { echo "Installer checksum mismatch, aborting." >&2; exit 1; }
+        else
+          echo "WARNING: installerHash is empty, skipping integrity check." >&2
+        fi
         chmod +x "$workdir/installer.sh"
 
         echo "Extracting embedded archive..."

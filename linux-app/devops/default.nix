@@ -1,8 +1,5 @@
-{ pkgs, lib, ... }:
-let
-  enable = true;
-in
-lib.mkIf enable {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     go
     nodejs
@@ -16,9 +13,7 @@ lib.mkIf enable {
     grpcurl
     ast-grep
     lazydocker
-    podman
     kubectl
     dbeaver-bin
-    insomnia
   ];
 }

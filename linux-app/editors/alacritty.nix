@@ -1,31 +1,37 @@
 { lib, ... }:
 {
+  programs = {
+    alacritty = {
+      enable = true;
+      settings = {
+        window = {
+          opacity = 1.0;
+          decorations = "NONE";
 
-  programs.alacritty.enable = true;
+          dynamic_title = true;
+          padding.x = 15;
+          padding.y = 15;
 
-  programs.alacritty.settings.window.opacity = 1.0;
-  programs.alacritty.settings.window.decorations = "NONE";
-  programs.alacritty.settings.font = {
-    builtin_box_drawing = true;
-    normal = {
-      style = lib.mkForce "Regular";
-    };
-    bold = {
-      style = lib.mkForce "Bold";
-    };
-    italic = {
-      style = lib.mkForce "Italic";
-    };
-  };
-  programs.alacritty.settings.window = {
-    dynamic_title = true;
-    padding.x = 15;
-    padding.y = 15;
-  };
-  programs.alacritty.settings.cursor = {
-    style = {
-      shape = "Block"; # или Beam (для Insert)
-      blinking = "On";
+        };
+        font = {
+          builtin_box_drawing = true;
+          normal = {
+            style = lib.mkForce "Regular";
+          };
+          bold = {
+            style = lib.mkForce "Bold";
+          };
+          italic = {
+            style = lib.mkForce "Italic";
+          };
+        };
+        cursor = {
+          style = {
+            shape = "Block"; # или Beam (для Insert)
+            blinking = "On";
+          };
+        };
+      };
     };
   };
 

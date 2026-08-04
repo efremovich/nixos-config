@@ -4,19 +4,7 @@
     enable = true;
 
     shellInit = ''
-      zoxide init fish | source
-
-      # Executed for all fish instances
-      set -x PATH $HOME/.local/bin $PATH
-      set -x PATH $HOME/go/bin $PATH
-
-      # Set GOPATH
-      set -gx GOPATH $HOME/go
-      set -x PATH $GOPATH/bin $PATH
-
-      # Mason в конце PATH: иначе битый gopls (старый PT_INTERP) перекрывает nixpkgs
-      set -x PATH $PATH $HOME/.local/share/nvim/mason/bin
-
+      # PATH и GOPATH заданы системно в nixos/modules/env.nix
       # Запуск sesh-session только при запуске в новом терминале (не в сабшелле)
       if status is-interactive
           # Проверяем, что мы не в сессии уже запущенного sesh
@@ -44,25 +32,7 @@
         };
       }
     ];
-    shellAliases = {
-      sw = "nh os switch";
-      upd = "nh os switch --update";
-
-      pkgs = "nvim ~/.nix/linux-app/packages.nix";
-
-      r = "ranger";
-      v = "nvim";
-      se = "sudoedit";
-      microfetch = "microfetch && echo";
-
-      gs = "git status";
-      ga = "git add";
-      gc = "git commit";
-      gp = "git push";
-
-      ".." = "cd ..";
-    };
-
+    # Общие алиасы — в home.shellAliases (shell/default.nix)
     functions = {
       # Функция для выбора и подключения к sesh-сессии через fzf
       sesh-sessions = {

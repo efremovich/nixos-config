@@ -2,10 +2,11 @@
   imports = [
     ./1c.nix
     ./cad.nix
+    ./kicad.nix
     ./obsidian.nix
     ./platformio.nix
     ./thunar.nix
-    ./mpd.nix
+    # ./mpd.nix
     ./gpg.nix
     ./syncthing.nix
     ./xmos.nix

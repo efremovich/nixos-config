@@ -14,9 +14,11 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
+    powerManagement = {
 
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
+      enable = false;
+      finegrained = false;
+    };
 
     open = true;
     nvidiaSettings = true;

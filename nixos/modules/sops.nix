@@ -1,4 +1,9 @@
-{ inputs, user, ... }:
+{
+  inputs,
+  lib,
+  user,
+  ...
+}:
 {
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
@@ -10,44 +15,19 @@
     #   sudo chmod 400 /var/lib/sops-nix/key.txt
     age.keyFile = "/var/lib/sops-nix/key.txt";
 
-    secrets = {
-      tfs_pat = {
-        owner = user;
-        mode = "0400";
-      };
-      anthropic_api_key = {
-        owner = user;
-        mode = "0400";
-      };
-      waybar_ssh_host = {
-        owner = user;
-        mode = "0400";
-      };
-      waybar_ssh_user = {
-        owner = user;
-        mode = "0400";
-      };
-      waybar_ssh_port = {
-        owner = user;
-        mode = "0400";
-      };
-      waybar_proxy_port = {
-        owner = user;
-        mode = "0400";
-      };
-      waybar_ssh_key_file = {
-        owner = user;
-        mode = "0400";
-      };
-      waybar_nats_url = {
-        owner = user;
-        mode = "0400";
-      };
-      waybar_nats_creds_file = {
-        owner = user;
-        mode = "0400";
-      };
-
-    };
+    secrets = lib.genAttrs [
+      "tfs_pat"
+      "anthropic_api_key"
+      "waybar_ssh_host"
+      "waybar_ssh_user"
+      "waybar_ssh_port"
+      "waybar_proxy_port"
+      "waybar_ssh_key_file"
+      "waybar_nats_url"
+      "waybar_nats_creds_file"
+    ] (_: {
+      owner = user;
+      mode = "0400";
+    });
   };
 }

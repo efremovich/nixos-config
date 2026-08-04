@@ -28,7 +28,7 @@ in
       mainBar = {
         layer = "top";
         position = "top";
-        mod = "dock";
+        mode = "dock";
         margin-left = 15;
         margin-right = 15;
         margin-top = 4;
@@ -366,8 +366,8 @@ in
           format = "󰌍 ";
         };
         "custom/window-icon" = {
-          format = " ";
-          on-click = "walker --modules windows";
+          format = " ";
+          on-click = "niri msg action toggle-overview";
           tooltip = "Window list";
         };
       };

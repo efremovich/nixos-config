@@ -1,10 +1,9 @@
+# Тяжёлые CAD-пакеты. kicad.nix подключается отдельно в apps/default.nix.
 { pkgs, lib, ... }:
 let
-  enable = true;
+  enable = false;
 in
 {
-  imports = [ ./kicad.nix ];
-
   config = lib.mkIf enable {
     home.packages = with pkgs; [
       freecad

@@ -1,8 +1,5 @@
-{ pkgs, lib, ... }:
-let
-  enable = true;
-in
-lib.mkIf enable {
+{ pkgs, ... }:
+{
   services.mpd = {
     enable = true;
     musicDirectory = "~/Music";

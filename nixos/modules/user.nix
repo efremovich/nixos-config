@@ -19,8 +19,6 @@
     };
   };
 
-  services.getty.autologinUser = user;
-
   # Включение udisks2 для монтирования съемных носителей
   services.udisks2.enable = true;
 }

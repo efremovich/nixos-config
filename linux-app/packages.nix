@@ -17,11 +17,8 @@
     bemoji
     pciutils
     jq
-    libxml2
     ipset
     gh
-    wine-staging
-    ngspice
     sops
   ];
 }

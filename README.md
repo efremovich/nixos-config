@@ -16,7 +16,7 @@ linux-app/       # пользовательские программы и Home M
   editors/       # neovim, alacritty
   browsers/      # firefox
   desktop/       # niri, waybar, stylix, fuzzel
-  apps/          # 1c, mpd, obsidian, …
+  apps/          # 1c, mpd …
   packages.nix   # пакеты без отдельного конфига
 secrets/         # зашифрованные секреты (sops)
 ```
@@ -24,7 +24,7 @@ secrets/         # зашифрованные секреты (sops)
 ## Возможности
 
 - Несколько хостов: `maximus`, `chicago`, `lenovo`, `pazajik`
-- Рабочий стол: Niri + Waybar + SwayNC на Wayland
+- Рабочий стол: Niri + Waybar + Mako на Wayland
 - Тема: Stylix (Catppuccin Latte)
 - Home Manager встроен в NixOS — один rebuild для системы и пользователя
 - Секреты через [sops-nix](https://github.com/Mic92/sops-nix) (age)
@@ -61,7 +61,7 @@ sudo nh os switch
 sudo nixos-rebuild switch --flake ~/.nix#<hostname>
 ```
 
-Алиасы в shell: `upnix`, `uphome`, `sw` — все ведут на `nh os switch`.
+Алиасы в shell: `sw` — `nh os switch`, `upd` — `nh os switch --update`.
 
 ## Работа с секретами
 
@@ -74,11 +74,16 @@ sudo nixos-rebuild switch --flake ~/.nix#<hostname>
 mkdir -p ~/.config/sops/age
 age-keygen -o ~/.config/sops/age/keys.txt
 
-# 2. Добавить публичный ключ в secrets/.sops.yaml (если настраиваете с нуля)
+# 2. Установить ключ в системное расположение (оттуда читает sops-nix)
+sudo install -d -m 0700 /var/lib/sops-nix
+sudo cp ~/.config/sops/age/keys.txt /var/lib/sops-nix/key.txt
+sudo chmod 400 /var/lib/sops-nix/key.txt
+
+# 3. Добавить публичный ключ в secrets/.sops.yaml (если настраиваете с нуля)
 age-keygen -y ~/.config/sops/age/keys.txt
 # вставить ключ в creation_rules → key_groups → age
 
-# 3. Заполнить секреты
+# 4. Заполнить секреты
 sops secrets/secrets.yaml
 ```
 
@@ -86,17 +91,17 @@ sops secrets/secrets.yaml
 
 ### Какие секреты используются
 
-| Ключ                     | Назначение                                          |
-| ------------------------ | --------------------------------------------------- |
-| `tfs_pat`                | PAT для git к `https://tfs.ru/` (credential helper) |
-| `anthropic_api_key`      | Опциональный API-ключ (резерв)                      |
-| `waybar_ssh_host`        | Хост SSH-туннеля в waybar                           |
-| `waybar_ssh_user`        | Пользователь SSH-туннеля                            |
-| `waybar_ssh_port`        | Порт SSH                                            |
-| `waybar_proxy_port`      | Локальный SOCKS-порт туннеля                        |
-| `waybar_ssh_key_file`    | Путь к приватному SSH-ключу                         |
-| `waybar_nats_url`        | URL NATS для operator-queues                        |
-| `waybar_nats_creds_file` | Путь к creds-файлу NATS                             |
+| Ключ                     | Назначение                                              |
+| ------------------------ | ------------------------------------------------------- |
+| `tfs_pat`                | PAT для git к `https://tfs.hub.ru/` (credential helper) |
+| `anthropic_api_key`      | Опциональный API-ключ (резерв)                          |
+| `waybar_ssh_host`        | Хост SSH-туннеля в waybar                               |
+| `waybar_ssh_user`        | Пользователь SSH-туннеля                                |
+| `waybar_ssh_port`        | Порт SSH                                                |
+| `waybar_proxy_port`      | Локальный SOCKS-порт туннеля                            |
+| `waybar_ssh_key_file`    | Путь к приватному SSH-ключу                             |
+| `waybar_nats_url`        | URL NATS для operator-queues                            |
+| `waybar_nats_creds_file` | Путь к creds-файлу NATS                                 |
 
 После `nh os switch` секреты доступны в `/run/secrets/<имя>`. Приложения читают их в runtime — секреты **не попадают** в Nix store при сборке.
 
@@ -134,6 +139,11 @@ age-keygen -y ~/.config/sops/age/keys.txt
 
 # на машине с доступом к репозиторию — добавить ключ в .sops.yaml и обновить
 sops updatekeys secrets/secrets.yaml
+
+# на новой машине — установить ключ для sops-nix
+sudo install -d -m 0700 /var/lib/sops-nix
+sudo cp ~/.config/sops/age/keys.txt /var/lib/sops-nix/key.txt
+sudo chmod 400 /var/lib/sops-nix/key.txt
 ```
 
 ### Что не хранится в sops
@@ -144,9 +154,9 @@ sops updatekeys secrets/secrets.yaml
 
 ### Безопасность
 
-- Не коммитьте `~/.config/sops/age/keys.txt` и `secrets/tfs_pat.txt`
+- Не коммитьте `~/.config/sops/age/keys.txt`, `/var/lib/sops-nix/key.txt` и `secrets/tfs_pat.txt`
 - При утечке PAT — немедленно отозвать токен в TFS и обновить через `sops secrets/secrets.yaml`
-- Репозиторий публичный: внутренние IP и хосты зашифрованы в `secrets.yaml`
+- Репозиторий публичный. Токены, ключи и хосты SSH-туннеля зашифрованы в `secrets.yaml`. Осознанно открытым текстом лежат: IP HASP-сервера (`nixos/modules/hasp.nix`), URL Ideco (`nixos/modules/ideco.nix`) и корпоративные домены (`linux-app/cli/git.nix`, `nixos/modules/env.nix`) — это не секреты, но учтите при форке.
 
 ## Хосты
 

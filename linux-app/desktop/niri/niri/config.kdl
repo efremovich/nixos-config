@@ -259,7 +259,6 @@ window-rule {
 }
 
 binds {
-    Mod+Z { spawn "bash" "-c" "bash ~/.config/niri/toggle-mpv.sh"; }
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
