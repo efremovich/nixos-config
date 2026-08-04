@@ -28,12 +28,12 @@
         package = pkgs.nerd-fonts.caskaydia-cove;
       };
       sansSerif = {
-        name = "Noto Sans";
-        package = pkgs.nerd-fonts.noto;
+        name = "CaskaydiaCove Nerd Font";
+        package = pkgs.nerd-fonts.caskaydia-cove;
       };
       serif = {
-        name = "Noto Serif";
-        package = pkgs.nerd-fonts.noto;
+        name = "CaskaydiaCove Nerd Font";
+        package = pkgs.nerd-fonts.caskaydia-cove;
       };
 
       sizes = {

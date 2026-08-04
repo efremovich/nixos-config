@@ -6,7 +6,7 @@
     ./waybar
     ./fuzzel.nix
     ./xdg.nix
-    ./stylix.nix
+    ./fonts.nix
   ];
 }
 

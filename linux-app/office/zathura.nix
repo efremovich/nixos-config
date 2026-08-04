@@ -7,7 +7,7 @@
       u = "scroll half_up";
     };
     options = {
-      font = "JetBrains Mono Bold 13";
+      font = "CaskaydiaCove Nerd Font 13";
     };
   };
 }
