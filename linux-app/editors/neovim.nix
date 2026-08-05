@@ -5,13 +5,8 @@
 {
   programs.neovim = {
     enable = true;
-    # HM 26.05: не пишем свой init.lua в ~/.config/nvim, т.к. там git-конфиг LazyVim.
-    # Провайдеры задаются через обёртку (--cmd 'lua dofile(...)'), а не через init.lua.
     sideloadInitLua = true;
-    # HM 26.05: defaults flipped to false; keep explicit to silence stateVersion warnings.
-    withRuby = false;
     withPython3 = false;
-    # # gopls в PATH внутри обёртки nvim (до Mason)
     extraPackages = with pkgs; [
       gopls
       delve
@@ -22,4 +17,19 @@
       impl
     ];
   };
+
+  xdg.dataFile."applications/nvim.desktop".text = ''
+    [Desktop Entry]
+    Name=Neovim wrapper
+    GenericName=Text Editor
+    Comment=Edit text files
+    TryExec=alacritty
+    Exec=alacritty -e nvim %F
+    Icon=nvim
+    Type=Application
+    Terminal=false
+    Categories=Utility;TextEditor;Development;
+    MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+    Keywords=Text;Editor;
+  '';
 }
