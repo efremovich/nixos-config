@@ -8,5 +8,9 @@
     v2raya.enable = true;
     hasp.enable = true;
     ideco.enable = true;
+    kesl = {
+      enable = true;
+      adminUser = "efremov";
+    };
   };
 }

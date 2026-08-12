@@ -52,15 +52,6 @@ in
       script = ''
         set -euo pipefail
 
-        latest=""
-        if [ -d "${installDir}" ]; then
-          latest="$(ls -1d ${installDir}/*/ 2>/dev/null | sort -V | tail -1 || true)"
-        fi
-        if [ -n "$latest" ] && [ -x "$latest/IdecoService" ]; then
-          echo "IdecoClient already installed, skipping."
-          exit 0
-        fi
-
         workdir="$(mktemp -d)"
         trap 'rm -rf "$workdir"' EXIT
 
@@ -86,6 +77,17 @@ in
           echo "Cannot determine version from installer" >&2
           exit 1
         fi
+
+        latest=""
+        if [ -d "${installDir}" ]; then
+          latest="$(ls -1d ${installDir}/*/ 2>/dev/null | sort -V | tail -1 || true)"
+        fi
+        if [ -n "$latest" ] && [ "$(basename "$latest")" = "$version" ] && [ -x "$latest/IdecoService" ]; then
+          echo "IdecoClient $version already installed, skipping."
+          exit 0
+        fi
+
+        echo "Installing IdecoClient $version (was $(basename "$latest" 2>/dev/null || echo none))..."
 
         app_dir="${installDir}/$version"
         temp_dir="$app_dir.tmp"
@@ -141,10 +143,8 @@ in
         mkdir -p /usr/lib
         ln -sfn /run/current-system/sw/lib/locale /usr/lib/locale
       fi
-      if [ ! -d /usr/share/X11/xkb ] && [ -d /run/current-system/sw/share/X11/xkb ]; then
-        mkdir -p /usr/share/X11
-        ln -sfn /run/current-system/sw/share/X11/xkb /usr/share/X11/xkb
-      fi
+      mkdir -p /usr/share/X11
+      ln -sfn ${pkgs.xkeyboard_config}/share/X11/xkb /usr/share/X11/xkb
     '';
 
     security.pki.certificateFiles = [

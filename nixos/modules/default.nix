@@ -12,6 +12,7 @@
     ./home-manager.nix
     ./ideco.nix
     ./kernel.nix
+    ./kesl.nix
     ./linux-app.nix
     ./locale.nix
     ./mime.nix

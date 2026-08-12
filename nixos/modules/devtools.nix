@@ -19,6 +19,7 @@
     rustc
     sqlite
     sqlite.dev
+    inetutils
   ];
 
   environment.variables.PKG_CONFIG_PATH =
