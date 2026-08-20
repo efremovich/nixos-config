@@ -15,5 +15,6 @@
     lazydocker
     kubectl
     dbeaver-bin
+    usbutils
   ];
 }
