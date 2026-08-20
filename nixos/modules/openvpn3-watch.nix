@@ -152,8 +152,30 @@ let
       start_vpn "$name" "$id" "$tfa"
     }
 
+    disconnect_vpn() {
+      local name="$1"
+      if session_exists "$name"; then
+        echo "[$name] disconnecting"
+        openvpn3 session-manage --config "$name" --disconnect >/dev/null 2>&1 || true
+      else
+        echo "[$name] no session to disconnect"
+      fi
+    }
+
+    stop_all() {
+      local entry name
+      for entry in "''${VPN_CONFIGS[@]}"; do
+        name=''${entry%%|*}
+        disconnect_vpn "$name"
+      done
+    }
+
     main() {
-      local entry name rest ovpn id tfa
+      local action="''${1:-start}" entry name rest ovpn id tfa
+      if [ "$action" = "stop" ]; then
+        stop_all
+        return 0
+      fi
       for entry in "''${VPN_CONFIGS[@]}"; do
         name=''${entry%%|*}
         rest=''${entry#*|}
@@ -217,6 +239,23 @@ in
         User = user;
         TimeoutStartSec = 60;
         ExecStart = connectScript;
+      };
+    };
+
+    # Ручное отключение всех VPN-сессий (вызывается тумблером в waybar).
+    systemd.services.openvpn3-watch-stop = {
+      description = "OpenVPN3: disconnect all VPN sessions";
+      path = with pkgs; [
+        openvpn3
+        coreutils
+        gnugrep
+        gnused
+      ];
+      serviceConfig = {
+        Type = "oneshot";
+        User = user;
+        TimeoutStartSec = 60;
+        ExecStart = "${connectScript} stop";
       };
     };
 

@@ -23,6 +23,12 @@ prefetch-out.txt
 prefetch-err.txt
 shell-fix-done.txt
 shell-test-done.txt
+obsidian-plugin-ran.txt
+tmp-kesl-scan-mon.sh
+
+# nix build result symlinks
+result
+result-*
 
 # Accidental nested store copies must never enter the dirty flake tree
 /nix/
