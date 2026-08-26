@@ -17,7 +17,7 @@
       "usb_storage"
       "sd_mod"
     ];
-    initrd.kernelModules = [ ];
+    initrd.kernelModules = [ "snd-usb-audio" ];
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
   };

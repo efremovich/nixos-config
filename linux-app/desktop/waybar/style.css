@@ -308,7 +308,6 @@ window#waybar.swallowing {
   background: @mauve;
 }
 
-#custom-vpn,
 #custom-ssh-tunnel,
 #idle_inhibitor {
   background: @crust;
@@ -317,8 +316,7 @@ window#waybar.swallowing {
   border-bottom: 2px solid @text;
 }
 
-#custom-ssh-tunnel,
-#custom-vpn {
+#custom-ssh-tunnel {
   color: @yellow;
 }
 
@@ -334,7 +332,6 @@ window#waybar.swallowing {
   border: 2px solid @green;
 }
 
-#custom-vpn-icon,
 #custom-ssh-tunnel-icon,
 #custom-idle-icon,
 #custom-window-icon {
@@ -344,8 +341,7 @@ window#waybar.swallowing {
   margin-right: 5px;
 }
 
-#custom-ssh-tunnel-icon,
-#custom-vpn-icon {
+#custom-ssh-tunnel-icon {
   background: @peach;
 }
 #custom-idle-icon {

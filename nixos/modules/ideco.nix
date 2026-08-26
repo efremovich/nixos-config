@@ -13,6 +13,27 @@ let
     APP_DIR="$(dirname "$(readlink -f "$0")")"
     exec "$APP_DIR/ld.so" --argv0 IdecoClient --library-path "$APP_DIR/lib" "$APP_DIR/IdecoClient" "$@"
   '';
+
+  # IdecoService crashes with "recvmmsg. Message too long (errno = 90)" when the
+  # WireGuard UDP datagrams exceed the path MTU to the NGFW (91.239.5.53, PMTU 1324,
+  # tunnel MTU 1420). The router then answers with ICMP "Fragmentation Needed", which
+  # surfaces on the connected UDP socket as EMSGSIZE and aborts the daemon.
+  # Locking the PMTU on the route to the NGFW makes the kernel fragment the datagrams
+  # locally, so no ICMP error is ever generated. The loop re-asserts the route every
+  # 30s (survives NetworkManager reconnects) and no-ops if the network is down.
+  mtuFixScript = pkgs.writeShellScript "ideco-mtu-fix" ''
+    set -euo pipefail
+    mtu="${toString cfg.mtuFix}"
+    while true; do
+      route="$(ip route get "${cfg.ngfwHost}" 2>/dev/null | head -1 || true)"
+      gw="$(printf '%s\n' "$route" | sed -n 's/.* via \([0-9.]*\).*/\1/p')"
+      dev="$(printf '%s\n' "$route" | sed -n 's/.* dev \([^ ]*\).*/\1/p')"
+      if [ -n "$gw" ] && [ -n "$dev" ]; then
+        ip route replace "${cfg.ngfwHost}/32" via "$gw" dev "$dev" mtu lock "$mtu" || true
+      fi
+      sleep 30
+    done
+  '';
 in
 {
   options.services.ideco = {
@@ -26,9 +47,42 @@ in
       default = "d052b2701b33f4c8bc8ef30de6ad23c6b761a5e8dda24f6f6e64f7499621e1c4";
       description = "SHA256 (hex) of the IdecoClient installer. Verified before execution.";
     };
+
+    ngfwHost = lib.mkOption {
+      type = lib.types.str;
+      default = "91.239.5.53";
+      description = "IP address of the Ideco NGFW (VPN server endpoint).";
+    };
+
+    mtuFix = lib.mkOption {
+      type = lib.types.int;
+      default = 1300;
+      description = ''
+        PMTU (mtu lock) for the route to the NGFW. Must be below the real path MTU
+        (1324 here) so the kernel fragments WireGuard datagrams locally instead of
+        triggering ICMP "Fragmentation Needed" -> EMSGSIZE crash in IdecoService.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.services.ideco-mtu = {
+      description = "Lock PMTU to the Ideco NGFW (prevent recvmmsg EMSGSIZE crash)";
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+      path = with pkgs; [
+        iproute2
+        gnused
+      ];
+      serviceConfig = {
+        Type = "simple";
+        Restart = "always";
+        RestartSec = "10";
+        ExecStart = mtuFixScript;
+      };
+    };
+
     systemd.services.ideco-install = {
       description = "Download and install Ideco Client";
       wantedBy = [ "multi-user.target" ];
@@ -156,8 +210,12 @@ in
       after = [
         "network.target"
         "ideco-install.service"
+        "ideco-mtu.service"
       ];
-      wants = [ "ideco-install.service" ];
+      wants = [
+        "ideco-install.service"
+        "ideco-mtu.service"
+      ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "notify";
