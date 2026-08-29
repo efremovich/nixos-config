@@ -15,6 +15,7 @@
         "dialout"
         "plugdev"
         "kvm"
+        "audio"
       ];
     };
   };

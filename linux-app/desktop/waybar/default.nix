@@ -17,8 +17,6 @@ in
       ".config/waybar/vpn_toggle.py".source = ./vpn_toggle.py;
       ".config/waybar/ssh_tunnel_status.py".source = ./ssh_tunnel_status.py;
       ".config/waybar/ssh_tunnel_toggle.py".source = ./ssh_tunnel_toggle.py;
-      ".config/waybar/openvpn3_status.py".source = ./openvpn3_status.py;
-      ".config/waybar/openvpn3_toggle.py".source = ./openvpn3_toggle.py;
       ".config/waybar/operator-queues.py".source = ./operator-queues.py;
     };
   };
@@ -67,7 +65,6 @@ in
           "battery"
           "battery#bat2"
           "network"
-          "custom/vpn"
           "custom/ssh-tunnel"
           "idle_inhibitor"
           "pulseaudio"
@@ -251,12 +248,6 @@ in
           icon-size = 18;
           spacing = 10;
         };
-        "custom/vpn" = {
-          format = "{}";
-          exec = "$HOME/.config/waybar/openvpn3_status.py";
-          interval = 10;
-          on-click = "$HOME/.config/waybar/openvpn3_toggle.py";
-        };
         "custom/ssh-tunnel" = {
           format = "{}";
           exec = "$HOME/.config/waybar/ssh_tunnel_status.py";
@@ -357,9 +348,6 @@ in
         };
         "custom/idle-icon" = {
           format = " ";
-        };
-        "custom/vpn-icon" = {
-          format = " ";
         };
         "custom/ssh_tunnel-icon" = {
           format = " ";

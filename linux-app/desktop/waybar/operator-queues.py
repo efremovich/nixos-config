@@ -11,6 +11,34 @@ import subprocess
 import sys
 from pathlib import Path
 
+# Общие префиксы имён стримов, которые можно отбросить при построении короткой метки.
+STRIP_PREFIXES = (
+    "operator-internal-roseu-",
+    "operator-internal-",
+    "edicore-",
+    "operator-",
+)
+
+# Названия всех очередей (ключи — исходные имена стримов из бинарника).
+# Значения — отображаемые метки; оставьте пустой строкой, чтобы использовать
+# автоматическую короткую метку (short_label). Порядок в этом словаре
+# определяет порядок отображения очередей на панели.
+QUEUE_LABELS: dict[str, str] = {
+    "edicore-message-process": "message-process",
+    "operator-internal-roseu-reader": "roseu-reader",
+    "operator-internal-roseu-writer": "roseu-writer",
+    "operator-internal-roseu-packer": "roseu-packer",
+    "edicore-pack": "package-creator",
+    "operator-internal-roseu-sender": "roseu-sender",
+    "edicore-send": "package-sender",
+    "edicore-marking": "marking",
+    "edicore-rnpt": "rnpt",
+    "edicore-storage": "storage",
+    "operator-internal-edi-docs": "edi-pdp",
+    "operator-internal-edi-rnpt": "edi-rnpt",
+    "operator-internal-edi-sender": "edi-sender",
+}
+
 # Константы
 BINARY_PATH = Path.home() / ".local" / "bin" / "operator-tui-waybar"
 SCRIPT_DIR = Path(__file__).parent.resolve()
@@ -94,6 +122,16 @@ def get_queue_class(value: int) -> tuple[str, str]:
         return ("critical", "#d20f39")  # red
 
 
+def short_label(name: str) -> str:
+    """Строит короткую метку очереди, отбрасывая общие префиксы имён стримов."""
+    label = name
+    for prefix in STRIP_PREFIXES:
+        if label.startswith(prefix):
+            label = label[len(prefix) :]
+            break
+    return label or name
+
+
 def format_queues_output(raw_output: str) -> dict:
     """Парсит и форматирует вывод бинарника."""
     try:
@@ -103,39 +141,51 @@ def format_queues_output(raw_output: str) -> dict:
 
     tooltip = data.get("tooltip", "")
 
-    # Извлекаем значения очередей из tooltip
-    incoming_match = re.search(r"Incoming: (\d+)", tooltip)
-    reader_match = re.search(r"Reader: (\d+)", tooltip)
-    writer_match = re.search(r"Writer: (\d+)", tooltip)
-    packer_match = re.search(r"Packer: (\d+)", tooltip)
-    sender_match = re.search(r"Sender: (\d+)", tooltip)
-    total_match = re.search(r"Всего: (\d+)", tooltip)
+    # Динамически извлекаем очереди из tooltip: каждая строка вида "<имя>: N".
+    # Жадный захват имени с конца строки позволяет корректно обрабатывать
+    # имена, содержащие двоеточие.
+    queues = []
+    total_val = 0
+    total_seen = False
+    for line in tooltip.splitlines():
+        match = re.match(r"^(.*): (\d+)$", line.strip())
+        if not match:
+            continue
+        name, value_str = match.groups()
+        value = int(value_str)
+        if name == "Всего":
+            total_val = value
+            total_seen = True
+        else:
+            queues.append((name, value))
 
-    # Получаем значения
-    incoming_val = int(incoming_match.group(1)) if incoming_match else 0
-    reader_val = int(reader_match.group(1)) if reader_match else 0
-    writer_val = int(writer_match.group(1)) if writer_match else 0
-    packer_val = int(packer_match.group(1)) if packer_match else 0
-    sender_val = int(sender_match.group(1)) if sender_match else 0
-    total_val = int(total_match.group(1)) if total_match else 0
+    # Если строка "Всего" отсутствует, считаем сумму по всем очередям.
+    if not total_seen:
+        total_val = sum(value for _, value in queues)
 
-    # Определяем класс и цвет для каждой очереди
-    _, incoming_color = get_queue_class(incoming_val)
-    _, reader_color = get_queue_class(reader_val)
-    _, writer_color = get_queue_class(writer_val)
-    _, packer_color = get_queue_class(packer_val)
-    _, sender_color = get_queue_class(sender_val)
-    total_class, total_color = get_queue_class(total_val)
-
-    # Форматируем текст с HTML-разметкой для каждой очереди
-    text_parts = [
-        f'<span foreground="{incoming_color}">I:{incoming_val}</span>',
-        f'<span foreground="{reader_color}">R:{reader_val}</span>',
-        f'<span foreground="{writer_color}">W:{writer_val}</span>',
-        f'<span foreground="{packer_color}">P:{packer_val}</span>',
-        f'<span foreground="{sender_color}">S:{sender_val}</span>',
-        f'<span foreground="{total_color}">T:{total_val}</span>',
+    # Показываем только те очереди, которые перечислены в QUEUE_LABELS,
+    # в порядке, заданном в словаре, и только если их количество > 10000.
+    # Неизвестные очереди не отображаются.
+    MIN_QUEUE_VALUE = 10000
+    known = {name: value for name, value in queues if name in QUEUE_LABELS}
+    ordered = [
+        (name, known[name])
+        for name in QUEUE_LABELS
+        if name in known and known[name] > MIN_QUEUE_VALUE
     ]
+
+    def label_of(name: str) -> str:
+        return QUEUE_LABELS.get(name) or short_label(name)
+
+    # Определяем цвет для каждой очереди и собираем текст панели.
+    text_parts = []
+    for name, value in ordered:
+        _, color = get_queue_class(value)
+        text_parts.append(f'<span foreground="{color}">{label_of(name)}:{value}</span>')
+
+    total_class, total_color = get_queue_class(total_val)
+    text_parts.append(f'<span foreground="{total_color}">T:{total_val}</span>')
+
     text = " ".join(text_parts)
 
     # Используем класс для общего модуля на основе total
