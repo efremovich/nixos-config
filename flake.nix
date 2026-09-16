@@ -51,6 +51,9 @@
           hostname = "pazajik";
           stateVersion = "26.05";
         }
+        { hostname = "eltubu"; 
+          stateVersion="26.05";
+        }
       ];
       makeSystem =
         { hostname, stateVersion }:
