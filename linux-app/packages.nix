@@ -2,23 +2,26 @@
 {
   # Misc leftovers that do not belong to a role module yet.
   home.packages = with pkgs; [
+    bemoji
+    gh
     grimblast
+    gvfs
+    ipset
+    jq
+    libnotify
     ntfs3g
     openssl
+    p7zip
+    pciutils
     rar
+    sops
+    squashfsTools
     udisks2
-    gvfs
     unzip
     w3m
+    yazi
     zip
-    p7zip
-    squashfsTools
-    libnotify
-    bemoji
-    pciutils
-    jq
-    ipset
-    gh
-    sops
+    gvfs
+    jmtpfs
   ];
 }

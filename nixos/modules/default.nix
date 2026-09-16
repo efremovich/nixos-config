@@ -20,7 +20,7 @@
     ./nh.nix
     ./niri.nix
     ./nix.nix
-    ./openvpn3-watch.nix
+    # ./openvpn3-watch.nix
     ./sops.nix
     ./ssh.nix
     ./stylix.nix

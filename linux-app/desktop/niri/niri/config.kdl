@@ -258,6 +258,11 @@ window-rule {
     default-window-height { fixed 292; }
 }
 
+window-rule{
+    match app-id=r#"Ideco"#
+    open-floating true
+}
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
