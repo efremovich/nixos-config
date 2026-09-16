@@ -7,6 +7,7 @@
 {
   config = lib.mkIf config.programs.niri.enable {
     services.displayManager.gdm.enable = true;
+    services.displayManager.defaultSession = "niri";
 
     # Схемы GSettings (org.gtk.Settings.FileChooser и др.) для GTK-приложений.
     # /run/current-system/sw/share добавляется в XDG_DATA_DIRS автоматически.
