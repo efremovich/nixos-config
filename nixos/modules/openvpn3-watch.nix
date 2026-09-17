@@ -8,27 +8,7 @@
 let
   cfg = config.services.openvpn3-watch;
 
-  # github.com/rsc/2fa — генерация TOTP-кодов из ~/.2fa
-  # В vendor/ upstream отсутствует modules.txt, из-за чего go считает vendoring
-  # несогласованным — генерируем его заново в postPatch.
-  tfa2 = pkgs.buildGoModule {
-    pname = "2fa";
-    version = "unstable-2026-08-05";
-    src = pkgs.fetchFromGitHub {
-      owner = "rsc";
-      repo = "2fa";
-      rev = "3b314a29f85f448059c2facbc9c77cada5e6f806";
-      sha256 = "sha256-ESC5mnz9dhfPAiqKTtqhcjCKF0bh3Ob0haK7xVhxU9k=";
-    };
-    vendorHash = null;
-    postPatch = ''
-      cat > vendor/modules.txt <<'MODTXT'
-      # github.com/atotto/clipboard v0.1.2
-      ## explicit
-      github.com/atotto/clipboard
-      MODTXT
-    '';
-  };
+  tfa2 = pkgs.callPackage ../../pkgs/2fa.nix { };
 
   # Конфигурации VPN. name — имя в openvpn3, id — префикс sops-секретов,
   # ovpn — имя секрета с .ovpn-файлом, tfa — аккаунт в 2fa (~/.2fa).
@@ -68,7 +48,7 @@ let
       local name="$1" ovpn="$2"
       if ! openvpn3 config-manage --config "$name" --exists --quiet 2>/dev/null; then
         echo "[$name] importing config from sops"
-        openvpn3 config-import --config "$ovpn" --name "$name" --persistent \
+        openvpn3 config-import --config "/run/secrets/$ovpn" --name "$name" --persistent \
           || echo "[$name] config-import failed" >&2
       fi
     }
@@ -111,8 +91,8 @@ let
       pass=$(cat "/run/secrets/''${id}_password" 2>/dev/null)
       code=$(2fa "$tfa" 2>/dev/null | head -1 | tr -d '[:space:]')
       if [ -z "$user" ] || [ -z "$pass" ] || [ -z "$code" ]; then
-        echo "[$name] missing credentials or TOTP code" >&2
-        return 1
+        echo "[$name] missing credentials or TOTP code, will retry on next timer tick" >&2
+        return 0
       fi
       printf '%s\n%s\n%s\n' "$user" "$pass" "$code" \
         | timeout "$START_TIMEOUT" openvpn3 session-start --config "$name" --background 2>&1 \

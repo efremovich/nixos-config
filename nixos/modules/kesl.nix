@@ -273,9 +273,56 @@ in
         if [ -d /etc/static/systemd/system ]; then
           cp -a /etc/static/systemd/system/. /etc/systemd/system/
         fi
+        (
+          for u in /etc/systemd/system/*; do
+            [ -L "$u" ] || continue
+            case "$(readlink "$u")" in
+              /nix/store/*|/etc/static/*) ;;
+              *) continue ;;
+            esac
+            n="$(basename "$u")"
+            if [ ! -e "/etc/static/systemd/system/$n" ] && [ ! -L "/etc/static/systemd/system/$n" ]; then
+              rm -f "$u"
+            fi
+          done
+          find /etc/systemd/system -xtype l -delete 2>/dev/null || true
+        ) || true
         cp ${keslUnit} /etc/systemd/system/kesl.service
         mkdir -p /etc/systemd/system/kesl.service.d
         cp ${keslPathDropIn} /etc/systemd/system/kesl.service.d/path.conf
+
+        # The KESL launcher drops a temporary copy of its unit in
+        # /etc/systemd/system, removes it, then runs `systemctl enable
+        # kesl.service`. systemd must therefore also find the unit in a search
+        # path. /usr/lib/systemd/system is one (see `systemd-analyze unit-paths`),
+        # and it mirrors how a distro package owns the unit.
+        mkdir -p /usr/lib/systemd/system
+        cp ${keslUnit} /usr/lib/systemd/system/kesl.service
+        chmod 644 /usr/lib/systemd/system/kesl.service
+
+        # KESL's launcher resolves helper tools (systemctl, groupadd, chown, ...)
+        # from hardcoded dirs (/usr/bin, /usr/sbin, /bin, /sbin), not $PATH. On
+        # NixOS they live in the store, so expose them. Only /usr/bin is a
+        # directory by default; /usr/sbin may be a stray file from a buggy vendor
+        # installer, so only populate it when it is a real directory.
+        mkdir -p /usr/bin
+        for t in ${lib.concatStringsSep " " [
+          "${config.systemd.package}/bin/systemctl"
+          "${pkgs.shadow}/bin/groupadd"
+          "${pkgs.shadow}/bin/groupdel"
+          "${pkgs.shadow}/bin/groupmod"
+          "${pkgs.shadow}/bin/useradd"
+          "${pkgs.shadow}/bin/usermod"
+          "${pkgs.shadow}/bin/userdel"
+          "${pkgs.coreutils-full}/bin/chown"
+          "${pkgs.coreutils-full}/bin/chmod"
+          "${pkgs.coreutils-full}/bin/chgrp"
+        ]}; do
+          ln -sfn "$t" "/usr/bin/$(basename "$t")"
+          if [ -d /usr/sbin ]; then
+            ln -sfn "$t" "/usr/sbin/$(basename "$t")"
+          fi
+        done
         # Network Agent (vendor unit) needs lsblk/lshw on PATH for inventory.
         if [ -f /etc/systemd/system/klnagent64.service ] || [ -L /etc/systemd/system/klnagent64.service ]; then
           mkdir -p /etc/systemd/system/klnagent64.service.d

@@ -37,6 +37,21 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # The Sentinel `dinst` installer copies aksusbd_x86_64 / hasplmd_x86_64 to
+    # /usr/sbin assuming it is a directory. On NixOS /usr/sbin does not exist, so
+    # the first copy lands as a regular file named /usr/sbin; that breaks the
+    # second copy and both systemd units (ExecStart=/usr/sbin/aksusbd_x86_64).
+    # Normalise it to a directory on every activation.
+    system.activationScripts.haspSbinDir = {
+      deps = [ "etc" ];
+      text = ''
+        if [ -e /usr/sbin ] && [ ! -d /usr/sbin ]; then
+          rm -f /usr/sbin
+        fi
+        install -d -m 0755 /usr/sbin
+      '';
+    };
+
     system.activationScripts.nethaspIni = {
       deps = [
         "users"
@@ -73,6 +88,12 @@ in
       ];
       script = ''
         set -euo pipefail
+
+        # Ensure dinst has a real /usr/sbin directory to copy the daemons into.
+        if [ -e /usr/sbin ] && [ ! -d /usr/sbin ]; then
+          rm -f /usr/sbin
+        fi
+        install -d -m 0755 /usr/sbin
 
         if command -v hasplmd >/dev/null 2>&1 || [ -x /etc/init.d/aksusbd ] || systemctl is-active --quiet aksusbd 2>/dev/null; then
           echo "HASP runtime already installed, skipping installation."

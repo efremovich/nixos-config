@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  tfa2 = pkgs.callPackage ../pkgs/2fa.nix { };
+in
 {
   # Misc leftovers that do not belong to a role module yet.
   home.packages = with pkgs; [
@@ -23,5 +26,6 @@
     zip
     gvfs
     jmtpfs
+    tfa2
   ];
 }

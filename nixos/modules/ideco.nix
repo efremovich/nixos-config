@@ -190,7 +190,30 @@ in
         mkdir -p /usr/local/bin
         latest="$(ls -1d ${installDir}/*/ 2>/dev/null | sort -V | tail -1 || true)"
         if [ -n "$latest" ]; then
-          ln -sf "$latest/IdecoClient.sh" /usr/local/bin/IdecoClient
+          app_dir="''${latest%/}"
+          version="$(basename "$app_dir")"
+          ln -sf "$app_dir/IdecoClient.sh" /usr/local/bin/IdecoClient
+
+          # Icon/desktop entry for launchers (fuzzel, etc). XDG_DATA_DIRS includes
+          # /usr/local/share, so this is enough. Recreated on every activation to
+          # cover the "already installed, skipping" path of ideco-install.
+          mkdir -p -m 755 /usr/local/share/applications
+          rm -f /usr/local/share/applications/IdecoAgent-*.desktop
+          printf '%s\n' \
+            "[Desktop Entry]" \
+            "Version=1.0" \
+            "StartupWMClass=Agent" \
+            "Type=Application" \
+            "Name=Ideco Client" \
+            "Exec=$app_dir/ld.so --argv0 IdecoClient --library-path $app_dir/lib $app_dir/IdecoClient --show" \
+            "Icon=$app_dir/res/client_logo.svg" \
+            "Comment=Ideco Client version $version" \
+            "StartupNotify=true" \
+            "Terminal=false" \
+            "Categories=Network;" \
+            "Keywords=Agent;VPN;vpn;ztna;client;ideco;Ideco" \
+            > "/usr/local/share/applications/IdecoAgent-$version.desktop"
+          chmod 644 "/usr/local/share/applications/IdecoAgent-$version.desktop"
         fi
       fi
       if [ ! -d /usr/lib/locale ] && [ -d /run/current-system/sw/lib/locale ]; then
