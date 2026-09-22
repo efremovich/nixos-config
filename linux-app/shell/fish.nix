@@ -19,7 +19,7 @@
     interactiveShellInit = ''
       # Only executed for interactive shells
       set fish_greeting ""  # Disable greeting
-      fish_config theme choose "Catppuccin Latte"
+      fish_config theme choose catppuccin-mocha --color-theme=light
     '';
     plugins = [
       {

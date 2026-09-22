@@ -106,11 +106,10 @@ in
     systemd.services.nix-daemon.serviceConfig.ExecStartPost = [
       "+${pkgs.writeShellScript "kesl-clamp-nix-store-mode" ''
         set -uo pipefail
-        if mountpoint -q /nix/store 2>/dev/null; then
-          mount -o remount,rw /nix/store 2>/dev/null || true
-          chmod 555 /nix/store 2>/dev/null || true
-          mount -o remount,ro /nix/store 2>/dev/null || true
-        else
+        if [ -d /nix/store ]; then
+          if mountpoint -q /nix/store 2>/dev/null; then
+            mount -o remount,rw /nix/store 2>/dev/null || true
+          fi
           chmod 555 /nix/store 2>/dev/null || true
         fi
         exit 0
@@ -151,11 +150,8 @@ in
         if [ -d /nix/store ]; then
           if mountpoint -q /nix/store 2>/dev/null; then
             mount -o remount,rw /nix/store 2>/dev/null || true
-            chmod 555 /nix/store 2>/dev/null || true
-            mount -o remount,ro /nix/store 2>/dev/null || true
-          else
-            chmod 555 /nix/store 2>/dev/null || true
           fi
+          chmod 555 /nix/store 2>/dev/null || true
         fi
 
         for p in /etc /var /opt /etc/opt /var/opt; do
@@ -210,47 +206,48 @@ in
         "etc"
       ];
       text = ''
-        if [ -d /nix/store ]; then
-          if mountpoint -q /nix/store 2>/dev/null; then
-            mount -o remount,rw /nix/store 2>/dev/null || true
-            chmod 555 /nix/store || true
-            mount -o remount,ro /nix/store 2>/dev/null || true
-          else
+        # This activation script also runs in stage-1 (initrd) where the root
+        # filesystem is read-only; chmod/chown there only produce log spam.
+        if [ -w /etc ]; then
+          if [ -d /nix/store ]; then
+            if mountpoint -q /nix/store 2>/dev/null; then
+              mount -o remount,rw /nix/store 2>/dev/null || true
+            fi
             chmod 555 /nix/store || true
           fi
+
+          # Parent path owners matter: KESL rejects clients if any path component
+          # is writable/owned by a non-root user (e.g. /etc or /var as efremov).
+          for p in /etc /var /opt /etc/opt /var/opt; do
+            if [ -e "$p" ]; then
+              chown root:root "$p" || true
+              chmod 755 "$p" || true
+            fi
+          done
+
+          for d in \
+            /opt/kaspersky \
+            /opt/kaspersky/kesl \
+            /opt/kaspersky/klnagent64 \
+            /etc/opt/kaspersky \
+            /var/opt/kaspersky \
+            /var/opt/kaspersky/kesl/install-current \
+            /var/opt/kaspersky/kesl/install_${cfg.packageVersion} \
+            /var/opt/kaspersky/kesl/${cfg.packageVersion}_*; do
+            if [ -e "$d" ]; then
+              chown -R root:root "$d" || true
+              chmod -R go-w "$d" || true
+            fi
+          done
+
+          for f in \
+            /var/opt/kaspersky/kesl/common/kesl.ini \
+            /var/opt/kaspersky/kesl/common/agreements.ini; do
+            if [ -e "$f" ]; then
+              chown root:root "$f" || true
+            fi
+          done
         fi
-
-        # Parent path owners matter: KESL rejects clients if any path component
-        # is writable/owned by a non-root user (e.g. /etc or /var as efremov).
-        for p in /etc /var /opt /etc/opt /var/opt; do
-          if [ -e "$p" ]; then
-            chown root:root "$p" || true
-            chmod 755 "$p" || true
-          fi
-        done
-
-        for d in \
-          /opt/kaspersky \
-          /opt/kaspersky/kesl \
-          /opt/kaspersky/klnagent64 \
-          /etc/opt/kaspersky \
-          /var/opt/kaspersky \
-          /var/opt/kaspersky/kesl/install-current \
-          /var/opt/kaspersky/kesl/install_${cfg.packageVersion} \
-          /var/opt/kaspersky/kesl/${cfg.packageVersion}_*; do
-          if [ -e "$d" ]; then
-            chown -R root:root "$d" || true
-            chmod -R go-w "$d" || true
-          fi
-        done
-
-        for f in \
-          /var/opt/kaspersky/kesl/common/kesl.ini \
-          /var/opt/kaspersky/kesl/common/agreements.ini; do
-          if [ -e "$f" ]; then
-            chown root:root "$f" || true
-          fi
-        done
       '';
     };
 
@@ -357,10 +354,19 @@ in
       script = ''
         set -euo pipefail
 
-        # Re-clamp in case nix-daemon restarted after activation.
-        if [ -d /nix/store ]; then
-          chmod 555 /nix/store || true
-        fi
+        # KESL rejects any path that is group-writable, but nix-daemon (and
+        # every nix build) keeps resetting /nix/store to 1775. Re-clamp it,
+        # retrying around the control command until the socket accepts it.
+        clamp_store() {
+          if [ -d /nix/store ]; then
+            if mountpoint -q /nix/store 2>/dev/null; then
+              mount -o remount,rw /nix/store 2>/dev/null || true
+            fi
+            chmod 555 /nix/store 2>/dev/null || true
+          fi
+        }
+
+        clamp_store
         for p in /etc /var /opt /etc/opt /var/opt; do
           if [ -e "$p" ]; then
             chown root:root "$p" || true
@@ -381,14 +387,27 @@ in
           sleep 1
         done
 
+        run_control() {
+          local n=0
+          while [ "$n" -lt 60 ]; do
+            clamp_store
+            if "$control" "$@"; then
+              return 0
+            fi
+            n=$((n + 1))
+            sleep 2
+          done
+          return 1
+        }
+
         ${lib.optionalString (cfg.adminUser != "root") ''
           echo "Granting KESL admin role to ${cfg.adminUser}..."
-          "$control" --grant-role admin ${lib.escapeShellArg cfg.adminUser}
+          run_control --grant-role admin ${lib.escapeShellArg cfg.adminUser} || exit 1
         ''}
 
         ${lib.optionalString cfg.useKsn ''
           echo "Accepting KSN statement..."
-          "$control" --accept-ksn || true
+          run_control --accept-ksn || true
         ''}
       '';
     };
