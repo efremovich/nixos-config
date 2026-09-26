@@ -221,23 +221,45 @@ in
             critical = 15;
           };
           format = "{icon}";
-          format-charging = "";
-          format-plugged = "";
+          # {icon} выбирается из format-icons по состоянию (charging/plugged/full/default).
+          # Раньше тут были статические коды Nerd Fonts v2 (U+F5E7), которых нет в v3 — иконка не рисовалась.
+          format-charging = "{icon}";
+          format-plugged = "{icon}";
           format-alt = "{capacity}% {icon}";
-          # format-icons = ["" "" "" "" "" "" "" ""];
-          format-icons = [
-            "󰂎"
-            "󰁺"
-            "󰁻"
-            "󰁼"
-            "󰁽"
-            "󰁾"
-            "󰁿"
-            "󰂀"
-            "󰂁"
-            "󰂂"
-            "󰁹"
-          ];
+          format-icons = {
+            # Разряд, 0 → 100%: md-battery_* (Nerd Fonts v3)
+            default = [
+              "󰂎"
+              "󰁺"
+              "󰁻"
+              "󰁼"
+              "󰁽"
+              "󰁾"
+              "󰁿"
+              "󰂀"
+              "󰂁"
+              "󰂂"
+              "󰁹"
+            ];
+            # Зарядка, 0 → 100%: md-battery_charging_*
+            charging = [
+              "󰢜"
+              "󰢜"
+              "󰂆"
+              "󰂇"
+              "󰂈"
+              "󰢝"
+              "󰂉"
+              "󰢞"
+              "󰂊"
+              "󰂋"
+              "󰂅"
+            ];
+            # Подключено к сети, но не заряжается: md-power_plug
+            plugged = "󰚥";
+            # Полностью заряжено: md-battery
+            full = "󰁹";
+          };
           tooltip-format = "{capacity}% {time}";
           tooltip = true;
         };

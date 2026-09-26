@@ -43,6 +43,7 @@ in {
       events = {
         lock = lock-session.outPath;
         before-sleep = before-sleep.outPath;
+        after-resume = "${pkgs.mako}/bin/makoctl reload || true";
       };
       systemdTargets = [ "niri.service" ];
     };

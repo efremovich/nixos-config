@@ -15,6 +15,7 @@
     ./kesl.nix
     ./linux-app.nix
     ./locale.nix
+    ./mako.nix
     ./mime.nix
     ./net.nix
     ./nh.nix

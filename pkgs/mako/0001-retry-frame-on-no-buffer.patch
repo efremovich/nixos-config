@@ -1,0 +1,17 @@
+--- a/wayland.c
++++ b/wayland.c
+@@ -605,6 +605,14 @@
+ 		surface->width * scale, surface->height * scale);
+ 	if (surface->current_buffer == NULL) {
+ 		fprintf(stderr, "no buffer available\n");
++		// Both buffers are still held by the compositor. Keep the surface
++		// dirty and request another frame callback so we retry after the
++		// compositor releases a buffer, instead of stalling forever: without
++		// this, dirty stays true, set_dirty() short-circuits, and no redraw
++		// ever happens again.
++		if (surface->surface != NULL) {
++			schedule_frame_and_commit(surface);
++		}
+ 		return;
+ 	}
+ 
