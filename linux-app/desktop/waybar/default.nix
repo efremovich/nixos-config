@@ -139,7 +139,7 @@ in
           format = "{icon}";
           format-bluetooth = "󰂰";
           format-muted = " muted";
-          tooltip-format = "{name} {volume}%";
+          tooltip-format = "{desc} {volume}%";
           format-icons = {
             "alsa_output.pci-0000_00_1f.3.analog-stereo" = "";
             "alsa_output.pci-0000_00_1f.3.analog-stereo-muted" = "";
