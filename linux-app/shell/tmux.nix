@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, colorfgbg, ... }:
 {
   programs.tmux = {
     enable = true;
@@ -6,11 +6,18 @@
     mouse = true;
     escapeTime = 0;
     keyMode = "vi";
-    terminal = "screen-256color";
+    # screen-256color заставляет tmux рендерить SGR-italic как standout
+    # (\e[7m, tty_set_italics в tty.c): курсивные блоки omp (thinking, заголовок
+    # сессии) превращаются в тёмные плашки. tmux-256color — без этой подмены.
+    terminal = "tmux-256color";
     extraConfig = ''
       set -as terminal-features ",alacritty*:RGB"
       set -g set-clipboard on      # use system clipboard
       set -g allow-passthrough on
+      # OSC 11 не отвечает, когда у сессии нет клиента (detached) — omp тогда
+      # падает в тёмный слот темы. Держим фолбэк в глобальном env сервера,
+      # чтобы его видели все панели, включая созданные до attach.
+      set-environment -g COLORFGBG "${colorfgbg}"
       set -g detach-on-destroy off # don't exit from tmux when closing a session
       set -g set-titles on
       set -g set-titles-string "#S: #W"

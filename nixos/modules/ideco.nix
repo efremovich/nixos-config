@@ -41,10 +41,10 @@ in
 
     installerHash = lib.mkOption {
       type = lib.types.str;
-      # sha256 (hex) of https://91.239.5.53/lk/IdecoClient.sh, version 22.4.1045.0.
+      # sha256 (hex) of https://91.239.5.53/lk/IdecoClient.sh, version 22.6.1060.0.
       # Update: curl -ksS -o /tmp/IdecoClient.sh <url> && sha256sum /tmp/IdecoClient.sh
       # Empty disables integrity check (NOT recommended).
-      default = "d052b2701b33f4c8bc8ef30de6ad23c6b761a5e8dda24f6f6e64f7499621e1c4";
+      default = "6d6c1b8e95de50e8191f2b01cab1af84f744183aead885fa75f125d4b8a2215a";
       description = "SHA256 (hex) of the IdecoClient installer. Verified before execution.";
     };
 
