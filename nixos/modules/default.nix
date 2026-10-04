@@ -21,6 +21,7 @@
     ./nh.nix
     ./niri.nix
     ./nix.nix
+    ./wireguard.nix
     # ./openvpn3-watch.nix
     ./sops.nix
     ./ssh.nix

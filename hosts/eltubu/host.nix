@@ -1,10 +1,11 @@
-# chicago — рабочая станция (1С / HASP, VPN, docker).
+# eltubu — рабочая станция (1С / HASP, VPN, docker).
 { user, ... }:
 {
-  services.getty.autologinUser = user;
 
   virtualisation.docker.enable = true;
   services = {
+    getty.autologinUser = user;
+    wireguard-wg0.enable = true;
     v2raya.enable = true;
     hasp.enable = true;
     ideco.enable = true;

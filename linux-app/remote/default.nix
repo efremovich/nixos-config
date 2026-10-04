@@ -1,5 +1,7 @@
 { pkgs, ... }:
 {
+  imports = [ ./rdp.nix ];
+
   home.packages = with pkgs; [
     freerdp
     anydesk

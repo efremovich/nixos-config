@@ -316,7 +316,8 @@ window#waybar.swallowing {
   border-bottom: 2px solid @text;
 }
 
-#custom-ssh-tunnel {
+#custom-ssh-tunnel,
+#custom-wireguard {
   color: @yellow;
 }
 

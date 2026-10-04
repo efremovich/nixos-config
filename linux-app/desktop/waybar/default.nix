@@ -17,6 +17,8 @@ in
       ".config/waybar/vpn_toggle.py".source = ./vpn_toggle.py;
       ".config/waybar/ssh_tunnel_status.py".source = ./ssh_tunnel_status.py;
       ".config/waybar/ssh_tunnel_toggle.py".source = ./ssh_tunnel_toggle.py;
+      ".config/waybar/wireguard_status.py".source = ./wireguard_status.py;
+      ".config/waybar/wireguard_toggle.py".source = ./wireguard_toggle.py;
       ".config/waybar/operator-queues.py".source = ./operator-queues.py;
     };
   };
@@ -65,6 +67,7 @@ in
           "battery"
           "battery#bat2"
           "network"
+          "custom/wireguard"
           "custom/ssh-tunnel"
           "idle_inhibitor"
           "pulseaudio"
@@ -277,6 +280,13 @@ in
           on-click = "$HOME/.config/waybar/ssh_tunnel_toggle.py";
           # tooltip = true;
           # tooltip-format = "SSH Tunnel: {icon}";
+        };
+        "custom/wireguard" = {
+          format = "{}";
+          exec = "${python3} $HOME/.config/waybar/wireguard_status.py";
+          interval = 5;
+          on-click = "${python3} $HOME/.config/waybar/wireguard_toggle.py";
+          tooltip = false;
         };
         "custom/toggl" = {
           format = "{}";
