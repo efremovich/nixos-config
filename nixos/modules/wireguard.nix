@@ -20,9 +20,10 @@ in
 
     security.polkit.extraConfig = ''
       polkit.addRule(function(action, subject) {
+        var verb = action.lookup("verb");
         if (action.id == "org.freedesktop.systemd1.manage-units" &&
             action.lookup("unit") == "wg-quick-wg0.service" &&
-            ["start", "stop"].includes(action.lookup("verb")) &&
+            (verb == "start" || verb == "stop") &&
             subject.isInGroup("wheel")) {
           return polkit.Result.YES;
         }

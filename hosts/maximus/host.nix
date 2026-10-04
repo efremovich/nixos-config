@@ -4,5 +4,8 @@
   services.getty.autologinUser = user;
 
   virtualisation.docker.enable = true;
-  services.v2raya.enable = true;
+  services = {
+    v2raya.enable = true;
+    wireguard-wg0.enable = true;
+  };
 }

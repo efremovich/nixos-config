@@ -309,6 +309,7 @@ window#waybar.swallowing {
 }
 
 #custom-ssh-tunnel,
+#custom-wireguard,
 #idle_inhibitor {
   background: @crust;
   padding: 0 5px;
@@ -317,10 +318,7 @@ window#waybar.swallowing {
 }
 
 #custom-ssh-tunnel,
-#custom-wireguard {
-  color: @yellow;
-}
-
+#custom-wireguard,
 #idle_inhibitor {
   color: @yellow;
 }
